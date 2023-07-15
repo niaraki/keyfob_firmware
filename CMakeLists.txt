@@ -35,4 +35,7 @@ include(ClangFormat)
 file(GLOB_RECURSE list_of_src_header_files "${CMAKE_SOURCE_DIR}/src/*.[c|h]")
 clangformat_setup(${list_of_src_header_files})
 
+# Lizard for CCM analysis
+include(lizard)
+
 

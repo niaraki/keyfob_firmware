@@ -38,4 +38,6 @@ clangformat_setup(${list_of_src_header_files})
 # Lizard for CCM analysis
 include(lizard)
 
+# Flawfinder for CVE analysis
+include(flawfinder)
 

@@ -7,7 +7,7 @@
 
 # folders
 rootFolders=("docs" "src" "external" "scripts" "templates" "tests" "cmake" "docker")
-srcFolders=("app" "bsp" "common" "drivres" "hal" "hll" "middleware")
+srcFolders=("app" "bsp" "common" "drivers" "hal" "hll" "middleware")
 placeholderFileName="CMakeLists.txt"
 
 # placeholders can be used for git repo.

@@ -1,4 +1,4 @@
-MIT License
+MT License
 
 Copyright (c) 2023 Mohammad Niaraki 
 

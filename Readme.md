@@ -56,6 +56,9 @@ Type Table:
 |📦 | NEW | we use this type when we have added something |
 |👌 | ENH | we use this type when we have modified or enhance something |
 |🐛 | FIX | we use this type when we have fixed a bug |
+|🎭 | MRG | we use this type when we want to merge two branches|
+
+
 <ul>
     <li>
     Scope can be a filename, a module name (*it is and optional field)
@@ -71,6 +74,11 @@ After the first line, we have the commit body which explains more about the comm
 <li>
 An optional footer part comes after the body and it should be like this:<br/>
 resolved #[The specific <b> issue number </b> which is targeted by this commit]
+</li>
+<li>
+Don't use fast-forward merging, because merge commits can show the history of changes better<br/>
+You can disable it on your machine by using the following command:<br/>
+<b>git config --global merge.ff no</b>
 </li>
 </ol><br/>
 

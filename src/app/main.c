@@ -1,9 +1,58 @@
+/**
+********************************************************************************  
+* @file     main.c
+* @author   M.Niaraki 
+* @date     07/15/2023
+* @brief    main file of the firmware 
+* @note     notes 
+  @verbatim 
+================================================================================
+More information should come here
+================================================================================
+  @endverbatim
+*
+********************************************************************************
+* @attention
+*
+* <h2><center>&copy; COPYRIGHT(c) 2023 Mohammad Niaraki</center></h2> 
+*
+* THIS SOFTWARE IS PROVIDED BY NIARAKI ENGINEERING "AS IS" AND ANY EXPRESSED
+* OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+* OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+* IN NO EVENT SHALL NIARAKI ENGINEERING OR ITS CONTRIBUTORS BE LIABLE FOR ANY
+* DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+* (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+* HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+* STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+* IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+* THE POSSIBILITY OF SUCH DAMAGE.
+********************************************************************************
+*/
+
+/** @addtogroup App 
+*   @brief Application laye, The main business of the firmware should be Implemented in this layer 
+*   @{
+*/
+
+/** @defgroup Main Main 
+*   @brief The main part of the firmware 
+*    @{
+*/
 #include <stdio.h>
 #include <stm32f0xx.h>
 
-void delay_us()
+/**
+* @brief this function can be used for delay 
+* @param void 
+* @retval void
+* @warning disable compiler optimizationj 
+* @attention sample attention 
+* @todo solve the bug
+*/
+void delay_us(void)
 {
-	int i = 0;
+	volatile int i = 0;
 	while (i < 250000) {
 		i++;
 	}
@@ -82,3 +131,8 @@ int main(void)
 
 	return 0;
 }
+
+/**  @}*/
+/** @}*/
+ 
+/************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

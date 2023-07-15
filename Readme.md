@@ -80,9 +80,10 @@ Don't use fast-forward merging, because merge commits can show the history of ch
 You can disable it on your machine by using the following command:<br/>
 <b>git config --global merge.ff no</b>
 </li>
-</ol><br/>
+</ol>
 
 #### Coding Styles
+This project uses the c-coding style introduced by [barrgroup](https://barrgroup.com/embedded-systems/books/embedded-c-coding-standard). The configurations are also available [here](https://github.com/petertorelli/clang-format-barr-c).
 
 ### Authors
 - [**Mohammad Niaraki**](https://www.github.com/niaraki)

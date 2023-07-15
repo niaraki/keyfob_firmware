@@ -11,9 +11,28 @@ set(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
 
 # Project option
 option(BUILD_DOC "Generate docs with doxygen" ON)
+option(ENABLE_CPPCHECK "Static code analysis by cppcheck" ON)
 
 # Project modules
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 include(doxygen)
+
+# Static Analyzer Settings
+set(CPPCHECK_PROJECT_DIR_ARG
+	"${CMAKE_SOURCE_DIR}/src"
+	#"${CMAKE_SOURCE_DIR}/tests"
+	CACHE STRING "source path for cppcheck")
+
+set(CPPCHECK_EXCLUDES
+	"${CMAKE_SOURCE_DIR}/src/hll"
+	"${CMAKE_SOURCE_DIR}/scripts"
+	"${CMAKE_SOURCE_DIR}/templates"
+	"${CMAKE_SOURCE_DIR}/docs"
+	"${CMAKE_SOURCE_DIR}/external")
+
+include(cppcheck)
+
+
+
 
 

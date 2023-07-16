@@ -28,6 +28,8 @@ set(CPPCHECK_EXCLUDES
 	"${CMAKE_SOURCE_DIR}/scripts"
 	"${CMAKE_SOURCE_DIR}/templates"
 	"${CMAKE_SOURCE_DIR}/docs"
+	"${CMAKE_SOURCE_DIR}/docker"
+	"${CMAKE_SOURCE_DIR}/cmake"
 	"${CMAKE_SOURCE_DIR}/external")
 
 # Clangformat checks
@@ -40,4 +42,9 @@ include(lizard)
 
 # Flawfinder for CVE analysis
 include(flawfinder)
+
+# GoogleTests
+include(googletest)
+enable_testing()
+add_subdirectory(tests)
 

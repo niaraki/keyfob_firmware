@@ -43,6 +43,25 @@ The structure of the source folder :
 
 ### Development Guidlines 
 #### Prerequisites
+
+
+| App | Description | Version | How to install |
+|-----|-------------|---------|----------------|
+| arm-none-eabi- | Cross compiler for arm MCU | 10.3.1 | |
+| CMake | Build System Generator | 3.26.4 | sudo snap install cmake --clasic |
+| GNU-Make | Source builder | 4.2.1 | sudo apt install make |
+| Cppcheck | C/C++ static analyzer | 1.90 | sudo apt install cppcheck |
+| [Lizard](https://github.com/terryyin/lizard) | Cyclomatic Complexity Analyzer | 1.17.10  | sudo pip install lizard |
+| [Flawfinder](https://github.com/david-a-wheeler/flawfinder) | Vulnerabilities scanner | 2.0.19 | pip install flawfinder |
+| Clangformat | C/C++ code linter | 10.0.0 | sudo apt-get install clang-format |
+| Doxygen | Automatic document generator from source codes | 1.8.17 | sudo apt install doxygen |
+| Lcov | Report generator from gcov | 1.14 | sudo apt install lcov |
+| Docker | Containerization technology | 24.0.2 | [Installation guide](https://docs.docker.com/engine/install/ubuntu/) |
+| STM32CubeProgrammer | STM32 programming suite | 2.13.0 |[Wiki](https://wiki.st.com/stm32mpu/wiki/STM32CubeProgrammer)|
+| Google Test | Google test harness | v1.13.0 | - |
+
+
+
 #### How To Compile 
 #### Commit Message Conventions
 <ol>

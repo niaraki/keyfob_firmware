@@ -1,0 +1,31 @@
+# https://github.com/terryyin/lizard
+name: Lizard
+
+on: [push]
+
+jobs:
+  lizard:
+    name: Lizard
+
+    runs-on: ubuntu-latest
+    container:
+      image: mohammadniaraki/stm32_build:latest
+
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Lizard scan
+        run: make clean && make prepare && make lizard
+
+      - name: Upload analysis results
+        uses: actions/upload-artifact@v3
+        with:
+          name: Archive production artifacts
+          path: build/lizard-reports.txt
+          retention-days: 90

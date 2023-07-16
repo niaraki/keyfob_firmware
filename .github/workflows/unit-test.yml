@@ -1,0 +1,32 @@
+name: Test
+
+on: [push]
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    container:
+      image: mohammadniaraki/stm32_build:latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Configure, build, and run Google Test
+      run: |
+        make clean
+        make prepare
+        make tests
+
+    - name: Upload coverage reports to Codecov with GitHub Action
+      uses: codecov/codecov-action@v3
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      with:
+        gcov_ignore: 
+          ./docs
+          ./tests
+          ./docker
+          ./cmake
+          ./external
+          ./scripts
+          ./templates

@@ -29,6 +29,7 @@ function(prefix_clangformat_setup prefix)
       -style=file
       --dry-run
       --Werror
+      --output-replacements-xml
       -i
       ${clangformat_sources}
       WORKING_DIRECTORY

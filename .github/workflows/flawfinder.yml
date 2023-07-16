@@ -1,0 +1,35 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Flawfinder
+
+on: [push]
+
+jobs:
+  flawfinder:
+    name: Flawfinder
+
+    runs-on: ubuntu-latest
+    container:
+      image: mohammadniaraki/stm32_build:latest
+
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3        
+
+      - name: Flawfinder scan
+        run: make clean && make prepare && make flawfinder 
+
+      - name: Upload analysis results
+        uses: actions/upload-artifact@v3
+        with:
+          name: Archive production artifacts
+          path: build/flawfinder-report.html
+          retention-days: 90

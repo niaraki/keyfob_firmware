@@ -29,6 +29,7 @@ if (ENABLE_CPPCHECK)
             "--suppress=missingIncludeSystem"
             "--suppress=unmatchedSuppression"
             "--suppress=unusedFunction"
+            #--output-file=cppcheck-report.txt
             CAHCE STRING "Arguments for the checks to run"
         )
         set(_CPPCHECK_EXCLUDES)

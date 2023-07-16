@@ -2,7 +2,7 @@
 # Date: 07/15/2023
 # Desc.: CMakeLists.txt for keyfob firmware
 
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.20)
 project(keyfob VERSION 1.0.0)
 
 # Disable in-source build
@@ -10,9 +10,9 @@ set(CMAKE_DISABLE_SOURCE_CHANGES ON)
 set(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
 
 # Project option
-option(BUILD_DOC "Generate docs with doxygen" ON)
+option(BUILD_DOC       "Generate docs with doxygen" ON)
 option(ENABLE_CPPCHECK "Static code analysis by cppcheck" ON)
-option(ENABLE_TESTS "Build project tests" ON)
+option(ENABLE_TESTS    "Build project tests" ON)
 option(ENABLE_COVERAGE "Enable code-coverage report" ON)
 
 # Project modules
@@ -33,6 +33,8 @@ set(CPPCHECK_EXCLUDES
 	"${CMAKE_SOURCE_DIR}/docker"
 	"${CMAKE_SOURCE_DIR}/cmake"
 	"${CMAKE_SOURCE_DIR}/external")
+
+include(cppcheck)
 
 # Clangformat checks
 include(ClangFormat)

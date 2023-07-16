@@ -51,7 +51,8 @@ More information should come here
  * @attention sample attention
  * @todo solve the bug
  */
-void delay_us(void)
+void
+delay_us(void)
 {
     volatile int i = 0;
     while (i < 250000)

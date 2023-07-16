@@ -1,7 +1,7 @@
 # Author: M.Niaraki
 # Project: Keyfob firmware
 
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.20)
 
 # Add cmake module path
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/../cmake)

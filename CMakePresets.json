@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 20,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "Debug",
+      "displayName": "Build debug",
+      "description": "Build debug sources of the project",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "BUILD_DOC": {
+          "type": "BOOL",
+          "value": "ON"},
+        "CMAKE_BUILD_TYPE": "Debug",
+		    "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+		    "ENABLE_TESTS": {
+          "type": "BOOL",
+          "value": "ON"
+        }
+      },
+      "vendor": {
+        "vendor-one.com/ExampleIDE/1.0": {
+          "buildQuickly": true
+        }
+      }
+    }
+  ],
+  "vendor": {
+    "vendor-one.com/ExampleIDE/1.0": {
+      "buildQuickly": false
+    }
+  }
+}

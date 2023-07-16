@@ -1,0 +1,48 @@
+{
+	"version": 1,
+	"cmakeMinimumRequired": {
+		"major": 3,
+		"minor": 20,
+		"patch": 0
+	},
+	"configurePresets": [
+		{
+			"name": "Debug",
+			"displayName": "Build app for debug",
+			"description": "Build all sources of the project for debug",
+			"generator": "Unix Makefiles",
+			"binaryDir": "${sourceDir}/../build/src",
+			"vendor": {
+				"vendor-one.com/ExampleIDE/1.0": {
+					"buildQuickly": true
+				}
+			},
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Debug",
+				"CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+				"ENABLE_CPPCHECK": "ON"
+			}
+		},
+		{
+			"name": "Release",
+			"displayName": "Build app for release",
+			"description": "Build all sources of the project for release",
+			"generator": "Unix Makefiles",
+			"binaryDir": "${sourceDir}/../build/src",
+			"vendor": {
+				"vendor-one.com/ExampleIDE/1.0": {
+					"buildQuickly": true
+				}
+			},
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE": "Release",
+				"ENABLE_CPPCHECK": "ON"
+			}
+		}
+	],
+	"vendor": {
+		"vendor-one.com/ExampleIDE/1.0": {
+			"buildQuickly": false
+		}
+	}
+}

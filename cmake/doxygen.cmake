@@ -13,8 +13,7 @@ if (BUILD_DOC)
 		configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT} @ONLY)
 		message("-- Doxygen configuration has been done.")
 
-		# note the option ALL which allows to build the docs together with the application
-		add_custom_target(docs ALL
+		add_custom_target(docs 
 		COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
 		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 		COMMENT "Generation doxygen documents"

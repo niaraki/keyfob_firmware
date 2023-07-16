@@ -12,6 +12,8 @@ set(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
 # Project option
 option(BUILD_DOC "Generate docs with doxygen" ON)
 option(ENABLE_CPPCHECK "Static code analysis by cppcheck" ON)
+option(ENABLE_TESTS "Build project tests" ON)
+option(ENABLE_COVERAGE "Enable code-coverage report" ON)
 
 # Project modules
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
@@ -44,7 +46,11 @@ include(lizard)
 include(flawfinder)
 
 # GoogleTests
-include(googletest)
-enable_testing()
-add_subdirectory(tests)
+if (ENABLE_TESTS)
+  include(googletest)
+  # Enable ctest before adding tests subdirectory
+  enable_testing()
+  add_subdirectory(tests)
+endif(ENABLE_TESTS)
+
 

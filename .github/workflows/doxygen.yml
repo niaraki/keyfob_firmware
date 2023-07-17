@@ -12,7 +12,7 @@ jobs:
 
     permissions:
       actions: read
-      contents: read
+      contents: write
       security-events: write
 
     steps:
@@ -22,7 +22,13 @@ jobs:
       - name: Generating documents by doxygen
         run: make clean && make prepare && make docs
 
+      - name: Install rsync 📚
+        run: |
+          apt-get update && apt-get install -y rsync
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
+          branch: gh-pages
+          single-commit: true
           folder: build/docs/html

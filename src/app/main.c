@@ -42,6 +42,7 @@ More information should come here
  */
 #include <stdio.h>
 #include <stm32f0xx.h>
+#include "config.h"
 
 /**
  * @brief this function can be used for delay
@@ -106,6 +107,8 @@ blinkLed(void)
 int
 main(void)
 {
+    const char* project_name = PROJECT_NAME;
+
     // set clock to pll and 48mhz
     activatePll();
 

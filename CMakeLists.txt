@@ -3,6 +3,8 @@
 # Desc.: CMakeLists.txt for keyfob firmware
 
 cmake_minimum_required(VERSION 3.20)
+
+# Versionin should be like semver
 project(keyfob VERSION 1.0.0)
 
 # Disable in-source build
@@ -19,6 +21,23 @@ option(ENABLE_COVERAGE "Enable code-coverage report" ON)
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 include(doxygen)
 
+# Read last hash in the code-base
+include(checkgit)
+CheckGitInstalled()
+
+# Read last hash from code-base
+execute_process(
+    COMMAND  git rev-parse --short HEAD
+    OUTPUT_VARIABLE GIT_HASH
+    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
+# Config the project
+configure_file(
+  "${CMAKE_CURRENT_SOURCE_DIR}/config.h.in"
+  "${CMAKE_BINARY_DIR}/configured_files/include/config.h"
+)
 # Static Analyzer Settings
 set(CPPCHECK_PROJECT_DIR_ARG
 	"${CMAKE_SOURCE_DIR}/src"

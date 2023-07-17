@@ -1,6 +1,5 @@
 # Author: M.Niaraki
 # Project: Keyfob firmware
-
 cmake_minimum_required(VERSION 3.20)
 
 # Add cmake module path
@@ -11,7 +10,6 @@ include(arm_none_eabi)
 include(project_options)
 
 project(keyfob_firmware 
-		VERSION      1.0.0
 	  DESCRIPTION  "keyfob access control firmware" 
 		HOMEPAGE_URL "keyfob.ir")
 
@@ -44,6 +42,7 @@ add_executable(${PROJECT_NAME} $<TARGET_OBJECTS:${APP_LIB_NAME}>)
 
 # Change the target name
 set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME ${PROJECT_NAME} SUFFIX ".elf")
+
 
 # Link other static library for each layer of the architecture
 target_link_libraries(${PROJECT_NAME} PUBLIC

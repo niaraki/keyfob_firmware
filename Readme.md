@@ -19,6 +19,7 @@
   - [Introduction](#introduction)
   - [Project Structure](#project-structure)
   - [Development Guidlines](#development-guidlines)
+  - [Versioning](#versioning)
   - [Authors](#authors)
   - [License](#license)
   - [Acknowledgments](#acknowledgments)
@@ -115,6 +116,9 @@ You can disable it on your machine by using the following command:<br/>
 
 #### Coding Styles
 This project uses the c-coding style introduced by [barrgroup](https://barrgroup.com/embedded-systems/books/embedded-c-coding-standard). The configurations are also available [here](https://github.com/petertorelli/clang-format-barr-c).
+
+#### Versioning
+We use [SemVer](http://semver.org/) for versioning.
 
 ### Authors
 - [**Mohammad Niaraki**](https://www.github.com/niaraki)

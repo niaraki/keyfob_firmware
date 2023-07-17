@@ -1,0 +1,19 @@
+{
+    "cpputestTestAdapter.logfile": "${workspaceFolder}/build/tests/tests_log.ini",
+    "cpputestTestAdapter.testExecutablePath": "${workspaceFolder}/build/tests",
+    "cpputestTestAdapter.testExecutable": "${workspaceFolder}/build/tests/keyfob_tests",
+    "cpputestTestAdapter.logpanel": true,
+    "testExplorer.sort": "byLabel",
+    "testExplorer.useNativeTesting": false,
+    "clang-format.assumeFilename": ".clang-format",
+    "clang-format.language.c.enable": true,
+    "clang-format.language.cpp.enable": true,
+    "clang-format.language.cuda.enable": false,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "files.associations": {
+        "stm32f0xx.h": "c",
+        "cmsis_os2.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "disabled",
+}

@@ -1,0 +1,30 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "cwd": "${workspaceRoot}",
+            "executable": "${workspaceRoot}/build/src/keyfob_firmware.elf",
+            "name": "Debug on MCU by OpenOCD",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "interface": "swd",
+            "configFiles": [
+                "interface/stlink-v2.cfg",
+                "target/stm32f0x.cfg"
+            ],
+            "svdFile": "${workspaceRoot}/src/hll/stm32f030xx/vendor_cmsis/stm32f030.svd",
+            "searchDir": [],
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "none",
+            "preLaunchCommands": [
+                "set mem inaccessible-by-default off",
+                "monitor reset"
+            ],
+            "postLaunchCommands": [
+                "monitor reset init",
+                "monitor sleep 200"
+            ],
+        }
+    ]
+}

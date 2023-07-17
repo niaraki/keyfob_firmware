@@ -1,0 +1,65 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build debug",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "debug"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$gcc"
+        },
+        {
+            "label": "build release",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "release"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$gcc"
+        },
+        {
+            "label": "build tests",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "tests"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$gcc"
+        },
+        {
+            "label": "build docs",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "docs"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+        },
+        {
+            "label": "flash MCU",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "flash"
+            ],
+            "group": "build",
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "recommendations": [
+        "marus25.cortex-debug",
+        "xaver.clang-format",
+        "ms-vscode.cpptools",
+        "hbenl.vscode-test-explorer",
+        "alefragnani.project-manager",
+        "cschlosser.doxdocgen",
+        "hakua.doxygen-previewer",
+        "ms-vscode.makefile-tools",
+        "equinusocio.vsc-material-theme",
+        "equinusocio.vsc-material-theme-icons",
+        "mcu-debug.memory-view",
+        "vscodevim.vim",
+        "ms-vscode.cpptools-themes",
+    ]
+}

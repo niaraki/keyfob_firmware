@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/external/cpputest/include",
+                "${workspaceFolder}/external/cmsis/CMSIS/Core/Include",
+                "${workspaceFolder}/src/hll/stm32f030xx/vendor_cmsis/include"
+            ],
+            "compileCommands": "build/src/compile_commands.json",
+            "defines": [
+                "STM32F030x6"
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-arm",
+            "configurationProvider": "ms-vscode.makefile-tools"
+        }
+    ],
+    "version": 4
+}

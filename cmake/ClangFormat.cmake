@@ -38,6 +38,18 @@ function(prefix_clangformat_setup prefix)
       "Formatting ${prefix} with ${CLANGFORMAT_EXECUTABLE} ..."
   )
 
+  add_custom_target(clangformat_apply
+    COMMAND
+      ${CLANGFORMAT_EXECUTABLE}
+      -style=file
+      -i
+      ${clangformat_sources}
+      WORKING_DIRECTORY
+      ${CMAKE_SOURCE_DIR}
+      COMMENT
+      "Formatting ${prefix} with ${CLANGFORMAT_EXECUTABLE} ..."
+  )
+
   if(TARGET clangformat)
     add_dependencies(clangformat ${prefix}_clangformat)
   else()

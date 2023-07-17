@@ -1,18 +1,18 @@
-.PHONY: sanitycheck all clean prepare tests cppcheck clangformat lizard flawfinder docs debug release flash 
+# Author: M.Niaraki
+# Date : 07/18/2023
+
+.PHONY: sanitycheck all clean prepare tests cppcheck clangformat lizard flawfinder docs debug release flash sure format
+
+format:
+	cmake --build build --config Debug --target clangformat_apply
+
+sure: lizard clangformat cppcheck flawfinder
+	@echo "Super, everything was perfect!"
 
 sanitycheck:
 	./scripts/sanity.sh
 
-all: 
-	@echo "Building keyfob firmware ... "	
-	cmake --build build --config Debug --target clangformat
-	cmake --build build --config Debug --target cppcheck_analysis
-	cmake --build build --config Debug --target lizard
-	cmake --build build --config Debug --target flawfinder
-	cmake --build build --config Debug --target keyfob_tests
-	cmake --build build/tests --config Debug --target coverage
-	cmake --build build/src --config Release
-	cmake --build build --config Debug --target docs
+all: sure tests release docs
 	@echo "Done!"	
 
 clean:
@@ -42,10 +42,10 @@ flawfinder:
 docs:
 	cmake --build build --config Release --target docs
 
-debug:
+debug: format sure
 	cmake --build build/src --config Debug 
 
-release:
+release: format sure
 	cmake -S src/ -B build/src --preset=Release
 	cmake --build build/src --config Release
 

@@ -107,7 +107,7 @@ blinkLed(void)
 int
 main(void)
 {
-    const char* project_name = PROJECT_NAME;
+    //    const char* project_name = PROJECT_NAME;
 
     // set clock to pll and 48mhz
     activatePll();

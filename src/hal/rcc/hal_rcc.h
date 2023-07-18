@@ -1,9 +1,9 @@
 /**
 ********************************************************************************
-* @file     template.h
+* @file     hal_rcc.h
 * @author   M.Niaraki
-* @date     07/15/2023
-* @brief    this is a template for project
+* @date     07/18/2023
+* @brief    This header is used to define Reset and Clock Control (RCC)
 ********************************************************************************
 * @attention
 *
@@ -11,18 +11,22 @@
 ********************************************************************************
 */
 
-#ifndef __TEMP_H
-#define __TEMP_H
+#ifndef __HAL_RCC_H
+#define __HAL_RCC_H
+
+#include "hal_rcc_cfg.h"
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
+    void hal_rcc_init(const rcc_config_t *);
+
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __TEMP_H */
+#endif /* __HAL_RCC_H */
 
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

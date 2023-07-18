@@ -1,10 +1,9 @@
 /**
 ********************************************************************************
-* @file     template.c
+* @file     hal_rcc_cfg.c
 * @author   M.Niaraki
-* @date     07/15/2023
-* @brief    this is a template for project
-*           enjoy it.
+* @date     07/18/2023
+* @brief    This module implements the config table for RCC driver
 * @note     notes
   @verbatim
 ================================================================================
@@ -13,15 +12,21 @@ More information should come here
   @endverbatim
 */
 
+#include "hal_rcc_cfg.h"
+
 /** @addtogroup HAL
  *   @brief Hardware ACCESS Layer (HAL)
  *   @{
  */
 
-/** @defgroup DIO DIO
- *   @brief Digital Input/Output Module for HAL
+/** @defgroup RCC RCC
+ *   @brief Reset and Clock Controller Module for HAL
  *    @{
  */
+const rcc_config_t g_rcc_config_table[] = {
+    /* ID   	*/
+    { 10 }, /* Simple Id */
+};
 
 /**
  * @brief test function
@@ -31,24 +36,14 @@ More information should come here
  * @note sample note
  * @bug sample bug
  * @attention sample attention
- * @todo solve the bug
- * @see test1
- */
-int
-test(int a)
-{
-    return a;
-}
-
-/**
  * @brief test1 function
  * @retval number
  * @see test
  */
-int
-test1(void)
+const rcc_config_t *
+rcc_get_config(void)
 {
-    return 0;
+    return g_rcc_config_table;
 }
 
 /**  @}*/

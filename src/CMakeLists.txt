@@ -46,9 +46,6 @@ set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME ${PROJECT_NAME} SUF
 
 # Link other static library for each layer of the architecture
 target_link_libraries(${PROJECT_NAME} PUBLIC
-  ${HLL_LIB_NAME}  
-  # ${HAL_LIB_NAME}  
-  # ${DRV_LIB_NAME}  
   # ${MID_LIB_NAME}  
   # ${BSP_LIB_NAME}  
   ${APP_LIB_NAME}  

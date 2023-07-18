@@ -19,6 +19,19 @@ extern "C"
 {
 #endif
 
+    /** @addtogroup HAL
+     *   @brief Hardware ACCESS Layer (HAL)
+     *   @{
+     */
+
+    /** @defgroup DIO DIO
+     *   @brief Digital Input/Output Module for HAL
+     *    @{
+     */
+
+    /**  @}*/
+    /** @}*/
+
 #ifdef __cplusplus
 }
 #endif

@@ -1,9 +1,9 @@
 /**
 ********************************************************************************
-* @file     template.h
+* @file     hal.h
 * @author   M.Niaraki
-* @date     07/15/2023
-* @brief    this is a template for project
+* @date     07/18/2023
+* @brief    this header is the main header of the Hardware Access Layer
 ********************************************************************************
 * @attention
 *
@@ -11,18 +11,27 @@
 ********************************************************************************
 */
 
-#ifndef __TEMP_H
-#define __TEMP_H
+#ifndef __HAL_H
+#define __HAL_H
+
+#include "hal_cfg.h"
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
+    /** @addtogroup HAL
+     *   @brief Hardware ACCESS Layer (HAL)
+     *   @{
+     */
+
+    /** @}*/
+
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __TEMP_H */
+#endif /* __HAL_H */
 
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

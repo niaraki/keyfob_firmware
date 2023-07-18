@@ -1,9 +1,9 @@
 /**
 ********************************************************************************
-* @file     template.h
+* @file     hal_cfg.h
 * @author   M.Niaraki
-* @date     07/15/2023
-* @brief    this is a template for project
+* @date     07/18/2023
+* @brief    This header is used to configure submodules of the HAL
 ********************************************************************************
 * @attention
 *
@@ -11,18 +11,25 @@
 ********************************************************************************
 */
 
-#ifndef __TEMP_H
-#define __TEMP_H
+#ifndef __HAL_CFG_H
+#define __HAL_CFG_H
+
+#define HALL_RCC_MODULE_ENABLED
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
+/* includes -------------------------- */
+#ifdef HALL_RCC_MODULE_ENABLED
+#include "hal_rcc.h"
+#endif /* HAL_RCC_MODULE_ENABLED */
+
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __TEMP_H */
+#endif /* __HAL_CFG_H */
 
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

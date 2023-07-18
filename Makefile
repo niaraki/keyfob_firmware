@@ -49,6 +49,9 @@ release: format sure
 	cmake -S src/ -B build/src --preset=Release
 	cmake --build build/src --config Release
 
+dependency:
+	cd build/src && cmake ../src --graphviz=graph.dot && dot -Tpng graph.dot -o graph_image.png
+
 flash:
 	@echo "Flashing..."
 	STM32_Programmer_CLI -c port=SWD -e all

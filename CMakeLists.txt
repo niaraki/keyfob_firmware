@@ -5,7 +5,13 @@
 cmake_minimum_required(VERSION 3.20)
 
 # Versionin should be like semver
-project(keyfob VERSION 1.0.0)
+project(keyfob 
+      DESCRIPTION  "keyfob access control firmware" 
+      HOMEPAGE_URL "keyfob.ir"
+      VERSION      1.0.0
+)
+
+enable_language(C ASM)
 
 # Disable in-source build
 set(CMAKE_DISABLE_SOURCE_CHANGES ON)
@@ -20,6 +26,12 @@ option(ENABLE_COVERAGE "Enable code-coverage report" ON)
 # Project modules
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 include(doxygen)
+include(libs)
+
+if (ENABLE_COVERAGE)
+    include(CodeCoverage)
+    append_coverage_compiler_flags()
+endif()
 
 # Read last hash in the code-base
 include(checkgit)
@@ -38,10 +50,12 @@ configure_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/config.h.in"
   "${CMAKE_BINARY_DIR}/configured_files/include/config.h"
 )
+
+include_directories("${CMAKE_BINARY_DIR}/configured_files/include/")
+
 # Static Analyzer Settings
 set(CPPCHECK_PROJECT_DIR_ARG
 	"${CMAKE_SOURCE_DIR}/src"
-	#"${CMAKE_SOURCE_DIR}/tests"
 	CACHE STRING "source path for cppcheck")
 
 set(CPPCHECK_EXCLUDES
@@ -53,7 +67,9 @@ set(CPPCHECK_EXCLUDES
 	"${CMAKE_SOURCE_DIR}/cmake"
 	"${CMAKE_SOURCE_DIR}/external")
 
-include(cppcheck)
+if(ENABLE_CPPCHECK)
+  include(cppcheck)
+endif()
 
 # Clangformat checks
 include(ClangFormat)
@@ -71,6 +87,10 @@ if (ENABLE_TESTS)
   include(googletest)
   # Enable ctest before adding tests subdirectory
   enable_testing()
+  # Add sources 
+	set(CROSS_COMPILE OFF)
+	add_subdirectory(src src_test)
+  # Add tests
   add_subdirectory(tests)
 endif(ENABLE_TESTS)
 

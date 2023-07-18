@@ -24,7 +24,9 @@ prepare:
 	cmake -S src/ -B build/src --preset=Debug 
 
 tests:
-	cmake --build build --config Debug --target keyfob_tests
+	cmake --build build --config Debug 
+	cd build && ctest --verbose
+	cd ..
 	cmake --build build/tests --config Debug --target coverage
 
 cppcheck:

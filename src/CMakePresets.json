@@ -20,7 +20,7 @@
 			"cacheVariables": {
 				"CMAKE_BUILD_TYPE": "Debug",
 				"CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-				"ENABLE_CPPCHECK": "ON"
+				"CROSS_COMPILE": "ON"
 			}
 		},
 		{
@@ -36,7 +36,7 @@
 			},
 			"cacheVariables": {
 				"CMAKE_BUILD_TYPE": "Release",
-				"ENABLE_CPPCHECK": "ON"
+				"CROSS_COMPILE": "ON"
 			}
 		}
 	],

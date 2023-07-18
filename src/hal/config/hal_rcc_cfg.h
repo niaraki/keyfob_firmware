@@ -26,7 +26,7 @@ extern "C"
 {
 #endif
 
-    const rcc_config_t *rcc_get_config(void);
+    const rcc_config_t *hal_rcc_cfg_get(void);
 
 #ifdef __cplusplus
 }

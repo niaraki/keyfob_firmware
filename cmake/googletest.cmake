@@ -13,7 +13,6 @@ FetchContent_Declare(
    GIT_TAG v1.13.0
 )
 
-# For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 set(BUILD_GMOCK ON CACHE BOOL "" FORCE)

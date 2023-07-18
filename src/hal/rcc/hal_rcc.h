@@ -22,6 +22,7 @@ extern "C"
 #endif
 
     void hal_rcc_init(const rcc_config_t *);
+    void hal_rcc_test(int);
 
 #ifdef __cplusplus
 }

@@ -1,9 +1,9 @@
 /**
 ********************************************************************************
-* @file     template.h
+* @file     HLL_RCC.h
 * @author   M.Niaraki
 * @date     07/15/2023
-* @brief    this is a template for project
+* @brief    Hardware Low Layer: Registers for RCC unit is defined here
 ********************************************************************************
 * @attention
 *
@@ -11,23 +11,29 @@
 ********************************************************************************
 */
 
-#ifndef __TEMP_H
-#define __TEMP_H
+#ifndef __HLL_RCC_H
+#define __HLL_RCC_H
+
+#include "stm32f0xx.h"
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
-    /** @addtogroup HAL
-     *   @brief Hardware ACCESS Layer (HAL)
+    /** @addtogroup HLL
+     *   @brief Hardware Low Layer (HLL)
      *   @{
      */
 
-    /** @defgroup DIO DIO
-     *   @brief Digital Input/Output Module for HAL
+    /** @defgroup RCC RCC
+     *   @brief Hardware registers for RCC unit
      *    @{
      */
+
+    /** @brief defines the hardware registers for RCC unit based on CMSIS layer
+     */
+    static volatile RCC_TypeDef *const hll_rcc_regs = RCC;
 
     /**  @}*/
     /** @}*/
@@ -36,6 +42,6 @@ extern "C"
 }
 #endif
 
-#endif /* __TEMP_H */
+#endif /* __HLL_RCC_H */
 
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

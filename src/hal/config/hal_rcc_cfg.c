@@ -41,7 +41,7 @@ const rcc_config_t g_rcc_config_table[] = {
  * @see test
  */
 const rcc_config_t *
-rcc_get_config(void)
+hal_rcc_cfg_get(void)
 {
     return g_rcc_config_table;
 }

@@ -25,21 +25,24 @@ if (ENABLE_COVERAGE)
     ${PROJECT_NAME}
   )
 
-  set(COVERAGE_EXCLUDES
+set(COVERAGE_EXCLUDES
+    "${PROJECT_SOURCE_DIR}/build"
     "${PROJECT_SOURCE_DIR}/docs"
     "${PROJECT_SOURCE_DIR}/templates"
     "${PROJECT_SOURCE_DIR}/scripts"
     "${PROJECT_SOURCE_DIR}/external"
     "${PROJECT_SOURCE_DIR}/docker"
     "${PROJECT_SOURCE_DIR}/cmake"
-    "${PROJECT_SOURCE_DIR}/build"
     "${PROJECT_SOURCE_DIR}/tests/*"
-  )
+    "*/gtest/*"
+    "/usr/include/*"
+ )
 
   setup_target_for_coverage_lcov(
     NAME ${COVERAGE_MAIN}
-    EXECUTABLE ${PROJECT_NAME}
+    EXECUTABLE ctest -j${PROCESSOR_COUNT}
     DEPENDENCIES ${COVERAGE_DEPENDENCIES}
     EXCLUDE ${COVERAGE_EXCLUDES}
   )
+  
 endif()

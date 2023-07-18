@@ -160,9 +160,7 @@ foreach(LANG ${LANGUAGES})
     endif()
   elseif(NOT "${CMAKE_${LANG}_COMPILER_ID}" MATCHES "GNU"
          AND NOT "${CMAKE_${LANG}_COMPILER_ID}" MATCHES "(LLVM)?[Ff]lang")
-    message(${LANG})
     message(FATAL_ERROR "Compiler is not GNU or Flang! Aborting...")
-    
   endif()
 endforeach()
 
@@ -254,7 +252,7 @@ function(setup_target_for_coverage_lcov)
     set(LCOV_EXCLUDES "")
     foreach(EXCLUDE ${Coverage_EXCLUDE} ${COVERAGE_EXCLUDES} ${COVERAGE_LCOV_EXCLUDES})
         if(CMAKE_VERSION VERSION_GREATER 3.4)
-            get_filename_component(EXCLUDE ${EXCLUDE} ABSOLUTE BASE_DIR ${BASEDIR})
+            #get_filename_component(EXCLUDE ${EXCLUDE} ABSOLUTE BASE_DIR ${BASEDIR})
         endif()
         list(APPEND LCOV_EXCLUDES "${EXCLUDE}")
     endforeach()

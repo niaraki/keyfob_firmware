@@ -12,6 +12,7 @@ gtest_discover_tests(${FIRST_UNIT_TARGET})
 add_executable(${HAL_UNIT_TARGET}
    ${TEST_FOLDER_PATH}/unit/hal/rcc_tests.cpp
 )
+add_definitions(-DSTM32F030x6) 
 target_link_libraries(${HAL_UNIT_TARGET} PUBLIC
   ${HAL_LIB_TARGET}
    GTest::gmock_main

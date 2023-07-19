@@ -4,7 +4,7 @@ if (CROSS_COMPILE)
     ${CMAKE_CURRENT_SOURCE_DIR}/vendor_cmsis/system_stm32f0xx.c
   )
   target_include_directories(${HLL_LIB_TARGET} PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/
     ${CMAKE_CURRENT_SOURCE_DIR}/vendor_cmsis/include
     ${CMAKE_CURRENT_SOURCE_DIR}/../../../external/CMSIS/Core/Include
   )

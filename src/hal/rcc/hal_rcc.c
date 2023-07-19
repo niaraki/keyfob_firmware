@@ -12,7 +12,7 @@ More information should come here
   @endverbatim
 */
 #include "hal.h"
-#include "hll_rcc.h"
+#include "hll.h"
 
 /** @addtogroup HAL
  *   @brief Hardware ACCESS Layer (HAL)
@@ -41,6 +41,7 @@ hal_rcc_init(const rcc_config_t *configs)
 {
     // Enable the HSE clock
     // hll_rcc_regs->CR |= RCC_CR_HSEON;
+
     // while (!(hll_rcc_regs->CR & RCC_CR_HSERDY))
     //     ;
     // // Configure the PLL
@@ -64,6 +65,7 @@ hal_rcc_init(const rcc_config_t *configs)
     // hll_rcc_regs->CFGR |= RCC_CFGR_SW_PLL;
     // while ((hll_rcc_regs->CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_PLL)
     //     ;
+    hll_rcc_regs->CR = 98; // for test
 }
 
 void

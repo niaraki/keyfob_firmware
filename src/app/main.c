@@ -50,20 +50,20 @@ delay_us(void)
 void
 blinkLed(void)
 {
-    // while (1)
-    // {
-    //     GPIOA->ODR |= (1 << 4);
-    //     delay_us();
-    //     GPIOA->ODR &= !(1 << 4);
-    //     delay_us();
-    // }
+    while (1)
+    {
+        GPIOA->ODR |= (1 << 4);
+        delay_us();
+        GPIOA->ODR &= !(1 << 4);
+        delay_us();
+    }
 }
 
 int
 main(void)
 {
     // //    const char* project_name = PROJECT_NAME;
-    // hal_rcc_init(hal_rcc_cfg_get());
+    hal_rcc_init(hal_rcc_cfg_get());
     // spi_flash_init();
 
     // RCC->AHBENR |= RCC_AHBENR_GPIOAEN; // Enable GPIOA clock
@@ -71,7 +71,6 @@ main(void)
     // // enable SWD: CLK:PA14 DATA: PA13
     // GPIOA->MODER |= GPIO_MODER_MODER14_1
     //                 | GPIO_MODER_MODER13_1; // PA13 & PA14 -> alternate
-    //                 function
     // GPIOA->OTYPER = 0;                      // set push-pull mode
     // GPIOA->OTYPER &= ~(GPIO_OTYPER_OT_13 | GPIO_OTYPER_OT_14);
     // GPIOA->OSPEEDR |= GPIO_OSPEEDER_OSPEEDR13_1 | GPIO_OSPEEDER_OSPEEDR14_1;
@@ -86,12 +85,12 @@ main(void)
     // GPIOA->MODER |= (1 << 8);
     // GPIOA->PUPDR |= (1 << 8);
 
-    // // check pll clock
-    // // SystemCoreClockUpdate();
-    // // if (SystemCoreClock != 48000000)
-    // // {
-    // //     SystemCoreClock++;
-    // // }
+    // check pll clock
+    // SystemCoreClockUpdate();
+    // if (SystemCoreClock != 48000000)
+    // {
+    //     SystemCoreClock++;
+    // }
 
     // blinkLed();
 

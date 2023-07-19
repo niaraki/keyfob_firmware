@@ -1,9 +1,9 @@
 /**
 ********************************************************************************
-* @file     HLL_RCC.h
+* @file     HLL.h
 * @author   M.Niaraki
-* @date     07/15/2023
-* @brief    Hardware Low Layer: Registers for RCC unit is defined here
+* @date     07/19/2023
+* @brief    Hardware Low Layer
 ********************************************************************************
 * @attention
 *
@@ -11,8 +11,8 @@
 ********************************************************************************
 */
 
-#ifndef __HLL_RCC_H
-#define __HLL_RCC_H
+#ifndef __HLL_H
+#define __HLL_H
 
 #include "stm32f0xx.h"
 
@@ -21,27 +21,12 @@ extern "C"
 {
 #endif
 
-    /** @addtogroup HLL
-     *   @brief Hardware Low Layer (HLL)
-     *   @{
-     */
-
-    /** @defgroup RCC RCC
-     *   @brief Hardware registers for RCC unit
-     *    @{
-     */
-
-    /** @brief defines the hardware registers for RCC unit based on CMSIS layer
-     */
     static volatile RCC_TypeDef *const hll_rcc_regs = RCC;
-
-    /**  @}*/
-    /** @}*/
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __HLL_RCC_H */
+#endif /* __HLL_H */
 
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

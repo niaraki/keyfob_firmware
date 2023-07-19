@@ -53,6 +53,11 @@ The structure of the source folder :
 | hal | Contains all source codes for developed Hardware-Abstraction-Layer|
 | hll | Contains all source codes for developed Hardware-Low-Layer|
 
+#### Architecture and dependencies
+
+In this project, we have a layerd architecture. As you can see in the following graph, The HLL (Hardware Low Layer) layer is the only dependency that exists between the firmware and the hardware. So, we can increase the development speed by faking the HLL and doing our unit tests on the development host (dual targeting approach). Eventually, we can cross compile our tests and run them on the actual hardware for further investigation. 
+
+<img height="400" alt="c" src="docs/images/keyfob_dependency.png"/>
 
 ### Development Guidlines 
 #### Prerequisites

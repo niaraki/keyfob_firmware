@@ -1,5 +1,6 @@
 # Add sources
 set(HAL_SOURCES
+  "./common/hal_common_helper.c"
   "./config/hal_rcc_cfg.c"
   "./rcc/hal_rcc.c"
 )

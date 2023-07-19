@@ -1,9 +1,9 @@
 /**
 ********************************************************************************
-* @file     hal.h
+* @file     hal_common_helper.h
 * @author   M.Niaraki
-* @date     07/18/2023
-* @brief    this header is the main header of the Hardware Access Layer
+* @date     07/19/2023
+* @brief    Implements some helper functions which are used by other HAL modules
 ********************************************************************************
 * @attention
 *
@@ -11,22 +11,25 @@
 ********************************************************************************
 */
 
-#ifndef __HAL_H
-#define __HAL_H
-
-#include "hal_common_defines.h"
-#include "hal_common_helper.h"
-#include "hal_cfg.h"
+#ifndef __HAL_COMMON_HELPER_H
+#define __HAL_COMMON_HELPER_H
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
+#include "hal_common_defines.h"
+
+    void hal_set_bit(REG reg, U8 bit_index);
+    void hal_clear_bit(REG reg, U8 bit_index);
+    void hal_toggle_bit(REG reg, U8 bit_index);
+    U8   hal_read_bit(REG reg, U8 bit_index);
+
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __HAL_H */
+#endif /* __HAL_COMMON_HELPER_H */
 
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

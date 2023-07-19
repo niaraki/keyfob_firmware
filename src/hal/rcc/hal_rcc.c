@@ -65,6 +65,8 @@ hal_rcc_init(const rcc_config_t *configs)
     // hll_rcc_regs->CFGR |= RCC_CFGR_SW_PLL;
     // while ((hll_rcc_regs->CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_PLL)
     //     ;
+    hal_set_bit(&hll_rcc_regs->CR, 1);
+
     hll_rcc_regs->CR = 98; // for test
 }
 

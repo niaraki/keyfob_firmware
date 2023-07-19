@@ -2,7 +2,7 @@
 #include "hal.h"
 #include "hll.h"
 
-TEST(RccUnitTests, RccSimpleAssertions_1)
+TEST(HalRccUnitTests, RccSimpleAssertions_1)
 {
     // Action
     hal_rcc_init(hal_rcc_cfg_get());

@@ -146,6 +146,20 @@ TEST(HalCommonUnitTests, HalToggleAndReadBit)
         EXPECT_EQ(read_expected, bit_value);
     }
 }
+
+TEST(HalCommonUnitTests, HalSetMask)
+{
+    _IO U32 reg = 0xAAAAAAAA;
+    hal_set_mask(&reg, 0x55555555);
+    EXPECT_EQ(0xFFFFFFFF, reg);
+}
+
+TEST(HalCommonUnitTests, HalClearMask)
+{
+    _IO U32 reg = 0xAAAAAAAA;
+    hal_clear_mask(&reg, 0xAAAAAAAA);
+    EXPECT_EQ(0, reg);
+}
 /**  @}*/
 /** @}*/
 

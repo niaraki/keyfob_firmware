@@ -21,10 +21,16 @@ extern "C"
 
 #include "hal_common_defines.h"
 
+    void hal_set_mask(REG reg, U32 mask);
+    void hal_clear_mask(REG reg, U32 mask);
+
     void hal_set_bit(REG reg, U8 bit_index);
     void hal_clear_bit(REG reg, U8 bit_index);
     void hal_toggle_bit(REG reg, U8 bit_index);
     U8   hal_read_bit(REG reg, U8 bit_index);
+
+    void hal_wait_for_bit(REG reg, U8 bit_index);
+    void hal_wait_for_mask(REG reg, U32 mask, U32 value);
 
 #ifdef __cplusplus
 }

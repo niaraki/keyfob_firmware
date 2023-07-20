@@ -28,6 +28,18 @@ More information should come here
 #define BIT_MASK(X) ((X <= MAX_BIT_INDEX) ? (U32)(1 << X) : 0U)
 
 inline void
+hal_set_mask(REG reg, U32 mask)
+{
+    *reg |= mask;
+}
+
+inline void
+hal_clear_mask(REG reg, U32 mask)
+{
+    *reg &= ~mask;
+}
+
+inline void
 hal_set_bit(REG reg, U8 bit_index)
 {
     *reg |= BIT_MASK(bit_index);
@@ -50,6 +62,22 @@ hal_read_bit(REG reg, U8 bit_index)
 {
     U8 result = ((*reg) & BIT_MASK(bit_index)) >> bit_index;
     return result;
+}
+inline void
+hal_wait_for_bit(REG reg, U8 bit_index)
+{
+#ifndef _TEST_
+    while (!((*reg) & BIT_MASK(bit_index)))
+        ;
+#endif
+}
+inline void
+hal_wait_for_mask(REG reg, U32 mask, U32 value)
+{
+#ifndef _TEST_
+    while (((*reg) & mask) != value)
+        ;
+#endif
 }
 /**  @}*/
 /** @}*/

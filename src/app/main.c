@@ -29,33 +29,15 @@
 #include "config.h"
 #include "spi_flash.h"
 
-/**
- * @brief this function can be used for delay
- * @param void
- * @retval void
- * @warning disable compiler optimizationj
- * @attention sample attention
- * @todo solve the bug
- */
-void
-delay_us(void)
-{
-    volatile int i = 0;
-    while (i < 250000)
-    {
-        i++;
-    }
-}
-
 void
 blinkLed(void)
 {
     while (1)
     {
         GPIOA->ODR |= (1 << 4);
-        delay_us();
+        hal_delay(1000);
         GPIOA->ODR &= ~(1 << 4);
-        delay_us();
+        hal_delay(1000);
     }
 }
 
@@ -66,7 +48,9 @@ main(void)
 
 #ifndef _TEST_
     hal_rcc_check_system_clock();
-
+    int result = hal_systick_init();
+    if (result < 0)
+        return 0;
     // enable SWD: CLK:PA14 DATA: PA13
     GPIOA->MODER |= GPIO_MODER_MODER14_1
                     | GPIO_MODER_MODER13_1; // PA13 & PA14 -> alternate

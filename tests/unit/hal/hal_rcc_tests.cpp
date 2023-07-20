@@ -12,7 +12,6 @@
 #include <gtest/gtest.h>
 #include "hal.h"
 #include "hll.h"
-#include "stm32f030x6.h"
 
 class HalRccTestFixture : public testing::Test
 {

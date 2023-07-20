@@ -28,4 +28,8 @@ SystemCoreClockUpdate(void)
 {
     SystemCoreClock = (48000000UL);
 }
+
+/* systick fakes */
+SysTick_Type fake_systick = { 0 };
+
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

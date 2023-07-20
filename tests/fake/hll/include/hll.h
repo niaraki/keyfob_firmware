@@ -26,6 +26,13 @@ extern "C"
 
     extern uint32_t SystemCoreClock;
     extern void     SystemCoreClockUpdate(void);
+#undef NVIC_SetPriority
+#define NVIC_SetPriority(X, Y)
+
+#undef SysTick
+    extern SysTick_Type fake_systick;
+#define Systick &fake_systick
+
 #ifdef __cplusplus
 }
 #endif

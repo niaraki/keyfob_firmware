@@ -21,8 +21,11 @@ extern "C"
 {
 #endif
 
-extern volatile RCC_TypeDef *const hll_rcc_regs;
+    extern volatile RCC_TypeDef *const gp_rcc_regs;
+    extern volatile PWR_TypeDef *const gp_pwr_regs;
 
+    extern uint32_t SystemCoreClock;
+    extern void     SystemCoreClockUpdate(void);
 #ifdef __cplusplus
 }
 #endif

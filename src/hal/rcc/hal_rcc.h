@@ -22,7 +22,7 @@ extern "C"
 #endif
 
     void hal_rcc_init(const rcc_config_t *);
-    void hal_rcc_test(int);
+    I8   hal_rcc_check_system_clock(void);
 
 #ifdef __cplusplus
 }

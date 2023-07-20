@@ -7,6 +7,7 @@ set(HAL_SOURCES
 
 # Add required headers
 set(HAL_INC_DIRS 
+    ${CMAKE_CURRENT_SOURCE_DIR}/../common
     ${CMAKE_CURRENT_SOURCE_DIR}/common
     ${CMAKE_CURRENT_SOURCE_DIR}/config
     ${CMAKE_CURRENT_SOURCE_DIR}/rcc

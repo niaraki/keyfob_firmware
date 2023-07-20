@@ -19,6 +19,10 @@ else()
   set(CMAKE_C_COMPILER_ID GNU)
   set(CMAKE_CXX_COMPILER_ID GNU)
   set(CMAKE_ASM_COMPILER_ID GNU)
+  add_definitions(
+      -DSTM32F030x6
+      -D_TEST_
+  ) 
 endif()
 
 # Sets name of the final artifact
@@ -29,9 +33,6 @@ set(LINKER_SCRIPT ${CMAKE_CURRENT_SOURCE_DIR}/hll/stm32f030xx/linker/STM32F030F4
 
 include(libs)
 
-add_definitions(
-    -DSTM32F030x6
-) 
 
 # Add each layer as subdirectory
 add_subdirectory(hll) 

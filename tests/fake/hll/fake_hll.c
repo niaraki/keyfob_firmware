@@ -14,7 +14,18 @@
 #include "stm32f0xx.h"
 #include "hll.h"
 
-volatile RCC_TypeDef        fake_rcc_regs = { 0 };
-volatile RCC_TypeDef *const hll_rcc_regs  = &fake_rcc_regs;
+volatile PWR_TypeDef        fake_pwr_regs = { 0 };
+volatile PWR_TypeDef *const gp_pwr_regs   = &fake_pwr_regs;
 
+volatile RCC_TypeDef        fake_rcc_regs = { 0 };
+volatile RCC_TypeDef *const gp_rcc_regs   = &fake_rcc_regs;
+
+/* Fake implementation of SystemCoreClockUpdate*/
+uint32_t SystemCoreClock = 0;
+
+void
+SystemCoreClockUpdate(void)
+{
+    SystemCoreClock = (48000000UL);
+}
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

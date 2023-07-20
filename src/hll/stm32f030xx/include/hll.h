@@ -21,7 +21,8 @@ extern "C"
 {
 #endif
 
-    static volatile RCC_TypeDef *const hll_rcc_regs = RCC;
+    static volatile PWR_TypeDef *const gp_pwr_regs = PWR;
+    static volatile RCC_TypeDef *const gp_rcc_regs = RCC;
 
 #ifdef __cplusplus
 }

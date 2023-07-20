@@ -40,11 +40,11 @@
 void
 delay_us(void)
 {
-    // volatile int i = 0;
-    // while (i < 250000)
-    // {
-    //     i++;
-    // }
+    volatile int i = 0;
+    while (i < 250000)
+    {
+        i++;
+    }
 }
 
 void
@@ -54,7 +54,7 @@ blinkLed(void)
     {
         GPIOA->ODR |= (1 << 4);
         delay_us();
-        GPIOA->ODR &= !(1 << 4);
+        GPIOA->ODR &= ~(1 << 4);
         delay_us();
     }
 }
@@ -62,42 +62,27 @@ blinkLed(void)
 int
 main(void)
 {
-    // //    const char* project_name = PROJECT_NAME;
     hal_rcc_init(hal_rcc_cfg_get());
-    // spi_flash_init();
 
-    // RCC->AHBENR |= RCC_AHBENR_GPIOAEN; // Enable GPIOA clock
+#ifndef _TEST_
+    hal_rcc_check_system_clock();
 
-    // // enable SWD: CLK:PA14 DATA: PA13
-    // GPIOA->MODER |= GPIO_MODER_MODER14_1
-    //                 | GPIO_MODER_MODER13_1; // PA13 & PA14 -> alternate
-    // GPIOA->OTYPER = 0;                      // set push-pull mode
-    // GPIOA->OTYPER &= ~(GPIO_OTYPER_OT_13 | GPIO_OTYPER_OT_14);
-    // GPIOA->OSPEEDR |= GPIO_OSPEEDER_OSPEEDR13_1 | GPIO_OSPEEDER_OSPEEDR14_1;
+    // enable SWD: CLK:PA14 DATA: PA13
+    GPIOA->MODER |= GPIO_MODER_MODER14_1
+                    | GPIO_MODER_MODER13_1; // PA13 & PA14 -> alternate
+    GPIOA->OTYPER = 0;                      // set push-pull mode
+    GPIOA->OTYPER &= ~(GPIO_OTYPER_OT_13 | GPIO_OTYPER_OT_14);
+    GPIOA->OSPEEDR |= GPIO_OSPEEDER_OSPEEDR13_1 | GPIO_OSPEEDER_OSPEEDR14_1;
 
-    // // Enable debug module clock
-    // RCC->APB2ENR |= RCC_APB2ENR_DBGMCUEN;
+    // Enable SWD
+    DBGMCU->CR |= DBGMCU_CR_DBG_STOP | DBGMCU_CR_DBG_STANDBY;
 
-    // // Enable SWD
-    // DBGMCU->CR |= DBGMCU_CR_DBG_STOP | DBGMCU_CR_DBG_STANDBY;
+    // enable GPIOA  PA4
+    GPIOA->MODER |= (1 << 8);
+    GPIOA->PUPDR |= (1 << 8);
 
-    // // enable GPIOA  PA4
-    // GPIOA->MODER |= (1 << 8);
-    // GPIOA->PUPDR |= (1 << 8);
-
-    // check pll clock
-    // SystemCoreClockUpdate();
-    // if (SystemCoreClock != 48000000)
-    // {
-    //     SystemCoreClock++;
-    // }
-
-    // blinkLed();
-
-    // you don't reach here
-    // while (1)
-    //     ;
-
+    blinkLed();
+#endif
     return 0;
 }
 

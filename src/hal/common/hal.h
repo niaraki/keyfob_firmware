@@ -23,7 +23,7 @@
 extern "C"
 {
 #endif
-
+    void hal_delay(U32 timout_ms);
 #ifdef __cplusplus
 }
 #endif

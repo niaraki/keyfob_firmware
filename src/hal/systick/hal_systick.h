@@ -1,9 +1,9 @@
 /**
 ********************************************************************************
-* @file     hal_cfg.h
+* @file     hal_systick.h
 * @author   M.Niaraki
-* @date     07/18/2023
-* @brief    This header is used to configure submodules of the HAL
+* @date     07/20/2023
+* @brief    This header is used to define Systick driver for the HAL layer
 ********************************************************************************
 * @attention
 *
@@ -11,29 +11,22 @@
 ********************************************************************************
 */
 
-#ifndef __HAL_CFG_H
-#define __HAL_CFG_H
-
-#define HALL_RCC_MODULE_ENABLED
-#define HALL_SYSTICK_MODULE_ENABLED
+#ifndef __HAL_SYSTICK_H
+#define __HAL_SYSTICK_H
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
+#include "hal_common_defines.h"
 
-/* includes -------------------------- */
-#ifdef HALL_RCC_MODULE_ENABLED
-#include "hal_rcc.h"
-#endif /* HAL_RCC_MODULE_ENABLED */
+    I8  hal_systick_init(void);
+    U32 hal_systick_get_tick(void);
 
-#ifdef HALL_SYSTICK_MODULE_ENABLED
-#include "hal_systick.h"
-#endif /* HALL_SYSTICK_MODULE_ENABLED */
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __HAL_CFG_H */
+#endif /* __HAL_SYSTICK_H */
 
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

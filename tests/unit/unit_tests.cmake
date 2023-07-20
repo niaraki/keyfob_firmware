@@ -12,6 +12,7 @@ gtest_discover_tests(${FIRST_UNIT_TARGET})
 add_executable(${HAL_UNIT_TARGET}
    ${TEST_FOLDER_PATH}/unit/hal/hal_common_tests.cpp
    ${TEST_FOLDER_PATH}/unit/hal/hal_rcc_tests.cpp
+   ${TEST_FOLDER_PATH}/unit/hal/hal_delay_tests.cpp
 )
 add_definitions(-DSTM32F030x6) 
 target_link_libraries(${HAL_UNIT_TARGET} PUBLIC

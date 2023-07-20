@@ -11,7 +11,9 @@ project(keyfob
       VERSION      1.0.0
 )
 
-enable_language(C ASM)
+enable_language(C CXX ASM)
+
+set(CMAKE_CXX_STANDARD 17)
 
 # Disable in-source build
 set(CMAKE_DISABLE_SOURCE_CHANGES ON)

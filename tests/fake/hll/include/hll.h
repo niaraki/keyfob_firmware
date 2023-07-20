@@ -1,9 +1,9 @@
 /**
 ********************************************************************************
-* @file     template.h
+* @file     HLL.h
 * @author   M.Niaraki
-* @date     07/15/2023
-* @brief    this is a template for project
+* @date     07/19/2023
+* @brief    FAKE Hardware Low Layer
 ********************************************************************************
 * @attention
 *
@@ -11,31 +11,25 @@
 ********************************************************************************
 */
 
-#ifndef __TEMP_H
-#define __TEMP_H
+#ifndef __HLL_H
+#define __HLL_H
+
+#include "stm32f0xx.h"
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
-    /** @addtogroup HAL
-     *   @brief Hardware ACCESS Layer (HAL)
-     *   @{
-     */
+    extern volatile RCC_TypeDef *const gp_rcc_regs;
+    extern volatile PWR_TypeDef *const gp_pwr_regs;
 
-    /** @defgroup DIO DIO
-     *   @brief Digital Input/Output Module for HAL
-     *    @{
-     */
-
-    /**  @}*/
-    /** @}*/
-
+    extern uint32_t SystemCoreClock;
+    extern void     SystemCoreClockUpdate(void);
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __TEMP_H */
+#endif /* __HLL_H */
 
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

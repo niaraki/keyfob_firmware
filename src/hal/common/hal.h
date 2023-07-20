@@ -14,19 +14,15 @@
 #ifndef __HAL_H
 #define __HAL_H
 
+#include "errno.h"
+#include "hal_common_defines.h"
+#include "hal_common_helper.h"
 #include "hal_cfg.h"
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
-
-    /** @addtogroup HAL
-     *   @brief Hardware ACCESS Layer (HAL)
-     *   @{
-     */
-
-    /** @}*/
 
 #ifdef __cplusplus
 }

@@ -1,7 +1,7 @@
 # Author: M.Niaraki
 # Date : 07/18/2023
 
-.PHONY: sanitycheck all clean prepare tests cppcheck clangformat lizard flawfinder docs debug release flash sure format
+.PHONY: sanitycheck all clean prepare tests coverage cppcheck clangformat lizard flawfinder docs debug release flash sure format
 
 format:
 	cmake --build build --config Debug --target clangformat_apply
@@ -24,7 +24,11 @@ prepare:
 	cmake -S src/ -B build/src --preset=Debug 
 
 tests:
-	cmake --build build --config Debug --target keyfob_tests
+	cmake --build build --config Debug 
+	cd build && ctest --verbose
+	cd ..
+
+coverage:
 	cmake --build build/tests --config Debug --target coverage
 
 cppcheck:

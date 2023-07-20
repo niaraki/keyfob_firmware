@@ -1,9 +1,9 @@
 /**
 ********************************************************************************
-* @file     hal_rcc.h
+* @file     hal_common_helper.h
 * @author   M.Niaraki
-* @date     07/18/2023
-* @brief    This header is used to define Reset and Clock Control (RCC)
+* @date     07/19/2023
+* @brief    Defines some helper functions which are used by other hall modules
 ********************************************************************************
 * @attention
 *
@@ -11,23 +11,22 @@
 ********************************************************************************
 */
 
-#ifndef __HAL_RCC_H
-#define __HAL_RCC_H
-
-#include "hal_rcc_cfg.h"
+#ifndef __HAL_COMMON_HELPER_H
+#define __HAL_COMMON_HELPER_H
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
+/* Includes ---------------------------------------- */
+#include "hal.h"
 
-    void hal_rcc_init(const rcc_config_t *);
-    I8   hal_rcc_check_system_clock(void);
+    U8 hal_read_bit(REG reg, U8 bit_index);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __HAL_RCC_H */
+#endif /* __HAL_COMMON_HELPER_H */
 
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

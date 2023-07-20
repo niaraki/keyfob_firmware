@@ -1,9 +1,9 @@
 /**
 ********************************************************************************
-* @file     hal_rcc.h
+* @file     HLL.h
 * @author   M.Niaraki
-* @date     07/18/2023
-* @brief    This header is used to define Reset and Clock Control (RCC)
+* @date     07/19/2023
+* @brief    Hardware Low Layer
 ********************************************************************************
 * @attention
 *
@@ -11,23 +11,23 @@
 ********************************************************************************
 */
 
-#ifndef __HAL_RCC_H
-#define __HAL_RCC_H
+#ifndef __HLL_H
+#define __HLL_H
 
-#include "hal_rcc_cfg.h"
+#include "stm32f0xx.h"
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
-    void hal_rcc_init(const rcc_config_t *);
-    I8   hal_rcc_check_system_clock(void);
+    static volatile PWR_TypeDef *const gp_pwr_regs = PWR;
+    static volatile RCC_TypeDef *const gp_rcc_regs = RCC;
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __HAL_RCC_H */
+#endif /* __HLL_H */
 
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

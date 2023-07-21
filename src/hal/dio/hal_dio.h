@@ -1,9 +1,9 @@
 /**
 ********************************************************************************
-* @file     HLL.h
+* @file     hal_rcc.h
 * @author   M.Niaraki
-* @date     07/19/2023
-* @brief    FAKE Hardware Low Layer
+* @date     07/18/2023
+* @brief    This header is used to define Reset and Clock Control (RCC)
 ********************************************************************************
 * @attention
 *
@@ -11,31 +11,22 @@
 ********************************************************************************
 */
 
-#ifndef __HLL_H
-#define __HLL_H
+#ifndef __HAL_DIO_H
+#define __HAL_DIO_H
 
-#include "stm32f0xx.h"
+#include "hal_dio_cfg.h"
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
-    enum
-    {
-        DIO_CHANNELS = 2U
-    };
-
-    extern volatile RCC_TypeDef *const  gp_rcc_regs;
-    extern volatile PWR_TypeDef *const  gp_pwr_regs;
-    extern volatile GPIO_TypeDef *const gp_dio_regs[DIO_CHANNELS];
-    extern uint32_t                     SystemCoreClock;
-    extern void                         SystemCoreClockUpdate(void);
+    void hal_dio_init(const dio_config_t *);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __HLL_H */
+#endif /* __HAL_DIO_H */
 
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

@@ -1,9 +1,9 @@
 /**
 ********************************************************************************
-* @file     HLL.h
+* @file     hal_dio_cfg.h
 * @author   M.Niaraki
-* @date     07/19/2023
-* @brief    FAKE Hardware Low Layer
+* @date     07/21/2023
+* @brief    This header defines DIO config defenitions
 ********************************************************************************
 * @attention
 *
@@ -11,31 +11,27 @@
 ********************************************************************************
 */
 
-#ifndef __HLL_H
-#define __HLL_H
+#ifndef __HAL_DIO_CFG_H
+#define __HAL_DIO_CFG_H
 
-#include "stm32f0xx.h"
+#include "hal_common_defines.h"
+
+typedef struct
+{
+    uint32_t id;
+} dio_config_t;
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
-    enum
-    {
-        DIO_CHANNELS = 2U
-    };
-
-    extern volatile RCC_TypeDef *const  gp_rcc_regs;
-    extern volatile PWR_TypeDef *const  gp_pwr_regs;
-    extern volatile GPIO_TypeDef *const gp_dio_regs[DIO_CHANNELS];
-    extern uint32_t                     SystemCoreClock;
-    extern void                         SystemCoreClockUpdate(void);
+    const dio_config_t *hal_dio_cfg_get(void);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __HLL_H */
+#endif /* __HAL_DIO_CFG_H */
 
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

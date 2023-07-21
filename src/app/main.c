@@ -56,6 +56,7 @@ main(void)
 
 #ifndef _TEST_
     hal_rcc_check_system_clock();
+    hal_dio_init(hal_dio_cfg_get());
     int result = hal_systick_init();
     if (result < 0)
         return 0;

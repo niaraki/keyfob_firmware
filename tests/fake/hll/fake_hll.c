@@ -14,9 +14,11 @@
 #include "stm32f0xx.h"
 #include "hll.h"
 
+/* PWR fakes */
 volatile PWR_TypeDef        fake_pwr_regs = { 0 };
 volatile PWR_TypeDef *const gp_pwr_regs   = &fake_pwr_regs;
 
+/* RCC fakes */
 volatile RCC_TypeDef        fake_rcc_regs = { 0 };
 volatile RCC_TypeDef *const gp_rcc_regs   = &fake_rcc_regs;
 
@@ -29,7 +31,11 @@ SystemCoreClockUpdate(void)
     SystemCoreClock = (48000000UL);
 }
 
-/* systick fakes */
-SysTick_Type fake_systick = { 0 };
+/* DIO fakes */
+volatile GPIO_TypeDef        fake_dio_regs_a = { 0 };
+volatile GPIO_TypeDef        fake_dio_regs_b = { 0 };
+volatile GPIO_TypeDef *const gp_dio_regs[DIO_CHANNELS]
+    = { &fake_dio_regs_a, &fake_dio_regs_b };
 
-/************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/
+/************************ (C) COPYRIGHT Mohammad Niaraki *****END OF
+   FILE****/

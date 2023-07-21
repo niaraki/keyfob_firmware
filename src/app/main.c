@@ -28,7 +28,13 @@
 #include "middleware.h"
 #include "config.h"
 #include "spi_flash.h"
+#include "assert.h"
 
+void
+test_assert(int x)
+{
+    ASSERT(x == 1);
+}
 void
 blinkLed(void)
 {
@@ -37,6 +43,7 @@ blinkLed(void)
         GPIOA->ODR |= (1 << 4);
         hal_delay(1000);
         GPIOA->ODR &= ~(1 << 4);
+        test_assert(0);
         hal_delay(1000);
     }
 }
@@ -44,6 +51,7 @@ blinkLed(void)
 int
 main(void)
 {
+
     hal_rcc_init(hal_rcc_cfg_get());
 
 #ifndef _TEST_

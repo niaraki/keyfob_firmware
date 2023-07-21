@@ -24,6 +24,7 @@ jobs:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       with:
         gcov_ignore: 
+          ./build/_deps
           ./docs
           ./tests
           ./docker

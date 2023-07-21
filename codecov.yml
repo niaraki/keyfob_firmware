@@ -5,6 +5,7 @@ coverage:
 
 ignore:
   - "cmake"
+  - "build/_deps"
   - "docs"
   - "tests"
   - "templates"

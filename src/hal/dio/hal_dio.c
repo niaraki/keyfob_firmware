@@ -23,6 +23,24 @@
  *   @brief
  *    @{
  */
+typedef struct
+{
+    _IO U8  port_index;
+    _IO U8  pin_index;
+    _IO U32 pin_mask;
+    _IO GPIO_TypeDef *reg;
+} dio_lookup_t;
+
+static inline dio_lookup_t
+dio_lookup(dio_channel_t channel)
+{
+    dio_lookup_t result = { 0U };
+    result.port_index   = channel / NUM_PIN_IN_PORT;
+    result.pin_index    = channel % NUM_PIN_IN_PORT;
+    result.pin_mask     = ((1UL) << result.pin_index);
+    result.reg          = gp_dio_regs[result.port_index];
+    return result;
+}
 
 void
 hal_dio_init(const dio_config_t *configs)
@@ -38,53 +56,36 @@ hal_dio_set_mode(dio_channel_t channel, dio_mode_t mode)
 void
 hal_dio_write(dio_channel_t channel, dio_state_t state)
 {
-    /* check params */
     ASSERT((state < DIO_MAX_PIN_STATE));
     ASSERT((channel < DIO_MAX_CHANNEL_NUMBER));
 
-    /* select port and pin due to the channel*/
-    U8 port_index = channel / NUM_PIN_IN_PORT;
-    U8 pin_index  = channel % NUM_PIN_IN_PORT;
+    dio_lookup_t chi = dio_lookup(channel);
 
-    /* apply to target the register */
     if (DIO_HIGH == state)
-        gp_dio_regs[port_index]->BSRR |= ((1UL) << (pin_index));
+        chi.reg->BSRR |= (chi.pin_mask);
     else
-        gp_dio_regs[port_index]->BRR |= ((1UL) << (pin_index));
+        chi.reg->BRR |= (chi.pin_mask);
 }
 
 void
 hal_dio_toggle(dio_channel_t channel)
 {
-    /* check params */
     ASSERT((channel < DIO_MAX_CHANNEL_NUMBER));
 
-    /* select port and pin due to the channel*/
-    U8  port_index = channel / NUM_PIN_IN_PORT;
-    U8  pin_index  = channel % NUM_PIN_IN_PORT;
-    U32 pin_mask   = ((1UL) << pin_index);
-    U32 odr_value  = gp_dio_regs[port_index]->ODR;
-
-    /* apply to the target register */
-    gp_dio_regs[port_index]->BSRR
-        = ((odr_value & pin_mask) << NUM_PIN_IN_PORT) | (~odr_value & pin_mask);
+    dio_lookup_t chi = dio_lookup(channel);
+    U32          odr = chi.reg->ODR;
+    chi.reg->BSRR
+        = ((odr & chi.pin_mask) << NUM_PIN_IN_PORT) | (~odr & chi.pin_mask);
 }
 
 dio_state_t
 hal_dio_read(dio_channel_t channel)
 {
-    dio_state_t result = DIO_LOW;
-
-    /* check params */
     ASSERT((channel < DIO_MAX_CHANNEL_NUMBER));
 
-    /* select port and pin due to the channel*/
-    U8  port_index = channel / NUM_PIN_IN_PORT;
-    U8  pin_index  = channel % NUM_PIN_IN_PORT;
-    U32 pin_mask   = ((1UL) << pin_index);
-    U32 idr_value  = gp_dio_regs[port_index]->IDR;
-
-    if ((pin_mask & idr_value) == pin_mask)
+    dio_state_t  result = DIO_LOW;
+    dio_lookup_t chi    = dio_lookup(channel);
+    if ((chi.pin_mask & chi.reg->IDR) == chi.pin_mask)
         result = DIO_HIGH;
 
     return result;

@@ -104,4 +104,24 @@ TEST_F(HalDioTestFixture, HalDioToggleTest)
         reset_registers();
     }
 }
+TEST_F(HalDioTestFixture, HalDioReadTest)
+{
+    for (U8 index = (0U); index < DIO_MAX_CHANNEL_NUMBER; index++)
+    {
+        /* Arrange */
+        U8            port_index     = index / NUM_PIN_IN_PORT;
+        U8            pin_index      = index % NUM_PIN_IN_PORT;
+        U32           pin_mask       = (1UL << (pin_index));
+        dio_channel_t channel        = (dio_channel_t)(index);
+        gp_dio_regs[port_index]->IDR = (0xAAAAUL);
+        dio_state_t expected_state   = (index % 2 == 0U) ? DIO_LOW : DIO_HIGH;
+
+        /* Action */
+        dio_state_t state = hal_dio_read(channel);
+
+        /* Assert */
+        EXPECT_EQ(expected_state, state);
+    }
+}
+
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

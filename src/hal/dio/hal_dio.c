@@ -73,7 +73,21 @@ hal_dio_toggle(dio_channel_t channel)
 dio_state_t
 hal_dio_read(dio_channel_t channel)
 {
-    return DIO_HIGH;
+    dio_state_t result = DIO_LOW;
+
+    /* check params */
+    ASSERT((channel < DIO_MAX_CHANNEL_NUMBER));
+
+    /* select port and pin due to the channel*/
+    U8  port_index = channel / NUM_PIN_IN_PORT;
+    U8  pin_index  = channel % NUM_PIN_IN_PORT;
+    U32 pin_mask   = ((1UL) << pin_index);
+    U32 idr_value  = gp_dio_regs[port_index]->IDR;
+
+    if ((pin_mask & idr_value) == pin_mask)
+        result = DIO_HIGH;
+
+    return result;
 }
 /**  @}*/
 /** @}*/

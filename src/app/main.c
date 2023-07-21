@@ -43,7 +43,7 @@ blinkLed(void)
         GPIOA->ODR |= (1 << 4);
         hal_delay(1000);
         GPIOA->ODR &= ~(1 << 4);
-        test_assert(0);
+        // test_assert(0);
         hal_delay(1000);
     }
 }

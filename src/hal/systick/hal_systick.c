@@ -25,9 +25,9 @@
 _IO U32 tick_counter = 0;
 
 void
-SysTick_Handler(void)
+hal_systick_inc_tick()
 {
-    tick_counter++; /* every 1ms */
+    tick_counter++;
 }
 
 I8

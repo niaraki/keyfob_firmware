@@ -11,7 +11,6 @@
 */
 
 #include "hal.h"
-#include "hal_common_defines.h"
 
 /** @addtogroup HAL
  *   @brief Hardware ACCESS Layer (HAL)

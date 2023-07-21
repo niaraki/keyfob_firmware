@@ -1,5 +1,7 @@
 add_library(${APP_LIB_TARGET} STATIC
-"main.c")
+"main.c"
+"../hal/common/hal_interrupt_handlers.c"
+)
 
 target_include_directories(
   ${APP_LIB_TARGET} PRIVATE

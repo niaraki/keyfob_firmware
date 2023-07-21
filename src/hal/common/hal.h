@@ -18,6 +18,7 @@
 #include "hal_common_defines.h"
 #include "hal_common_helper.h"
 #include "hal_cfg.h"
+#include "assert.h"
 
 #ifdef __cplusplus
 extern "C"

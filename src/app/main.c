@@ -40,10 +40,9 @@ blinkLed(void)
 {
     while (1)
     {
-        GPIOA->ODR |= (1 << 4);
+        hal_dio_write(PA4, DIO_HIGH);
         hal_delay(1000);
-        GPIOA->ODR &= ~(1 << 4);
-        // test_assert(0);
+        hal_dio_write(PA4, DIO_LOW);
         hal_delay(1000);
     }
 }

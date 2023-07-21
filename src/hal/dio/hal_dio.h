@@ -21,7 +21,11 @@ extern "C"
 {
 #endif
 
-    void hal_dio_init(const dio_config_t *);
+    void        hal_dio_init(const dio_config_t *);
+    void        hal_dio_set_mode(dio_channel_t channel, dio_mode_t mode);
+    void        hal_dio_write(dio_channel_t channel, dio_state_t state);
+    void        hal_dio_toggle(dio_channel_t channel);
+    dio_state_t hal_dio_read(dio_channel_t channel);
 
 #ifdef __cplusplus
 }

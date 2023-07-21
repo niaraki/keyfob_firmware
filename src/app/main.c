@@ -40,9 +40,7 @@ blinkLed(void)
 {
     while (1)
     {
-        hal_dio_write(PA4, DIO_HIGH);
-        hal_delay(1000);
-        hal_dio_write(PA4, DIO_LOW);
+        hal_dio_toggle(PA4);
         hal_delay(1000);
     }
 }

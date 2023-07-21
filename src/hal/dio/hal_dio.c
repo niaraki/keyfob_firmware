@@ -42,11 +42,11 @@ hal_dio_write(dio_channel_t channel, dio_state_t state)
     ASSERT((state < DIO_MAX_PIN_STATE));
     ASSERT((channel < DIO_MAX_CHANNEL_NUMBER));
 
-    /* select port and pin due to channel*/
+    /* select port and pin due to the channel*/
     U8 port_index = channel / NUM_PIN_IN_PORT;
     U8 pin_index  = channel % NUM_PIN_IN_PORT;
 
-    /* apply to target register */
+    /* apply to target the register */
     if (DIO_HIGH == state)
         gp_dio_regs[port_index]->BSRR |= ((1UL) << (pin_index));
     else
@@ -56,6 +56,18 @@ hal_dio_write(dio_channel_t channel, dio_state_t state)
 void
 hal_dio_toggle(dio_channel_t channel)
 {
+    /* check params */
+    ASSERT((channel < DIO_MAX_CHANNEL_NUMBER));
+
+    /* select port and pin due to the channel*/
+    U8  port_index = channel / NUM_PIN_IN_PORT;
+    U8  pin_index  = channel % NUM_PIN_IN_PORT;
+    U32 pin_mask   = ((1UL) << pin_index);
+    U32 odr_value  = gp_dio_regs[port_index]->ODR;
+
+    /* apply to the target register */
+    gp_dio_regs[port_index]->BSRR
+        = ((odr_value & pin_mask) << NUM_PIN_IN_PORT) | (~odr_value & pin_mask);
 }
 
 dio_state_t

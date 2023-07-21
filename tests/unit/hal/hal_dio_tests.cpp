@@ -72,4 +72,36 @@ TEST_F(HalDioTestFixture, HalDioWriteTestLow)
         EXPECT_EQ(pin_mask, gp_dio_regs[port_index]->BRR);
     }
 }
+
+TEST_F(HalDioTestFixture, HalDioToggleTest)
+{
+    for (U8 index = (0U); index < DIO_MAX_CHANNEL_NUMBER; index++)
+    {
+        /* Arrange */
+        U8            port_index    = index / NUM_PIN_IN_PORT;
+        U8            pin_index     = index % NUM_PIN_IN_PORT;
+        U32           pin_mask      = (1UL << (pin_index));
+        U32           expected_bsrr = pin_mask;
+        dio_channel_t channel       = (dio_channel_t)(index);
+        /*Set ODR to 0xAAAAAAAAUL (even bits are one)*/
+        gp_dio_regs[port_index]->ODR = (0xAAAAAAAAUL);
+        if (index % (2U) != (0U))
+        {
+            /*When the index is odd, means we want to toggle from 1 -> 0
+             * So, we should shift the pin_mask to second part of the BSRR
+             * BSRR[31:16] are used to reset bits, page:137 of STM32f030f4 user
+             * manual*/
+            expected_bsrr = (pin_mask << NUM_PIN_IN_PORT);
+        }
+
+        /* Action */
+        hal_dio_toggle(channel);
+
+        /* Assert */
+        EXPECT_EQ(expected_bsrr, gp_dio_regs[port_index]->BSRR);
+
+        /* Clean-up */
+        reset_registers();
+    }
+}
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

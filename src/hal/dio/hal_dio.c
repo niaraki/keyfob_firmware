@@ -58,7 +58,7 @@ hal_dio_init(const dio_config_t *configs, U16 num_configs)
         ASSERT((ch_config.speed < DIO_NUM_SPEED) && (2U != ch_config.speed));
         ASSERT(ch_config.af < DIO_NUM_AF);
         ASSERT(ch_config.resistor < DIO_NUM_RESISTOR);
-        ASSERT(ch_config.default_value < DIO_NUM_PIN_STATE);
+        ASSERT(ch_config.default_state < DIO_NUM_PIN_STATE);
         ASSERT(ch_config.exti < DIO_NUM_EXTI);
 
         /* get channel info */
@@ -78,6 +78,10 @@ hal_dio_init(const dio_config_t *configs, U16 num_configs)
         /* Set resistor value*/
         U8 resistor = (U8)ch_config.resistor;
         ch_info.reg->PUPDR |= ((resistor) << (ch_info.pin_index * (2U)));
+
+        /* Set default state */
+        U8 state = (U8)ch_config.default_state;
+        ch_info.reg->ODR |= (state << ch_info.pin_index);
     }
 }
 

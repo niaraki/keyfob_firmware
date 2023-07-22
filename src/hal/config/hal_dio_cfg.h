@@ -117,7 +117,7 @@ typedef struct
     dio_mode_t     mode;
     dio_af_t       af;
     dio_resistor_t resistor;
-    dio_state_t    default_value;
+    dio_state_t    default_state;
     dio_speed_t    speed;
     dio_exti_t     exti;
 } dio_config_t;

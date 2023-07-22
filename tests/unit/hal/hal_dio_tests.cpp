@@ -191,4 +191,32 @@ TEST_F(HalDioTestFixture, HalDioInit_SpeedRegisterTest)
         EXPECT_EQ(0x34343434UL, gp_dio_regs[port_index]->OSPEEDR);
     }
 }
+
+TEST_F(HalDioTestFixture, HalDioInit_ResistorRegisterTest)
+{
+    /* Arrange */
+    dio_config_t test_configs[DIO_NUM_CHANNEL];
+    U16          pin_index = 0;
+    while (pin_index < DIO_NUM_CHANNEL)
+    {
+        test_configs[pin_index].channel    = (dio_channel_t)pin_index;
+        test_configs[pin_index++].resistor = PULLUP;
+        test_configs[pin_index].channel    = (dio_channel_t)pin_index;
+        test_configs[pin_index++].resistor = PULLDOWN;
+        test_configs[pin_index].channel    = (dio_channel_t)pin_index;
+        test_configs[pin_index++].resistor = RES_DISABLE;
+        test_configs[pin_index].channel    = (dio_channel_t)pin_index;
+        test_configs[pin_index++].resistor = PULLDOWN;
+    }
+
+    /* Action */
+    hal_dio_init((const dio_config_t *)test_configs, DIO_NUM_CHANNEL);
+
+    /* Assert */
+    for (U8 port_index = 0U; port_index < (DIO_NUM_CHANNEL / NUM_PIN_IN_PORT);
+         port_index++)
+    {
+        EXPECT_EQ(0x89898989UL, gp_dio_regs[port_index]->PUPDR);
+    }
+}
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

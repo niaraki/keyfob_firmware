@@ -74,6 +74,10 @@ hal_dio_init(const dio_config_t *configs, U16 num_configs)
         /* Set speed */
         U8 speed = (U8)ch_config.speed;
         ch_info.reg->OSPEEDR |= ((speed) << (ch_info.pin_index * (2U)));
+
+        /* Set resistor value*/
+        U8 resistor = (U8)ch_config.resistor;
+        ch_info.reg->PUPDR |= ((resistor) << (ch_info.pin_index * (2U)));
     }
 }
 

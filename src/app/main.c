@@ -40,8 +40,8 @@ blinkLed(void)
 {
     while (1)
     {
-        dio_state_t state = hal_dio_read(PA4);
-        hal_dio_write(PA4, (state == DIO_LOW));
+        // dio_state_t state = hal_dio_read(PA4);
+        // hal_dio_write(PA4, (state == DIO_LOW));
         // hal_dio_toggle(PA4);
         hal_delay(1000);
     }
@@ -58,12 +58,10 @@ main(void)
     hal_dio_init(hal_dio_cfg_get(), hal_dio_cfg_get_size());
     hal_systick_init();
 
-    GPIOA->OSPEEDR |= GPIO_OSPEEDER_OSPEEDR13_1 | GPIO_OSPEEDER_OSPEEDR14_1;
-
     // Enable SWD
     DBGMCU->CR |= DBGMCU_CR_DBG_STOP | DBGMCU_CR_DBG_STANDBY;
 
-    GPIOA->PUPDR |= (1 << 8);
+    // GPIOA->PUPDR |= (1 << 8);
 
     blinkLed();
 #endif

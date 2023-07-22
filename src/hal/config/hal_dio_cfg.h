@@ -69,8 +69,8 @@ typedef enum
 typedef enum
 {
     RES_DISABLE = (0U),
-    PULLUP,
-    PULLDOWN,
+    PULLUP      = (1U),
+    PULLDOWN    = (2U),
     DIO_NUM_RESISTOR
 } dio_resistor_t;
 

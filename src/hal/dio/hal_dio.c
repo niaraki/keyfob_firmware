@@ -26,9 +26,9 @@
 
 typedef struct
 {
-    _IO U8            port_index;
-    _IO U8            pin_index;
-    _IO U32           pin_mask;
+    _IO U8  port_index;
+    _IO U8  pin_index;
+    _IO U32 pin_mask;
     _IO GPIO_TypeDef *reg;
 } dio_channel_info_t;
 
@@ -55,6 +55,7 @@ hal_dio_init(const dio_config_t *configs, U16 num_configs)
         /* check config params */
         ASSERT(ch_config.channel < DIO_NUM_CHANNEL);
         ASSERT(ch_config.mode < DIO_NUM_MODE);
+        ASSERT((ch_config.speed < DIO_NUM_SPEED) && (2U != ch_config.speed));
         ASSERT(ch_config.af < DIO_NUM_AF);
         ASSERT(ch_config.resistor < DIO_NUM_RESISTOR);
         ASSERT(ch_config.default_value < DIO_NUM_PIN_STATE);
@@ -69,6 +70,10 @@ hal_dio_init(const dio_config_t *configs, U16 num_configs)
             |= (pin_mode >= OUTPUT_OD) ? ch_info.pin_mask : (0UL);
         pin_mode = (pin_mode > 3U) ? (pin_mode - 3U) : pin_mode;
         ch_info.reg->MODER |= ((pin_mode) << (ch_info.pin_index * (2U)));
+
+        /* Set speed */
+        U8 speed = (U8)ch_config.speed;
+        ch_info.reg->OSPEEDR |= ((speed) << (ch_info.pin_index * (2U)));
     }
 }
 

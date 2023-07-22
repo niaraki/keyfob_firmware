@@ -140,17 +140,13 @@ TEST_F(HalDioTestFixture, HalDioInit_ModeRegisterTest)
     while (pin_index < DIO_NUM_CHANNEL)
     {
         test_configs[pin_index].channel = (dio_channel_t)pin_index;
-        test_configs[pin_index].mode    = INPUT;
-        pin_index++;
+        test_configs[pin_index++].mode  = INPUT;
         test_configs[pin_index].channel = (dio_channel_t)pin_index;
-        test_configs[pin_index].mode    = OUTPUT_PP;
-        pin_index++;
+        test_configs[pin_index++].mode  = OUTPUT_PP;
         test_configs[pin_index].channel = (dio_channel_t)pin_index;
-        test_configs[pin_index].mode    = AF_OD;
-        pin_index++;
+        test_configs[pin_index++].mode  = AF_OD;
         test_configs[pin_index].channel = (dio_channel_t)pin_index;
-        test_configs[pin_index].mode    = ANALOG;
-        pin_index++;
+        test_configs[pin_index++].mode  = ANALOG;
     }
 
     /* Action */
@@ -165,4 +161,34 @@ TEST_F(HalDioTestFixture, HalDioInit_ModeRegisterTest)
     }
 }
 
+TEST_F(HalDioTestFixture, HalDioInit_SpeedRegisterTest)
+{
+    /* Arrange */
+    dio_config_t test_configs[DIO_NUM_CHANNEL];
+    U16          pin_index = 0;
+    /*set speed profile for the first four pins are configured like this: 0b00
+     * 11 01 00 = 0x34 by repeating this pattern for other four-grouped pins, we
+     * expect to have 0x34343434UL in the target register */
+    while (pin_index < DIO_NUM_CHANNEL)
+    {
+        test_configs[pin_index].channel = (dio_channel_t)pin_index;
+        test_configs[pin_index++].speed = SLOW;
+        test_configs[pin_index].channel = (dio_channel_t)pin_index;
+        test_configs[pin_index++].speed = MEDIUM;
+        test_configs[pin_index].channel = (dio_channel_t)pin_index;
+        test_configs[pin_index++].speed = FAST;
+        test_configs[pin_index].channel = (dio_channel_t)pin_index;
+        test_configs[pin_index++].speed = SLOW;
+    }
+
+    /* Action */
+    hal_dio_init((const dio_config_t *)test_configs, DIO_NUM_CHANNEL);
+
+    /* Assert */
+    for (U8 port_index = 0U; port_index < (DIO_NUM_CHANNEL / NUM_PIN_IN_PORT);
+         port_index++)
+    {
+        EXPECT_EQ(0x34343434UL, gp_dio_regs[port_index]->OSPEEDR);
+    }
+}
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

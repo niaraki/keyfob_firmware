@@ -83,9 +83,10 @@ typedef enum
 
 typedef enum
 {
-    SLOW = (0U),
-    FAST,
-    DIO_NUM_SPEED
+    SLOW          = (0U),
+    MEDIUM        = (1U),
+    FAST          = (3U),
+    DIO_NUM_SPEED = (4U)
 } dio_speed_t;
 
 typedef enum

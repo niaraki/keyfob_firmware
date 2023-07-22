@@ -58,15 +58,10 @@ main(void)
     hal_dio_init(hal_dio_cfg_get(), hal_dio_cfg_get_size());
     hal_systick_init();
 
-    GPIOA->OTYPER = 0; // set push-pull mode
-    GPIOA->OTYPER &= ~(GPIO_OTYPER_OT_13 | GPIO_OTYPER_OT_14);
     GPIOA->OSPEEDR |= GPIO_OSPEEDER_OSPEEDR13_1 | GPIO_OSPEEDER_OSPEEDR14_1;
 
     // Enable SWD
     DBGMCU->CR |= DBGMCU_CR_DBG_STOP | DBGMCU_CR_DBG_STANDBY;
-
-    // enable GPIOA  PA4
-    // GPIOA->MODER |= (1 << 8);
 
     GPIOA->PUPDR |= (1 << 8);
 

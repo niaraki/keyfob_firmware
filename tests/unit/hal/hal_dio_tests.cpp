@@ -23,6 +23,7 @@ public:
     }
     void TearDown(void) override
     {
+        reset_registers();
     }
     static void reset_registers()
     {
@@ -35,7 +36,7 @@ protected:
 
 TEST_F(HalDioTestFixture, HalDioWriteTestHigh)
 {
-    for (U8 index = (0U); index < DIO_MAX_CHANNEL_NUMBER; index++)
+    for (U8 index = (0U); index < DIO_NUM_CHANNEL; index++)
     {
         /* Arrange */
         U8            port_index = index / NUM_PIN_IN_PORT;
@@ -56,7 +57,7 @@ TEST_F(HalDioTestFixture, HalDioWriteTestHigh)
 
 TEST_F(HalDioTestFixture, HalDioWriteTestLow)
 {
-    for (U8 index = (0U); index < DIO_MAX_CHANNEL_NUMBER; index++)
+    for (U8 index = (0U); index < DIO_NUM_CHANNEL; index++)
     {
         /* Arrange */
         U8  port_index               = index / NUM_PIN_IN_PORT;
@@ -75,7 +76,7 @@ TEST_F(HalDioTestFixture, HalDioWriteTestLow)
 
 TEST_F(HalDioTestFixture, HalDioToggleTest)
 {
-    for (U8 index = (0U); index < DIO_MAX_CHANNEL_NUMBER; index++)
+    for (U8 index = (0U); index < DIO_NUM_CHANNEL; index++)
     {
         /* Arrange */
         U8            port_index    = index / NUM_PIN_IN_PORT;
@@ -104,9 +105,10 @@ TEST_F(HalDioTestFixture, HalDioToggleTest)
         reset_registers();
     }
 }
+
 TEST_F(HalDioTestFixture, HalDioReadTest)
 {
-    for (U8 index = (0U); index < DIO_MAX_CHANNEL_NUMBER; index++)
+    for (U8 index = (0U); index < DIO_NUM_CHANNEL; index++)
     {
         /* Arrange */
         U8            port_index     = index / NUM_PIN_IN_PORT;
@@ -121,6 +123,45 @@ TEST_F(HalDioTestFixture, HalDioReadTest)
 
         /* Assert */
         EXPECT_EQ(expected_state, state);
+    }
+}
+
+TEST_F(HalDioTestFixture, HalDioInit_ModeRegisterTest)
+{
+    /* Arrange */
+    dio_config_t test_configs[DIO_NUM_CHANNEL];
+    U16          pin_index = 0;
+    /*The following loop defines pin configuration for each pin of the dio unit
+     * and sets the mode register as bellow:
+     * first pin: INPUT, second pin: OUTPUT, third pin: AF, fourth pin: ANALOG,
+     * fifth bit: like the first bit and so on.
+     * So, the mode register for first four pins would be: 0b11100100 = 0xE4
+     *  */
+    while (pin_index < DIO_NUM_CHANNEL)
+    {
+        test_configs[pin_index].channel = (dio_channel_t)pin_index;
+        test_configs[pin_index].mode    = INPUT;
+        pin_index++;
+        test_configs[pin_index].channel = (dio_channel_t)pin_index;
+        test_configs[pin_index].mode    = OUTPUT_PP;
+        pin_index++;
+        test_configs[pin_index].channel = (dio_channel_t)pin_index;
+        test_configs[pin_index].mode    = AF_OD;
+        pin_index++;
+        test_configs[pin_index].channel = (dio_channel_t)pin_index;
+        test_configs[pin_index].mode    = ANALOG;
+        pin_index++;
+    }
+
+    /* Action */
+    hal_dio_init((const dio_config_t *)test_configs, DIO_NUM_CHANNEL);
+
+    /* Assert */
+    for (U8 port_index = 0U; port_index < (DIO_NUM_CHANNEL / NUM_PIN_IN_PORT);
+         port_index++)
+    {
+        EXPECT_EQ(0xE4E4E4E4UL, gp_dio_regs[port_index]->MODER);
+        EXPECT_EQ(0x4444UL, gp_dio_regs[port_index]->OTYPER);
     }
 }
 

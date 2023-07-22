@@ -40,6 +40,8 @@ extern "C"
 #define FALSE (0U)
 #define TRUE  (1U)
 
+#define NULLPTR (0U)
+
 #ifdef __cplusplus
 }
 #endif

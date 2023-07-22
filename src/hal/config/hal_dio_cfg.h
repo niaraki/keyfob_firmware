@@ -31,6 +31,7 @@ typedef enum
     PA8,
     PA9,
     PA10,
+    PA11,
     PA12,
     PA13,
     PA14,
@@ -51,47 +52,73 @@ typedef enum
     PB13,
     PB14,
     PB15,
-    DIO_MAX_CHANNEL_NUMBER
+    DIO_NUM_CHANNEL
 } dio_channel_t;
 
 typedef enum
 {
-    DIO_INPUT = (0U),
-    DIO_OUTPUT,
-    DIO_AF1,
-    DIO_AF2,
-    DIO_AF3,
-    DIO_MAX_MODE
+    INPUT     = (0U),
+    OUTPUT_PP = (1U),
+    AF_PP     = (2U),
+    ANALOG    = (3U),
+    OUTPUT_OD = (4U),
+    AF_OD     = (5U),
+    DIO_NUM_MODE
 } dio_mode_t;
 
 typedef enum
 {
-    DIO_PULLUP = 0,
-    DIO_PULLDOWN,
-    DIO_OPENDRAIN,
-    DIO_MAX_RESISTOR
+    RES_DISABLE = (0U),
+    PULLUP,
+    PULLDOWN,
+    DIO_NUM_RESISTOR
 } dio_resistor_t;
 
 typedef enum
 {
     DIO_LOW = (0U),
     DIO_HIGH,
-    DIO_MAX_PIN_STATE
+    DIO_NUM_PIN_STATE
 } dio_state_t;
 
 typedef enum
 {
-    DIO_SLOW = (0U),
-    DIO_FAST,
-    DIO_MAX_SPEED
+    SLOW = (0U),
+    FAST,
+    DIO_NUM_SPEED
 } dio_speed_t;
+
+typedef enum
+{
+    AF_0 = (0U),
+    AF_1,
+    AF_2,
+    AF_3,
+    AF_4,
+    AF_5,
+    AF_6,
+    AF_7,
+    DIO_NUM_AF
+} dio_af_t;
+
+typedef enum
+{
+    EXTI_DISABLE = (0UL),
+    EXTI_RISING,
+    EXTI_FALLING,
+    EXTI_BOTH_EDGES,
+    DIO_NUM_EXTI
+} dio_exti_t;
 
 typedef struct
 {
     dio_channel_t  channel;
     dio_mode_t     mode;
+    dio_af_t       af;
     dio_resistor_t resistor;
+    dio_state_t    default_value;
     dio_speed_t    speed;
+    dio_exti_t     exti;
 } dio_config_t;
 
 #ifdef __cplusplus
@@ -100,6 +127,7 @@ extern "C"
 #endif
 
     const dio_config_t *hal_dio_cfg_get(void);
+    U16                 hal_dio_cfg_get_size(void);
 
 #ifdef __cplusplus
 }

@@ -42,8 +42,8 @@ blinkLed(void)
     {
         // dio_state_t state = hal_dio_read(PA4);
         // hal_dio_write(PA4, (state == DIO_LOW));
-        // hal_dio_toggle(PA4);
-        hal_delay(1000);
+        hal_dio_toggle(PA4);
+        hal_delay(50);
     }
 }
 

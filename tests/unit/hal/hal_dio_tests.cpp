@@ -9,6 +9,7 @@
 ================================================================================
   @endverbatim
 */
+#include <cmath>
 #include <gtest/gtest.h>
 #include "hal.h"
 #include "hal_dio_cfg.h"
@@ -219,11 +220,11 @@ TEST_F(HalDioTestFixture, HalDioInit_ResistorRegisterTest)
         EXPECT_EQ(0x89898989UL, gp_dio_regs[port_index]->PUPDR);
     }
 }
-TEST_F(HalDioTestFixture, HalDioInit_DefaultTest)
+TEST_F(HalDioTestFixture, HalDioInit_DefaultStateTest)
 {
     /* Arrange */
     dio_config_t test_configs[DIO_NUM_CHANNEL];
-    U16          pin_index = 0;
+    U16          pin_index = 0U;
     while (pin_index < DIO_NUM_CHANNEL)
     {
         test_configs[pin_index].channel         = (dio_channel_t)pin_index;
@@ -244,6 +245,33 @@ TEST_F(HalDioTestFixture, HalDioInit_DefaultTest)
          port_index++)
     {
         EXPECT_EQ(0x5555UL, gp_dio_regs[port_index]->ODR);
+    }
+}
+
+TEST_F(HalDioTestFixture, HalDioInit_AFTest)
+{
+    /* Arrange */
+    dio_config_t test_configs[DIO_NUM_CHANNEL];
+    U16          pin_index   = 0U;
+    U32          expectedAFR = (0x76543210UL);
+
+    /*Sets AF from 0 to 7 for each 8-group of pins
+     * So, the target registers expected to be 0x76543210UL*/
+    while (pin_index < DIO_NUM_CHANNEL)
+    {
+        test_configs[pin_index].channel = (dio_channel_t)pin_index;
+        test_configs[pin_index++].af    = (dio_af_t)(pin_index % 8U);
+    }
+
+    /* Action */
+    hal_dio_init((const dio_config_t *)test_configs, DIO_NUM_CHANNEL);
+
+    /* Assert */
+    for (U8 port_index = 0U; port_index < (DIO_NUM_CHANNEL / NUM_PIN_IN_PORT);
+         port_index++)
+    {
+        EXPECT_EQ(expectedAFR, gp_dio_regs[port_index]->AFR[0]);
+        EXPECT_EQ(expectedAFR, gp_dio_regs[port_index]->AFR[1]);
     }
 }
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

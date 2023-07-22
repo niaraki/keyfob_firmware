@@ -82,6 +82,12 @@ hal_dio_init(const dio_config_t *configs, U16 num_configs)
         /* Set default state */
         U8 state = (U8)ch_config.default_state;
         ch_info.reg->ODR |= (state << ch_info.pin_index);
+
+        /* Set AF*/
+        U8 af_value   = (U8)ch_config.af;
+        U8 af_reg_idx = (ch_info.pin_index < 8) ? 0U : 1U;
+        U8 af_bit_idx = (ch_info.pin_index % (NUM_PIN_IN_PORT / 2U));
+        ch_info.reg->AFR[af_reg_idx] |= ((af_value) << (af_bit_idx * (4U)));
     }
 }
 

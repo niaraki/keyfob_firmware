@@ -15,6 +15,7 @@
 #define __HAL_COMMON_DEFINES_H
 
 #include <stdint.h>
+#include "hal_pins.h"
 
 #ifdef __cplusplus
 extern "C"

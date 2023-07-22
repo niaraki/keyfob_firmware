@@ -26,11 +26,11 @@
 
 const dio_config_t g_dio_config_table[DIO_NUM_CONFIGURED_PINS] = {
     /* Channel , Mode , AF , Resistor , Speed , EXTI */
-    { PA0, INPUT, AF_0, PULLDOWN, DIO_LOW, FAST, EXTI_BOTH_EDGES }, /*RF_IN*/
-    { PA0, INPUT, AF_0, PULLUP, DIO_HIGH, FAST, EXTI_FALLING },     /*BUTTON*/
-    { PA4, OUTPUT_PP, AF_0, PULLUP, DIO_HIGH, FAST, EXTI_DISABLE }, /*LED*/
-    { PA13, AF_PP, AF_0, PULLDOWN, DIO_LOW, FAST, EXTI_DISABLE },   /*SWDIO*/
-    { PA14, AF_PP, AF_0, PULLDOWN, DIO_LOW, FAST, EXTI_DISABLE },   /*SWCLK*/
+    { PA0, INPUT, AF_0, PULLUP, DIO_HIGH, FAST },     /*RF_IN*/
+    { PA1, INPUT, AF_0, PULLUP, DIO_HIGH, FAST },     /*BUTTON*/
+    { PA4, OUTPUT_PP, AF_0, PULLUP, DIO_HIGH, FAST }, /*LED*/
+    { PA13, AF_PP, AF_0, PULLDOWN, DIO_LOW, FAST },   /*SWDIO*/
+    { PA14, AF_PP, AF_0, PULLDOWN, DIO_LOW, FAST },   /*SWCLK*/
 };
 
 /**

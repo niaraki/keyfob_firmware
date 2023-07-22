@@ -31,18 +31,18 @@
 #include "assert.h"
 
 void
-test_assert(int x)
+app(void)
 {
-    ASSERT(x == 1);
-}
-void
-blinkLed(void)
-{
+    hal_rcc_init(hal_rcc_cfg_get());
+    hal_rcc_check_system_clock();
+    hal_dio_init(hal_dio_cfg_get(), hal_dio_cfg_get_size());
+    hal_systick_init();
+
     while (1)
     {
-        // dio_state_t state = hal_dio_read(PA4);
-        // hal_dio_write(PA4, (state == DIO_LOW));
-        hal_dio_toggle(PA4);
+        dio_state_t state = hal_dio_read(PA0);
+        if (DIO_LOW != state)
+            hal_dio_toggle(PA4);
         hal_delay(50);
     }
 }
@@ -51,19 +51,10 @@ int
 main(void)
 {
 
-    hal_rcc_init(hal_rcc_cfg_get());
-
 #ifndef _TEST_
-    hal_rcc_check_system_clock();
-    hal_dio_init(hal_dio_cfg_get(), hal_dio_cfg_get_size());
-    hal_systick_init();
-
     // Enable SWD
     DBGMCU->CR |= DBGMCU_CR_DBG_STOP | DBGMCU_CR_DBG_STANDBY;
-
-    // GPIOA->PUPDR |= (1 << 8);
-
-    blinkLed();
+    app();
 #endif
     return 0;
 }

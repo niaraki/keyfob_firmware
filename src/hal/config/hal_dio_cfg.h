@@ -16,45 +16,6 @@
 
 #include "hal_common_defines.h"
 
-#define NUM_PIN_IN_PORT (16U)
-
-typedef enum
-{
-    PA0 = (0U),
-    PA1,
-    PA2,
-    PA3,
-    PA4,
-    PA5,
-    PA6,
-    PA7,
-    PA8,
-    PA9,
-    PA10,
-    PA11,
-    PA12,
-    PA13,
-    PA14,
-    PA15,
-    PB0,
-    PB1,
-    PB2,
-    PB3,
-    PB4,
-    PB5,
-    PB6,
-    PB7,
-    PB8,
-    PB9,
-    PB10,
-    PB11,
-    PB12,
-    PB13,
-    PB14,
-    PB15,
-    DIO_NUM_CHANNEL
-} dio_channel_t;
-
 typedef enum
 {
     INPUT     = (0U),
@@ -102,24 +63,14 @@ typedef enum
     DIO_NUM_AF
 } dio_af_t;
 
-typedef enum
-{
-    EXTI_DISABLE = (0UL),
-    EXTI_RISING,
-    EXTI_FALLING,
-    EXTI_BOTH_EDGES,
-    DIO_NUM_EXTI
-} dio_exti_t;
-
 typedef struct
 {
-    dio_channel_t  channel;
+    pin_t          channel;
     dio_mode_t     mode;
     dio_af_t       af;
     dio_resistor_t resistor;
     dio_state_t    default_state;
     dio_speed_t    speed;
-    dio_exti_t     exti;
 } dio_config_t;
 
 #ifdef __cplusplus

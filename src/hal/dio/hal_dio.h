@@ -1,9 +1,9 @@
 /**
 ********************************************************************************
-* @file     hal_rcc.h
+* @file     hal_dio.h
 * @author   M.Niaraki
 * @date     07/18/2023
-* @brief    This header is used to define Reset and Clock Control (RCC)
+* @brief    This header is used to define the API of DIO module
 ********************************************************************************
 * @attention
 *

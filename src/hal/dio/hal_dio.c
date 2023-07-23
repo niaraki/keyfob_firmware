@@ -27,9 +27,9 @@
 
 typedef struct
 {
-    _IO U8  port_index;
-    _IO U8  pin_index;
-    _IO U32 pin_mask;
+    _IO U8            port_index;
+    _IO U8            pin_index;
+    _IO U32           pin_mask;
     _IO GPIO_TypeDef *reg;
 } dio_channel_info_t;
 
@@ -59,11 +59,13 @@ static inline void
 set_mode(const dio_config_t *const config, dio_channel_info_t *chi)
 {
     U8 pin_mode = (U8)config->mode;
+    chi->reg->OTYPER &= ~((chi->pin_mask));
     chi->reg->OTYPER |= (pin_mode >= OUTPUT_OD) ? chi->pin_mask : (0UL);
     if (pin_mode > ANALOG)
     {
         pin_mode -= 3;
     }
+    chi->reg->MODER &= ~VALUE_BY_INDEX(3U, chi->pin_index);
     chi->reg->MODER |= VALUE_BY_INDEX(pin_mode, chi->pin_index);
 }
 
@@ -71,6 +73,7 @@ static inline void
 set_speed(const dio_config_t *const config, const dio_channel_info_t *const chi)
 {
     U8 speed = (U8)config->speed;
+    chi->reg->OSPEEDR &= ~VALUE_BY_INDEX(3U, chi->pin_index);
     chi->reg->OSPEEDR |= VALUE_BY_INDEX(speed, chi->pin_index);
 }
 
@@ -79,6 +82,7 @@ set_resistor(const dio_config_t *const       config,
              const dio_channel_info_t *const chi)
 {
     U8 resistor = (U8)config->resistor;
+    chi->reg->PUPDR &= ~VALUE_BY_INDEX(3U, chi->pin_index);
     chi->reg->PUPDR |= VALUE_BY_INDEX(resistor, chi->pin_index);
 }
 
@@ -88,6 +92,7 @@ set_af(const dio_config_t *const config, const dio_channel_info_t *const chi)
     U8 af_value   = (U8)config->af;
     U8 af_reg_idx = (((U8)chi->pin_index) < 8U) ? 0 : 1;
     U8 af_bit_idx = (chi->pin_index % (NUM_PIN_IN_PORT / 2U));
+    chi->reg->AFR[af_reg_idx] &= ~((7U) << (af_bit_idx * (4U)));
     chi->reg->AFR[af_reg_idx] |= ((af_value) << (af_bit_idx * (4U)));
 }
 
@@ -120,9 +125,7 @@ hal_dio_init(const dio_config_t *const configs, U16 num_configs)
     ASSERT(NULLPTR != configs);
 
     for (U16 index = 0UL; index < num_configs; index++)
-    {
         hal_dio_config(&configs[index]);
-    }
 }
 
 void

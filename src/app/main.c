@@ -31,20 +31,22 @@
 #include "assert.h"
 
 void
-test_assert(int x)
+app(void)
 {
-    ASSERT(x == 1);
-}
-void
-blinkLed(void)
-{
+    hal_rcc_init(hal_rcc_cfg_get());
+    hal_rcc_check_system_clock();
+    hal_dio_init(hal_dio_cfg_get(), hal_dio_cfg_get_size());
+    hal_systick_init();
+
     while (1)
     {
-        GPIOA->ODR |= (1 << 4);
-        hal_delay(1000);
-        GPIOA->ODR &= ~(1 << 4);
-        // test_assert(0);
-        hal_delay(1000);
+        dio_state_t state = hal_dio_read(PA0);
+        if (DIO_LOW != state)
+            // hal_dio_toggle(PA4);
+            hal_dio_write_port(PORTA, 0xFFFF);
+        hal_delay(50);
+        hal_dio_write_port(PORTA, 0);
+        hal_delay(50);
     }
 }
 
@@ -52,28 +54,10 @@ int
 main(void)
 {
 
-    hal_rcc_init(hal_rcc_cfg_get());
-
 #ifndef _TEST_
-    hal_rcc_check_system_clock();
-    int result = hal_systick_init();
-    if (result < 0)
-        return 0;
-    // enable SWD: CLK:PA14 DATA: PA13
-    GPIOA->MODER |= GPIO_MODER_MODER14_1
-                    | GPIO_MODER_MODER13_1; // PA13 & PA14 -> alternate
-    GPIOA->OTYPER = 0;                      // set push-pull mode
-    GPIOA->OTYPER &= ~(GPIO_OTYPER_OT_13 | GPIO_OTYPER_OT_14);
-    GPIOA->OSPEEDR |= GPIO_OSPEEDER_OSPEEDR13_1 | GPIO_OSPEEDER_OSPEEDR14_1;
-
     // Enable SWD
     DBGMCU->CR |= DBGMCU_CR_DBG_STOP | DBGMCU_CR_DBG_STANDBY;
-
-    // enable GPIOA  PA4
-    GPIOA->MODER |= (1 << 8);
-    GPIOA->PUPDR |= (1 << 8);
-
-    blinkLed();
+    app();
 #endif
     return 0;
 }

@@ -15,6 +15,7 @@
 #define __HAL_COMMON_DEFINES_H
 
 #include <stdint.h>
+#include "hal_pins.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -39,6 +40,8 @@ extern "C"
 
 #define FALSE (0U)
 #define TRUE  (1U)
+
+#define NULLPTR (0U)
 
 #ifdef __cplusplus
 }

@@ -22,7 +22,7 @@
             __ASM("BKPT"); \
     } while (0)
 #else
-#define ASSERT(expression)
+#define ASSERT(expression) ((void)(expression))
 #endif
 
 #endif /* __ASSERT_H */

@@ -20,9 +20,15 @@
 extern "C"
 {
 #endif
-
+    enum
+    {
+        DIO_CHANNELS = 2U
+    };
     static volatile PWR_TypeDef *const gp_pwr_regs = PWR;
     static volatile RCC_TypeDef *const gp_rcc_regs = RCC;
+    /* DIO regs */
+    static volatile GPIO_TypeDef *const gp_dio_regs[DIO_CHANNELS]
+        = { GPIOA, GPIOB };
 
 #ifdef __cplusplus
 }

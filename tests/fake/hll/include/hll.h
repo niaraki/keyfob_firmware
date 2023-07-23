@@ -21,17 +21,16 @@ extern "C"
 {
 #endif
 
-    extern volatile RCC_TypeDef *const gp_rcc_regs;
-    extern volatile PWR_TypeDef *const gp_pwr_regs;
+    enum
+    {
+        DIO_CHANNELS = 2U
+    };
 
-    extern uint32_t SystemCoreClock;
-    extern void     SystemCoreClockUpdate(void);
-#undef NVIC_SetPriority
-#define NVIC_SetPriority(X, Y)
-
-#undef SysTick
-    extern SysTick_Type fake_systick;
-#define Systick &fake_systick
+    extern volatile RCC_TypeDef *const  gp_rcc_regs;
+    extern volatile PWR_TypeDef *const  gp_pwr_regs;
+    extern volatile GPIO_TypeDef *const gp_dio_regs[DIO_CHANNELS];
+    extern uint32_t                     SystemCoreClock;
+    extern void                         SystemCoreClockUpdate(void);
 
 #ifdef __cplusplus
 }

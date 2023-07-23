@@ -42,7 +42,10 @@ app(void)
     {
         dio_state_t state = hal_dio_read(PA0);
         if (DIO_LOW != state)
-            hal_dio_toggle(PA4);
+            // hal_dio_toggle(PA4);
+            hal_dio_write_port(PORTA, 0xFFFF);
+        hal_delay(50);
+        hal_dio_write_port(PORTA, 0);
         hal_delay(50);
     }
 }

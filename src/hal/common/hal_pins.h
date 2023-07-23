@@ -18,6 +18,13 @@
 
 typedef enum
 {
+    PORTA = (0U),
+    PORTB,
+    NUM_PORTS
+} port_t;
+
+typedef enum
+{
     PA0 = (0U),
     PA1,
     PA2,

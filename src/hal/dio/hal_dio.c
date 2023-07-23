@@ -159,6 +159,22 @@ hal_dio_read(pin_t channel)
     return result;
 }
 
+void
+hal_dio_write_port(port_t port, U32 value)
+{
+    ASSERT(port < NUM_PORTS);
+    gp_dio_regs[port]->ODR = value;
+}
+
+U32
+hal_dio_read_port(port_t port)
+{
+    U32 result = 0;
+    ASSERT(port < NUM_PORTS);
+    result = gp_dio_regs[port]->ODR;
+    return result;
+}
+
 /**  @}*/
 /** @}*/
 

@@ -60,7 +60,7 @@ hal_toggle_bit(REG reg, U8 bit_index)
 inline U8
 hal_read_bit(REG reg, U8 bit_index)
 {
-    U8 result = ((*reg) & BIT_MASK(bit_index)) >> bit_index;
+    U8 result = (U8)((((*reg) & BIT_MASK(bit_index)) >> bit_index) & 0xFFU);
     return result;
 }
 inline void

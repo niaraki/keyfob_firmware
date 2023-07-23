@@ -12,6 +12,7 @@
 #include <cmath>
 #include <gtest/gtest.h>
 #include "hal.h"
+#include "hal_dio.h"
 #include "hal_dio_cfg.h"
 #include "hll.h"
 
@@ -35,7 +36,7 @@ public:
 protected:
 };
 
-TEST_F(HalDioTestFixture, HalDioWriteTestHigh)
+TEST_F(HalDioTestFixture, HalDioWrite_With_HighValue_Test)
 {
     for (U8 index = (0U); index < NUM_PINS; index++)
     {
@@ -56,7 +57,7 @@ TEST_F(HalDioTestFixture, HalDioWriteTestHigh)
     }
 }
 
-TEST_F(HalDioTestFixture, HalDioWriteTestLow)
+TEST_F(HalDioTestFixture, HalDioWrite_With_LowValue_Test)
 {
     for (U8 index = (0U); index < NUM_PINS; index++)
     {
@@ -127,7 +128,7 @@ TEST_F(HalDioTestFixture, HalDioReadTest)
     }
 }
 
-TEST_F(HalDioTestFixture, HalDioInit_ModeRegisterTest)
+TEST_F(HalDioTestFixture, HalDioInit_SetModeRegister_Test)
 {
     /* Arrange */
     dio_config_t test_configs[NUM_PINS];
@@ -162,7 +163,7 @@ TEST_F(HalDioTestFixture, HalDioInit_ModeRegisterTest)
     }
 }
 
-TEST_F(HalDioTestFixture, HalDioInit_SpeedRegisterTest)
+TEST_F(HalDioTestFixture, HalDioInit_SetSpeedRegister_Test)
 {
     /* Arrange */
     dio_config_t test_configs[NUM_PINS];
@@ -193,7 +194,7 @@ TEST_F(HalDioTestFixture, HalDioInit_SpeedRegisterTest)
     }
 }
 
-TEST_F(HalDioTestFixture, HalDioInit_ResistorRegisterTest)
+TEST_F(HalDioTestFixture, HalDioInit_SetResistorRegister_Test)
 {
     /* Arrange */
     dio_config_t test_configs[NUM_PINS];
@@ -220,7 +221,7 @@ TEST_F(HalDioTestFixture, HalDioInit_ResistorRegisterTest)
         EXPECT_EQ(0x89898989UL, gp_dio_regs[port_index]->PUPDR);
     }
 }
-TEST_F(HalDioTestFixture, HalDioInit_DefaultStateTest)
+TEST_F(HalDioTestFixture, HalDioInit_SetDefaultState_Test)
 {
     /* Arrange */
     dio_config_t test_configs[NUM_PINS];
@@ -249,12 +250,12 @@ TEST_F(HalDioTestFixture, HalDioInit_DefaultStateTest)
     }
 }
 
-TEST_F(HalDioTestFixture, HalDioInit_AFTest)
+TEST_F(HalDioTestFixture, HalDioInit_SetAF_Test)
 {
     /* Arrange */
     dio_config_t test_configs[NUM_PINS];
-    U16          pin_index   = 0U;
-    U32          expectedAFR = (0x76543210UL);
+    U16          pin_index    = 0U;
+    U32          expected_afr = (0x76543210UL);
 
     /*Sets AF from 0 to 7 for each 8-group of pins
      * So, the target registers expected to be 0x76543210UL*/
@@ -271,8 +272,22 @@ TEST_F(HalDioTestFixture, HalDioInit_AFTest)
     for (U8 port_index = 0U; port_index < (NUM_PINS / NUM_PIN_IN_PORT);
          port_index++)
     {
-        EXPECT_EQ(expectedAFR, gp_dio_regs[port_index]->AFR[0]);
-        EXPECT_EQ(expectedAFR, gp_dio_regs[port_index]->AFR[1]);
+        EXPECT_EQ(expected_afr, gp_dio_regs[port_index]->AFR[0]);
+        EXPECT_EQ(expected_afr, gp_dio_regs[port_index]->AFR[1]);
     }
 }
+TEST_F(HalDioTestFixture, HalDioReadWriteFromPortTest)
+{
+    /* Arrange */
+    U32 write_value = 0xAAAAAAAAUL;
+
+    /* Action */
+    for (U8 index = 0; index < NUM_PORTS; index++)
+        hal_dio_write_port((port_t)index, write_value);
+
+    /* Assert */
+    for (U8 index = 0; index < NUM_PORTS; index++)
+        EXPECT_EQ(write_value, hal_dio_read_port((port_t)index));
+}
+
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

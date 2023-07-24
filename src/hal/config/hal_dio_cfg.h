@@ -72,10 +72,11 @@ typedef enum
  **/
 typedef enum
 {
-    SLOW          = (0U),
-    MEDIUM        = (1U),
-    FAST          = (3U),
-    DIO_NUM_SPEED = (4U)
+    SLOW           = (0U),
+    MEDIUM         = (1U),
+    RESERVED_SPEED = (2U),
+    FAST           = (3U),
+    DIO_NUM_SPEED  = (4U)
 } dio_speed_t;
 
 /**@brief Specify the alternate function of a pin

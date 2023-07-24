@@ -53,7 +53,7 @@ DIO module
  * Also, the DIO_NUM_CONFIGURED_PINS must be updated
  * @see DIO_NUM_CONFIGURED_PINS
  **/
-const dio_config_t g_dio_config_table[DIO_NUM_CONFIGURED_PINS] = {
+static const dio_config_t g_dio_config_table[DIO_NUM_CONFIGURED_PINS] = {
     /* Channel , Mode , AF , Resistor , Speed , EXTI */
     { PA0, INPUT, AF_0, PULLUP, DIO_HIGH, FAST },     /*RF_IN*/
     { PA1, INPUT, AF_0, PULLUP, DIO_HIGH, FAST },     /*BUTTON*/

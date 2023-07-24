@@ -11,6 +11,7 @@
 */
 #include "hal.h"
 #include "hal_dio_cfg.h"
+#include "hal_pins.h"
 #include "hll.h"
 
 /** @addtogroup HAL
@@ -60,10 +61,12 @@ static inline dio_channel_info_t
 dio_get_channel_info(pin_t channel)
 {
     dio_channel_info_t result = { 0U };
-    result.port_index         = (channel / NUM_PIN_IN_PORT);
-    result.pin_index          = (channel % NUM_PIN_IN_PORT);
+    result.port_index         = (((U8)channel) / NUM_PIN_IN_PORT);
+    result.pin_index          = (((U8)channel) % NUM_PIN_IN_PORT);
     result.pin_mask           = ((1UL) << result.pin_index);
     /* Link the corresponding register from the HLL for the specified channel*/
+    if (result.port_index >= NUM_PORTS)
+        result.port_index = 0;
     result.reg = gp_dio_regs[result.port_index];
     return result;
 }
@@ -78,7 +81,8 @@ assert_config_params(const dio_config_t *const config)
     ASSERT(config->channel < NUM_PINS);
     ASSERT(config->mode < DIO_NUM_MODE);
     /* Speed value 2, has been reserved by ST*/
-    ASSERT((config->speed < DIO_NUM_SPEED) && (2U != config->speed));
+    ASSERT((config->speed < DIO_NUM_SPEED)
+           && (RESERVED_SPEED != config->speed));
     ASSERT(config->af < DIO_NUM_AF);
     ASSERT(config->resistor < DIO_NUM_RESISTOR);
     ASSERT(config->default_state < DIO_NUM_PIN_STATE);
@@ -92,11 +96,11 @@ assert_config_params(const dio_config_t *const config)
 static inline void
 set_mode(const dio_config_t *const config, dio_channel_info_t *chi)
 {
-    U8 pin_mode = (U8)config->mode;
+    U8 pin_mode = ((U8)config->mode);
     chi->reg->OTYPER &= ~((chi->pin_mask)); /*Clear OTYPER for the pin*/
-    chi->reg->OTYPER |= (pin_mode >= OUTPUT_OD) ? chi->pin_mask : (0UL);
+    chi->reg->OTYPER |= ((config->mode) >= OUTPUT_OD) ? chi->pin_mask : (0UL);
     /*Make AF_OD(5) and OUTPUT_OD(4) to the range of MODER register*/
-    if (pin_mode > ANALOG)
+    if (config->mode > ANALOG)
     {
         pin_mode -= 3;
     }
@@ -150,7 +154,9 @@ set_af(const dio_config_t *const config, const dio_channel_info_t *const chi)
      * bit-index of the specified pin as well as the corresponding index of the
      * AFR register*/
     U8 af_value   = (U8)config->af;
-    U8 af_reg_idx = (((U8)chi->pin_index) < 8U) ? 0 : 1;
+    U8 af_reg_idx = 0U;
+    if (chi->pin_index < 8U)
+        af_reg_idx = 1U;
     U8 af_bit_idx = (chi->pin_index % (NUM_PIN_IN_PORT / 2U));
 
     /*Clear and set AFR register for the pin*/
@@ -168,9 +174,13 @@ static inline void
 set_state(dio_channel_info_t *channel_info, dio_state_t state)
 {
     if (DIO_HIGH == state)
+    {
         channel_info->reg->BSRR |= (channel_info->pin_mask);
+    }
     else
+    {
         channel_info->reg->BRR |= (channel_info->pin_mask);
+    }
 }
 
 /** @defgroup DIO_API API
@@ -183,7 +193,7 @@ set_state(dio_channel_info_t *channel_info, dio_state_t state)
  * @retval None
  * @see dio_config_t
  **/
-inline void
+void
 hal_dio_config(const dio_config_t *const config)
 {
     assert_config_params(config);
@@ -212,8 +222,10 @@ hal_dio_init(const dio_config_t *const configs, U16 num_configs)
 {
     ASSERT(NULLPTR != configs);
 
-    for (U16 index = 0UL; index < num_configs; index++)
+    for (U16 index = 0U; index < num_configs; index++)
+    {
         hal_dio_config(&configs[index]);
+    }
 }
 
 /**@brief Set the state of the pin to high or low
@@ -223,7 +235,6 @@ hal_dio_init(const dio_config_t *const configs, U16 num_configs)
  * @arg DIO_HIGH -> logic 1
  * @retval None
  * @code
- * // Set the state of the pin 0 from the PORTA to logic 1
  * hal_dio_write(PA0, DIO_HIGH);
  * @endcode
  **/
@@ -241,7 +252,6 @@ hal_dio_write(pin_t channel, dio_state_t state)
  * @param channel is the selected pin
  * @retval None
  * @code
- * // Toggle the state of the pin 0 from the PORTA
  * hal_dio_toggle(PA0);
  * @endcode
  * @see pin_t
@@ -261,7 +271,6 @@ hal_dio_toggle(pin_t channel)
  * @param channel is the selected pin
  * @retval None
  * @code
- * // Read the state of pin 0 from the PORTA
  * dio_state_t state = hal_dio_read(PA0);
  * @endcode
  * @see pin_t
@@ -274,7 +283,9 @@ hal_dio_read(pin_t channel)
     dio_state_t        result = DIO_LOW;
     dio_channel_info_t chi    = dio_get_channel_info(channel);
     if ((chi.pin_mask & chi.reg->IDR) == chi.pin_mask)
+    {
         result = DIO_HIGH;
+    }
 
     return result;
 }
@@ -286,7 +297,6 @@ hal_dio_read(pin_t channel)
  * @attention this implementation is based on ODR register. So, it is not
  *atomic.
  * @code
- * // Set to high all the pins inside of the PORTA
  * hal_dio_write_port(PORTA, 0xFFFFFFFF);
  * @endcode
  * @see port_t
@@ -295,7 +305,10 @@ void
 hal_dio_write_port(port_t port, U32 value)
 {
     ASSERT(port < NUM_PORTS);
-    gp_dio_regs[port]->ODR = value;
+    if (port < NUM_PORTS)
+    {
+        gp_dio_regs[port]->ODR = value;
+    }
 }
 
 /**@brief Read the value of the port
@@ -303,7 +316,6 @@ hal_dio_write_port(port_t port, U32 value)
  * @attention this implementation is based on ODR register. So, it is not
  *atomic.
  * @code
- * // Read the status of pins in the PORTA
  * U32 val = hal_dio_read_port(PORTA);
  * @endcode
  **/
@@ -312,7 +324,10 @@ hal_dio_read_port(port_t port)
 {
     U32 result = 0;
     ASSERT(port < NUM_PORTS);
-    result = gp_dio_regs[port]->ODR;
+    if (port < NUM_PORTS)
+    {
+        result = gp_dio_regs[port]->ODR;
+    }
     return result;
 }
 

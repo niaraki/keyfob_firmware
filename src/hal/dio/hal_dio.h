@@ -21,10 +21,10 @@ extern "C"
 {
 #endif
 
-    void        hal_dio_init(const dio_config_t *const, U16 num_configs);
-    void        hal_dio_config(const dio_config_t *const config);
-    void        hal_dio_write(pin_t channel, dio_state_t state);
-    void        hal_dio_toggle(pin_t channel);
+    void hal_dio_init(const dio_config_t *const configs, U16 num_configs);
+    void hal_dio_config(const dio_config_t *const config);
+    void hal_dio_write(pin_t channel, dio_state_t state);
+    void hal_dio_toggle(pin_t channel);
     dio_state_t hal_dio_read(pin_t channel);
     void        hal_dio_write_port(port_t port, U32 value);
     U32         hal_dio_read_port(port_t port);

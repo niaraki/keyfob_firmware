@@ -7,7 +7,7 @@
 
 [![Language](https://img.shields.io/badge/Made%20with-C-blue.svg)](https://shields.io/)
 ![License](https://camo.githubusercontent.com/890acbdcb87868b382af9a4b1fac507b9659d9bf/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6c6963656e73652d4d49542d626c75652e737667)
-[![ClangFormat](https://github.com/niaraki/keyfob_firmware/actions/workflows/clangformat.yml/badge.svg)](https://github.com/niaraki/keyfob_firmware/actions/workflows/clangformat.yml)
+[![ClangFormat](https://github.com/niaraki/keyfob_firmware/actions/workflows/clangformat.yml/badge.svg)](https://niaraki.github.io/keyfob_firmware/)
 [![CppCheck](https://github.com/niaraki/keyfob_firmware/actions/workflows/cppcheck.yml/badge.svg)](https://github.com/niaraki/keyfob_firmware/actions/workflows/cppcheck.yml)
 [![Lizard](https://github.com/niaraki/keyfob_firmware/actions/workflows/lizard.yml/badge.svg)](https://github.com/niaraki/keyfob_firmware/actions/workflows/lizard.yml)
 [![Flawfinder](https://github.com/niaraki/keyfob_firmware/actions/workflows/flawfinder.yml/badge.svg)](https://github.com/niaraki/keyfob_firmware/actions/workflows/flawfinder.yml)
@@ -19,7 +19,12 @@
   - [Introduction](#introduction)
   - [Project Structure](#project-structure)
   - [Development Guidlines](#development-guidlines)
-  - [Versioning](#versioning)
+    - [Source Code Documents](https://niaraki.github.io/keyfob_firmware/)
+    - [Prerequisites](#prerequisites)
+    - [How To Compile](#how-to-compile)
+    - [Commit Message Conventions](#commit-message-conventions)
+    - [Coding Styles](#coding-styles)
+    - [Versioning](#versioning)
   - [Authors](#authors)
   - [License](#license)
   - [Acknowledgments](#acknowledgments)
@@ -81,6 +86,23 @@ In this project, we have a layerd architecture. As you can see in the following 
 
 
 #### How To Compile 
+    
+1- Install docker on your machine - [Installation guide](https://docs.docker.com/engine/install/ubuntu/)<br/>
+2- Write following commands in the terminal:
+
+     docker pull mohammadniaraki/stm32_build:latest
+     docker run -it stm32_build:latest
+
+3- After running the container in interactive mode, write following commands in the terminal:
+
+     git clone https://www.github.com/niaraki/keyfob_firmware --recursive
+     cd keyfob_firmware 
+     make clean && make prepare && make release
+
+4- Final artifacts (keyfob_firmware.[elf | hex | bin]) are generated under the "build/src" directory.<br/>
+5- Read the Makefile for other build targets     
+
+    
 #### Commit Message Conventions
 <ol>
 <li>

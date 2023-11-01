@@ -48,7 +48,7 @@ TEST_F(HalDioTestFixture, HalDioWrite_With_HighValue_Test)
         pin_t channel    = (pin_t)(index);
 
         /* Action */
-        hal_dio_write(channel, DIO_HIGH);
+        hal_dio_write(channel, DIO_STATE_HIGH);
 
         /* Assert */
         EXPECT_EQ(pin_mask, gp_dio_regs[port_index]->BSRR);
@@ -70,7 +70,7 @@ TEST_F(HalDioTestFixture, HalDioWrite_With_LowValue_Test)
         pin_t channel                = (pin_t)(index);
 
         /* Action */
-        hal_dio_write(channel, DIO_LOW);
+        hal_dio_write(channel, DIO_STATE_LOW);
 
         /* Assert */
         EXPECT_EQ(pin_mask, gp_dio_regs[port_index]->BRR);
@@ -120,7 +120,8 @@ TEST_F(HalDioTestFixture, HalDioReadTest)
         U32   pin_mask               = (1UL << (pin_index));
         pin_t channel                = (pin_t)(index);
         gp_dio_regs[port_index]->IDR = (0xAAAAUL);
-        dio_state_t expected_state   = (index % 2 == 0U) ? DIO_LOW : DIO_HIGH;
+        dio_state_t expected_state
+            = (index % 2 == 0U) ? DIO_STATE_LOW : DIO_STATE_HIGH;
 
         /* Action */
         dio_state_t state = hal_dio_read(channel);
@@ -131,9 +132,10 @@ TEST_F(HalDioTestFixture, HalDioReadTest)
 }
 
 /** @brief The following loop defines pin configuration for each pin of the dio
- * unit and sets the mode register as bellow: first pin: INPUT, second pin:
- * OUTPUT, third pin: AF, fourth pin: ANALOG, fifth bit: like the first bit and
- * so on. So, the mode register for first four pins would be: 0b11100100 = 0xE4
+ * unit and sets the mode register as bellow: first pin: DIO_MODE_INPUT, second
+ * pin: OUTPUT, third pin: AF, fourth pin: DIO_MODE_ANALOG, fifth bit: like the
+ * first bit and so on. So, the mode register for first four pins would be:
+ * 0b11100100 = 0xE4
  *  */
 TEST_F(HalDioTestFixture, HalDioInit_SetModeRegister_Test)
 {
@@ -146,13 +148,13 @@ TEST_F(HalDioTestFixture, HalDioInit_SetModeRegister_Test)
     while (pin_index < NUM_PINS)
     {
         test_configs[pin_index].channel = (pin_t)pin_index;
-        test_configs[pin_index++].mode  = INPUT;
+        test_configs[pin_index++].mode  = DIO_MODE_INPUT;
         test_configs[pin_index].channel = (pin_t)pin_index;
-        test_configs[pin_index++].mode  = OUTPUT_PP;
+        test_configs[pin_index++].mode  = DIO_MODE_OUTPUT_PP;
         test_configs[pin_index].channel = (pin_t)pin_index;
-        test_configs[pin_index++].mode  = AF_OD;
+        test_configs[pin_index++].mode  = DIO_MODE_AF_OD;
         test_configs[pin_index].channel = (pin_t)pin_index;
-        test_configs[pin_index++].mode  = ANALOG;
+        test_configs[pin_index++].mode  = DIO_MODE_ANALOG;
     }
 
     /* Action */
@@ -179,13 +181,13 @@ TEST_F(HalDioTestFixture, HalDioInit_SetSpeedRegister_Test)
     while (pin_index < NUM_PINS)
     {
         test_configs[pin_index].channel = (pin_t)pin_index;
-        test_configs[pin_index++].speed = SLOW;
+        test_configs[pin_index++].speed = DIO_SPEED_SLOW;
         test_configs[pin_index].channel = (pin_t)pin_index;
-        test_configs[pin_index++].speed = MEDIUM;
+        test_configs[pin_index++].speed = DIO_SPEED_MEDIUM;
         test_configs[pin_index].channel = (pin_t)pin_index;
-        test_configs[pin_index++].speed = FAST;
+        test_configs[pin_index++].speed = DIO_SPEED_FAST;
         test_configs[pin_index].channel = (pin_t)pin_index;
-        test_configs[pin_index++].speed = SLOW;
+        test_configs[pin_index++].speed = DIO_SPEED_SLOW;
     }
 
     /* Action */
@@ -206,13 +208,13 @@ TEST_F(HalDioTestFixture, HalDioInit_SetResistorRegister_Test)
     while (pin_index < NUM_PINS)
     {
         test_configs[pin_index].channel    = (pin_t)pin_index;
-        test_configs[pin_index++].resistor = PULLUP;
+        test_configs[pin_index++].resistor = DIO_RES_PULLUP;
         test_configs[pin_index].channel    = (pin_t)pin_index;
-        test_configs[pin_index++].resistor = PULLDOWN;
+        test_configs[pin_index++].resistor = DIO_RES_PULLDOWN;
         test_configs[pin_index].channel    = (pin_t)pin_index;
-        test_configs[pin_index++].resistor = RES_DISABLE;
+        test_configs[pin_index++].resistor = DIO_RES_DISABLE;
         test_configs[pin_index].channel    = (pin_t)pin_index;
-        test_configs[pin_index++].resistor = PULLDOWN;
+        test_configs[pin_index++].resistor = DIO_RES_PULLDOWN;
     }
 
     /* Action */
@@ -234,13 +236,13 @@ TEST_F(HalDioTestFixture, HalDioInit_SetDefaultState_Test)
     while (pin_index < NUM_PINS)
     {
         test_configs[pin_index].channel         = (pin_t)pin_index;
-        test_configs[pin_index++].default_state = DIO_HIGH;
+        test_configs[pin_index++].default_state = DIO_STATE_HIGH;
         test_configs[pin_index].channel         = (pin_t)pin_index;
-        test_configs[pin_index++].default_state = DIO_LOW;
+        test_configs[pin_index++].default_state = DIO_STATE_LOW;
         test_configs[pin_index].channel         = (pin_t)pin_index;
-        test_configs[pin_index++].default_state = DIO_HIGH;
+        test_configs[pin_index++].default_state = DIO_STATE_HIGH;
         test_configs[pin_index].channel         = (pin_t)pin_index;
-        test_configs[pin_index++].default_state = DIO_LOW;
+        test_configs[pin_index++].default_state = DIO_STATE_LOW;
     }
 
     /* Action */
@@ -299,18 +301,18 @@ TEST_F(HalDioTestFixture, HalDioMultiConfig_Test)
 {
     /* Arrange */
     dio_config_t pin_config1 = { .channel       = PA0,
-                                 .mode          = INPUT,
-                                 .af            = AF_1,
-                                 .resistor      = PULLDOWN,
-                                 .default_state = DIO_LOW,
-                                 .speed         = SLOW };
+                                 .mode          = DIO_MODE_INPUT,
+                                 .af            = DIO_AF_1,
+                                 .resistor      = DIO_RES_PULLDOWN,
+                                 .default_state = DIO_STATE_LOW,
+                                 .speed         = DIO_SPEED_SLOW };
 
     dio_config_t pin_config2 = { .channel       = PA0,
-                                 .mode          = OUTPUT_OD,
-                                 .af            = AF_0,
-                                 .resistor      = PULLUP,
-                                 .default_state = DIO_HIGH,
-                                 .speed         = FAST };
+                                 .mode          = DIO_MODE_OUTPUT_OD,
+                                 .af            = DIO_AF_0,
+                                 .resistor      = DIO_RES_PULLUP,
+                                 .default_state = DIO_STATE_HIGH,
+                                 .speed         = DIO_SPEED_FAST };
     /* Action */
     /** config with an old settings */
     hal_dio_config(&pin_config1);

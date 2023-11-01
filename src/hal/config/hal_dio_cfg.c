@@ -12,7 +12,6 @@ DIO module
 */
 
 #include "hal_dio_cfg.h"
-#include "hll.h"
 
 /** @addtogroup HAL
  *   @brief Hardware ACCESS Layer (HAL)
@@ -48,18 +47,43 @@ DIO module
  * | Channel , Mode , AF , Resistor , Speed , EXTI | </br>
  * for example:
  * @code
- *  { PA0, INPUT, AF_0, PULLUP, DIO_HIGH, FAST }
+ *  { PA0, DIO_MODE_INPUT, DIO_AF_0, DIO_RES_PULLUP, DIO_HIGH, DIO_SPEED_FAST }
  * @endcode
  * Also, the DIO_NUM_CONFIGURED_PINS must be updated
  * @see DIO_NUM_CONFIGURED_PINS
  **/
 static const dio_config_t g_dio_config_table[DIO_NUM_CONFIGURED_PINS] = {
     /* Channel , Mode , AF , Resistor , Speed , EXTI */
-    { PA0, INPUT, AF_0, PULLUP, DIO_HIGH, FAST },     /*RF_IN*/
-    { PA1, INPUT, AF_0, PULLUP, DIO_HIGH, FAST },     /*BUTTON*/
-    { PA4, OUTPUT_PP, AF_0, PULLUP, DIO_HIGH, FAST }, /*LED*/
-    { PA13, AF_PP, AF_0, PULLDOWN, DIO_LOW, FAST },   /*SWDIO*/
-    { PA14, AF_PP, AF_0, PULLDOWN, DIO_LOW, FAST },   /*SWCLK*/
+    { PA0,
+      DIO_MODE_INPUT,
+      DIO_AF_0,
+      DIO_RES_PULLUP,
+      DIO_STATE_HIGH,
+      DIO_SPEED_FAST }, /*RF_IN*/
+    { PA1,
+      DIO_MODE_INPUT,
+      DIO_AF_0,
+      DIO_RES_PULLUP,
+      DIO_STATE_HIGH,
+      DIO_SPEED_FAST }, /*BUTTON*/
+    { PA4,
+      DIO_MODE_OUTPUT_PP,
+      DIO_AF_0,
+      DIO_RES_PULLUP,
+      DIO_STATE_HIGH,
+      DIO_SPEED_FAST }, /*LED*/
+    { PA13,
+      DIO_MODE_AF_PP,
+      DIO_AF_0,
+      DIO_RES_PULLDOWN,
+      DIO_STATE_LOW,
+      DIO_SPEED_FAST }, /*SWDIO*/
+    { PA14,
+      DIO_MODE_AF_PP,
+      DIO_AF_0,
+      DIO_RES_PULLDOWN,
+      DIO_STATE_LOW,
+      DIO_SPEED_FAST }, /*SWCLK*/
 };
 /**  @}*/
 

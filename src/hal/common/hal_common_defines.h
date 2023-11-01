@@ -42,6 +42,9 @@ extern "C"
 #define TRUE  (1U)
 
 #define NULLPTR (0U)
+#define NULL    (0U)
+
+#define BOOL bit
 
 #ifdef __cplusplus
 }

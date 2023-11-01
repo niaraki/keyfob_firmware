@@ -79,13 +79,13 @@ static inline void
 assert_config_params(const dio_config_t *const config)
 {
     ASSERT(config->channel < NUM_PINS);
-    ASSERT(config->mode < DIO_NUM_MODE);
+    ASSERT(config->mode < DIO_MODE_COUNT);
     /* Speed value 2, has been reserved by ST*/
-    ASSERT((config->speed < DIO_NUM_SPEED)
-           && (RESERVED_SPEED != config->speed));
-    ASSERT(config->af < DIO_NUM_AF);
-    ASSERT(config->resistor < DIO_NUM_RESISTOR);
-    ASSERT(config->default_state < DIO_NUM_PIN_STATE);
+    ASSERT((config->speed < DIO_SPEED_COUNT)
+           && (DIO_SPEED_RESERVED_SPEED != config->speed));
+    ASSERT(config->af < DIO_AF_COUNT);
+    ASSERT(config->resistor < DIO_RES_COUNT);
+    ASSERT(config->default_state < DIO_STATE_COUNT);
 }
 
 /**@brief Set MODER and OTYPER registers according to the passed config.
@@ -98,9 +98,10 @@ set_mode(const dio_config_t *const config, dio_channel_info_t *chi)
 {
     U8 pin_mode = ((U8)config->mode);
     chi->reg->OTYPER &= ~((chi->pin_mask)); /*Clear OTYPER for the pin*/
-    chi->reg->OTYPER |= ((config->mode) >= OUTPUT_OD) ? chi->pin_mask : (0UL);
+    chi->reg->OTYPER
+        |= ((config->mode) >= DIO_MODE_OUTPUT_OD) ? chi->pin_mask : (0UL);
     /*Make AF_OD(5) and OUTPUT_OD(4) to the range of MODER register*/
-    if (config->mode > ANALOG)
+    if (config->mode > DIO_MODE_ANALOG)
     {
         pin_mode -= 3;
     }
@@ -173,7 +174,7 @@ set_af(const dio_config_t *const config, const dio_channel_info_t *const chi)
 static inline void
 set_state(dio_channel_info_t *channel_info, dio_state_t state)
 {
-    if (DIO_HIGH == state)
+    if (DIO_STATE_HIGH == state)
     {
         channel_info->reg->BSRR |= (channel_info->pin_mask);
     }
@@ -241,7 +242,7 @@ hal_dio_init(const dio_config_t *const configs, U16 num_configs)
 void
 hal_dio_write(pin_t channel, dio_state_t state)
 {
-    ASSERT((state < DIO_NUM_PIN_STATE));
+    ASSERT((state < DIO_STATE_HIGH));
     ASSERT((channel < NUM_PINS));
 
     dio_channel_info_t chi = dio_get_channel_info(channel);
@@ -280,11 +281,11 @@ hal_dio_read(pin_t channel)
 {
     ASSERT((channel < NUM_PINS));
 
-    dio_state_t        result = DIO_LOW;
+    dio_state_t        result = DIO_STATE_LOW;
     dio_channel_info_t chi    = dio_get_channel_info(channel);
     if ((chi.pin_mask & chi.reg->IDR) == chi.pin_mask)
     {
-        result = DIO_HIGH;
+        result = DIO_STATE_HIGH;
     }
 
     return result;

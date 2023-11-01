@@ -38,23 +38,23 @@
  **/
 typedef enum
 {
-    INPUT     = (0U),
-    OUTPUT_PP = (1U),
-    AF_PP     = (2U),
-    ANALOG    = (3U),
-    OUTPUT_OD = (4U),
-    AF_OD     = (5U),
-    DIO_NUM_MODE
+    DIO_MODE_INPUT     = (0U),
+    DIO_MODE_OUTPUT_PP = (1U),
+    DIO_MODE_AF_PP     = (2U),
+    DIO_MODE_ANALOG    = (3U),
+    DIO_MODE_OUTPUT_OD = (4U),
+    DIO_MODE_AF_OD     = (5U),
+    DIO_MODE_COUNT
 } dio_mode_t;
 
 /**@brief Specify the status of internal resistor
  **/
 typedef enum
 {
-    RES_DISABLE = (0U),
-    PULLUP      = (1U),
-    PULLDOWN    = (2U),
-    DIO_NUM_RESISTOR
+    DIO_RES_DISABLE  = (0U),
+    DIO_RES_PULLUP   = (1U),
+    DIO_RES_PULLDOWN = (2U),
+    DIO_RES_COUNT
 } dio_resistor_t;
 
 /**@brief Specify the logic level
@@ -63,35 +63,35 @@ typedef enum
  **/
 typedef enum
 {
-    DIO_LOW = (0U),
-    DIO_HIGH,
-    DIO_NUM_PIN_STATE
+    DIO_STATE_LOW = (0U),
+    DIO_STATE_HIGH,
+    DIO_STATE_COUNT
 } dio_state_t;
 
 /**@brief Specify the switching speed of a pin
  **/
 typedef enum
 {
-    SLOW           = (0U),
-    MEDIUM         = (1U),
-    RESERVED_SPEED = (2U),
-    FAST           = (3U),
-    DIO_NUM_SPEED  = (4U)
+    DIO_SPEED_SLOW           = (0U),
+    DIO_SPEED_MEDIUM         = (1U),
+    DIO_SPEED_RESERVED_SPEED = (2U),
+    DIO_SPEED_FAST           = (3U),
+    DIO_SPEED_COUNT          = (4U)
 } dio_speed_t;
 
 /**@brief Specify the alternate function of a pin
  **/
 typedef enum
 {
-    AF_0 = (0U),
-    AF_1,
-    AF_2,
-    AF_3,
-    AF_4,
-    AF_5,
-    AF_6,
-    AF_7,
-    DIO_NUM_AF
+    DIO_AF_0 = (0U),
+    DIO_AF_1,
+    DIO_AF_2,
+    DIO_AF_3,
+    DIO_AF_4,
+    DIO_AF_5,
+    DIO_AF_6,
+    DIO_AF_7,
+    DIO_AF_COUNT
 } dio_af_t;
 
 /**@brief Specify the config entry of a pin.

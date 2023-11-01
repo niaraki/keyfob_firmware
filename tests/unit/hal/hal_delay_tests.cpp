@@ -9,11 +9,7 @@
 ================================================================================
   @endverbatim
 */
-#include <gmock/gmock.h>
-#include <gtest/gtest.h>
 #include "hal_systick_mock.cpp"
-#include "hal.h"
-#include "hll.h"
 
 class HalDelayTestFixture : public HalTestFixture
 {

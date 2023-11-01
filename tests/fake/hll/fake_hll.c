@@ -23,12 +23,17 @@ volatile RCC_TypeDef        fake_rcc_regs = { 0 };
 volatile RCC_TypeDef *const gp_rcc_regs   = &fake_rcc_regs;
 
 /* Fake implementation of SystemCoreClockUpdate*/
+#define FAKE_RCC_PRE_INITED_FREQ (48000000UL)
 uint32_t SystemCoreClock = 0;
+uint8_t  IsWrongSystemCoreClockEnabled;
 
 void
 SystemCoreClockUpdate(void)
 {
-    SystemCoreClock = (48000000UL);
+    if (0U == IsWrongSystemCoreClockEnabled)
+        SystemCoreClock = FAKE_RCC_PRE_INITED_FREQ;
+    else
+        SystemCoreClock = (FAKE_RCC_PRE_INITED_FREQ - 1U);
 }
 
 /* DIO fakes */

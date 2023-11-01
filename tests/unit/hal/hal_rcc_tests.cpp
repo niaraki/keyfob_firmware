@@ -80,4 +80,16 @@ TEST_F(HalRccTestFixture, HalRccAHBTest)
     EXPECT_EQ(expected_AHB, gp_rcc_regs->AHBENR);
 }
 
+TEST_F(HalRccTestFixture, HalRccCheckSystemClock)
+{
+    I8 result                     = -1;
+    IsWrongSystemCoreClockEnabled = false;
+    result                        = hal_rcc_check_system_clock();
+    EXPECT_EQ(0U, result);
+    /* check faulty situation */
+    IsWrongSystemCoreClockEnabled = true;
+    result                        = hal_rcc_check_system_clock();
+    EXPECT_EQ(-EFAULT, result);
+}
+
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

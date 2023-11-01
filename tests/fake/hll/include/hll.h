@@ -30,6 +30,7 @@ extern "C"
     extern volatile PWR_TypeDef *const  gp_pwr_regs;
     extern volatile GPIO_TypeDef *const gp_dio_regs[DIO_CHANNELS];
     extern uint32_t                     SystemCoreClock;
+    extern uint8_t                      IsWrongSystemCoreClockEnabled;
     extern void                         SystemCoreClockUpdate(void);
 
 #ifdef __cplusplus

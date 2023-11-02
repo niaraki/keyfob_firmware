@@ -17,7 +17,9 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include "hal.h"
+#include "hal_common_defines.h"
 
+namespace HalUnitTests {
 class HalMock
 {
 public:
@@ -27,7 +29,11 @@ public:
     virtual ~HalMock()
     {
     }
+    /*hal_systick module*/
     MOCK_METHOD((U32), hal_systick_get_tick, ());
+
+    /*CMSIS related funtions or macros*/
+    MOCK_METHOD((U32), SysTick_Config, (U32));
 };
 
 class HalTestFixture : public testing::Test
@@ -50,7 +56,7 @@ public:
     inline static std::unique_ptr<HalMock> m_mock;
     inline static U32                      m_tick;
 };
-
+}
 #endif /* __HAL_MOCK_FIXTUREH */
 
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

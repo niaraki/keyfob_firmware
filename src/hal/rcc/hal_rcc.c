@@ -188,7 +188,8 @@ hal_rcc_init(const rcc_config_t *configs)
     for (U8 index = 0U; index < RCC_PERI_COUNT; index++)
     {
         rcc_peri_t cp = configs->rcc_peri_table[index];
-        rcc_set_peri_clock(configs, index, cp.default_clk_state);
+        rcc_set_peri_clock(
+            configs, (rcc_peri_name_t)index, cp.default_clk_state);
     }
 }
 

@@ -11,11 +11,9 @@
 */
 #include <cmath>
 #include <gtest/gtest.h>
-#include "hal.h"
-#include "hal_dio.h"
-#include "hal_dio_cfg.h"
-#include "hal_pins.h"
-#include "hll.h"
+
+/*Include CUT source files*/
+#include "hal_dio.c"
 
 class HalDioTestFixture : public testing::Test
 {

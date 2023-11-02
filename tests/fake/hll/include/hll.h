@@ -14,7 +14,7 @@
 #ifndef __HLL_H
 #define __HLL_H
 
-#include "stm32f0xx.h"
+#include "stm32f0xx_override.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -25,7 +25,6 @@ extern "C"
     {
         DIO_CHANNELS = 2U
     };
-
     extern volatile RCC_TypeDef *const  gp_rcc_regs;
     extern volatile PWR_TypeDef *const  gp_pwr_regs;
     extern volatile GPIO_TypeDef *const gp_dio_regs[DIO_CHANNELS];

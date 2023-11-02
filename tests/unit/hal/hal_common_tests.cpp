@@ -10,12 +10,13 @@
   @endverbatim
 */
 
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
 #include <vector>
 #include <tuple>
 #include <iostream>
-#include "hal.h"
-#include "hal_common_defines.h"
+
+/* Include CUT source files */
+#include "hal_common_helper.c"
 
 /** @addtogroup HAL
  *   @brief Hardware ACCESS Layer (HAL)

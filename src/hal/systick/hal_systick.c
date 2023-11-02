@@ -11,7 +11,6 @@
 */
 #include "hal.h"
 #include "hll.h"
-#include "system_stm32f0xx.h"
 
 /** @addtogroup HAL
  *   @brief Hardware ACCESS Layer (HAL)
@@ -22,7 +21,7 @@
  *   @brief Cortex-M systick driver for HAL
  *    @{
  */
-_IO U32 tick_counter = 0;
+static _IO U32 tick_counter = 0;
 
 void
 hal_systick_inc_tick()
@@ -33,9 +32,13 @@ hal_systick_inc_tick()
 I8
 hal_systick_init(void)
 {
+    tick_counter = 0;
     SystemCoreClockUpdate();
-    U32 result = SysTick_Config(SystemCoreClock / 1000UL);
-    return (0U == result) ? 0U : -EFAULT;
+
+    if (0U == SysTick_Config(SystemCoreClock / 1000UL))
+        return 0U;
+
+    return -EFAULT;
 }
 
 U32
@@ -43,6 +46,14 @@ hal_systick_get_tick(void)
 {
     return tick_counter;
 }
+
+#ifdef UNITTEST
+void
+hal_systick_unittest_set_tick(U32 value)
+{
+    tick_counter = value;
+}
+#endif
 /**  @}*/
 /** @}*/
 

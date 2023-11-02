@@ -10,8 +10,10 @@
   @endverbatim
 */
 #include <gtest/gtest.h>
-#include "hal.h"
-#include "hll.h"
+
+/*Include CUT soruce files*/
+#include "hal_common_helper.c"
+#include "hal_rcc.c"
 
 class HalRccTestFixture : public testing::Test
 {

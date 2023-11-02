@@ -11,7 +11,7 @@
 ********************************************************************************
 */
 
-#include "stm32f0xx.h"
+#include "stm32f0xx_override.h"
 #include "hll.h"
 
 /* PWR fakes */

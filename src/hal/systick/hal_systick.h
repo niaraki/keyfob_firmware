@@ -18,11 +18,16 @@
 extern "C"
 {
 #endif
+
 #include "hal_common_defines.h"
 
+#ifndef UNITTEST
     I8   hal_systick_init(void);
     void hal_systick_inc_tick(void);
     U32  hal_systick_get_tick(void);
+#else
+void hal_systick_unittest_set_tick(U32 value);
+#endif
 
 #ifdef __cplusplus
 }

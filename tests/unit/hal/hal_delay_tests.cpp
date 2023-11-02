@@ -9,9 +9,16 @@
 ================================================================================
   @endverbatim
 */
+
+/*Include mock of dependencies*/
 #include "hal_systick_mock.cpp"
 
-class HalDelayTestFixture : public HalTestFixture
+/*Include CUT source files*/
+#include "hal.c"
+
+namespace HalDelayUnitTests {
+
+class HalDelayTestFixture : public HalUnitTests::HalTestFixture
 {
 public:
     void SetUp(void) override
@@ -37,4 +44,5 @@ TEST_F(HalDelayTestFixture, HalDelayTest)
     EXPECT_EQ(delay_ms, m_tick - over_execution);
 }
 
+}
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

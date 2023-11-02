@@ -60,13 +60,13 @@ hal_toggle_bit(REG reg, U8 bit_index)
 inline U8
 hal_read_bit(REG reg, U8 bit_index)
 {
-    U8 result = (U8)((((*reg) & BIT_MASK(bit_index)) >> bit_index) & 0xFFU);
+    U8 result = ((*reg) & BIT_MASK(bit_index)) >> bit_index;
     return result;
 }
 inline void
 hal_wait_for_bit(REG reg, U8 bit_index)
 {
-#ifndef _TEST_
+#ifndef UNITTEST
     while (!((*reg) & BIT_MASK(bit_index)))
         ;
 #endif
@@ -74,7 +74,7 @@ hal_wait_for_bit(REG reg, U8 bit_index)
 inline void
 hal_wait_for_mask(REG reg, U32 mask, U32 value)
 {
-#ifndef _TEST_
+#ifndef UNITTEST
     while (((*reg) & mask) != value)
         ;
 #endif

@@ -22,7 +22,7 @@ set(COMPILER_OPTIONS
 	-Wlogical-op
 	-pedantic
 	-Werror=cast-align
-  -fshort-enums
+  	-fshort-enums
 )
 
 if (CMAKE_BUILD_TYPE  STREQUAL "Debug")

@@ -13,7 +13,6 @@ include_directories(
 )
 
 # Set targets for unit tests
-set(FIRST_UNIT_TARGET keyfob_first_unit_tests)
 set(HAL_UNIT_TARGET keyfob_hal_unit_tests)
 set(APP_UNIT_TARGET keyfob_app_unit_tests)
 set(DRV_UNIT_TARGET keyfob_drv_unit_tests)
@@ -35,7 +34,6 @@ if (ENABLE_COVERAGE)
   set(COVERAGE_MAIN "coverage")
 
   set(COVERAGE_DEPENDENCIES 
-    ${FIRST_UNIT_TARGET}
     ${HAL_UNIT_TARGET}
     ${BSP_UNIT_TARGET}
     ${DRV_UNIT_TARGET}

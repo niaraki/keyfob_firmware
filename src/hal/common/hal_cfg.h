@@ -17,6 +17,7 @@
 #define HALL_RCC_MODULE_ENABLED
 #define HALL_SYSTICK_MODULE_ENABLED
 #define HALL_DIO_MODULE_ENABLED
+#define HALL_EXTI_MODULE_ENABLED
 
 #ifdef __cplusplus
 extern "C"
@@ -35,6 +36,10 @@ extern "C"
 #ifdef HALL_DIO_MODULE_ENABLED
 #include "hal_dio.h"
 #endif /* HALL_DIO_MODULE_ENABLED */
+
+#ifdef HALL_EXTI_MODULE_ENABLED
+#include "hal_exti.h"
+#endif /* HALL_EXTI_MODULE_ENABLED */
 
 #ifdef __cplusplus
 }

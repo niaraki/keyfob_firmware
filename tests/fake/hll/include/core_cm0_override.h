@@ -700,15 +700,16 @@ extern "C"
       controller. \param [in]      IRQn  Device specific interrupt number. \note
       IRQn must not be negative.
      */
-    __STATIC_INLINE void __NVIC_EnableIRQ(IRQn_Type IRQn)
-    {
-        if ((int32_t)(IRQn) >= 0)
-        {
-            __COMPILER_BARRIER();
-            NVIC->ISER[0U] = (uint32_t)(1UL << (((uint32_t)IRQn) & 0x1FUL));
-            __COMPILER_BARRIER();
-        }
-    }
+    __STATIC_INLINE void __NVIC_EnableIRQ(IRQn_Type IRQn);
+    // __STATIC_INLINE void __NVIC_EnableIRQ(IRQn_Type IRQn)
+    // {
+    //     if ((int32_t)(IRQn) >= 0)
+    //     {
+    //         __COMPILER_BARRIER();
+    //         NVIC->ISER[0U] = (uint32_t)(1UL << (((uint32_t)IRQn) & 0x1FUL));
+    //         __COMPILER_BARRIER();
+    //     }
+    // }
 
     /**
       \brief   Get Interrupt Enable status
@@ -739,15 +740,16 @@ extern "C"
       controller. \param [in]      IRQn  Device specific interrupt number. \note
       IRQn must not be negative.
      */
-    __STATIC_INLINE void __NVIC_DisableIRQ(IRQn_Type IRQn)
-    {
-        if ((int32_t)(IRQn) >= 0)
-        {
-            NVIC->ICER[0U] = (uint32_t)(1UL << (((uint32_t)IRQn) & 0x1FUL));
-            __DSB();
-            __ISB();
-        }
-    }
+    __STATIC_INLINE void __NVIC_DisableIRQ(IRQn_Type IRQn);
+    // __STATIC_INLINE void __NVIC_DisableIRQ(IRQn_Type IRQn)
+    // {
+    //     if ((int32_t)(IRQn) >= 0)
+    //     {
+    //         NVIC->ICER[0U] = (uint32_t)(1UL << (((uint32_t)IRQn) & 0x1FUL));
+    //         __DSB();
+    //         __ISB();
+    //     }
+    // }
 
     /**
       \brief   Get Pending Interrupt
@@ -809,25 +811,29 @@ extern "C"
       [in]      IRQn  Interrupt number. \param [in]  priority  Priority to set.
       \note    The priority cannot be set for every processor exception.
      */
-    __STATIC_INLINE void __NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority)
-    {
-        if ((int32_t)(IRQn) >= 0)
-        {
-            NVIC->IP[_IP_IDX(IRQn)]
-                = ((uint32_t)(NVIC->IP[_IP_IDX(IRQn)]
-                              & ~(0xFFUL << _BIT_SHIFT(IRQn)))
-                   | (((priority << (8U - __NVIC_PRIO_BITS)) & (uint32_t)0xFFUL)
-                      << _BIT_SHIFT(IRQn)));
-        }
-        else
-        {
-            SCB->SHP[_SHP_IDX(IRQn)]
-                = ((uint32_t)(SCB->SHP[_SHP_IDX(IRQn)]
-                              & ~(0xFFUL << _BIT_SHIFT(IRQn)))
-                   | (((priority << (8U - __NVIC_PRIO_BITS)) & (uint32_t)0xFFUL)
-                      << _BIT_SHIFT(IRQn)));
-        }
-    }
+    __STATIC_INLINE void __NVIC_SetPriority(IRQn_Type IRQn, uint32_t priority);
+    // __STATIC_INLINE void __NVIC_SetPriority(IRQn_Type IRQn, uint32_t
+    // priority)
+    // {
+    //     if ((int32_t)(IRQn) >= 0)
+    //     {
+    //         NVIC->IP[_IP_IDX(IRQn)]
+    //             = ((uint32_t)(NVIC->IP[_IP_IDX(IRQn)]
+    //                           & ~(0xFFUL << _BIT_SHIFT(IRQn)))
+    //                | (((priority << (8U - __NVIC_PRIO_BITS)) &
+    //                (uint32_t)0xFFUL)
+    //                   << _BIT_SHIFT(IRQn)));
+    //     }
+    //     else
+    //     {
+    //         SCB->SHP[_SHP_IDX(IRQn)]
+    //             = ((uint32_t)(SCB->SHP[_SHP_IDX(IRQn)]
+    //                           & ~(0xFFUL << _BIT_SHIFT(IRQn)))
+    //                | (((priority << (8U - __NVIC_PRIO_BITS)) &
+    //                (uint32_t)0xFFUL)
+    //                   << _BIT_SHIFT(IRQn)));
+    //     }
+    // }
 
     /**
       \brief   Get Interrupt Priority

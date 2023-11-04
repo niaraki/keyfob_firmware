@@ -1,6 +1,6 @@
 /**
 ********************************************************************************
-* @file     hal_rcc_tests.cpp
+* @file     hal_dio_tests.cpp
 * @author   M.Niaraki
 * @date     07/21/2023
 * @brief    Unit tests for DIO module in the HAL

@@ -63,7 +63,7 @@ static const dio_config_t g_dio_config_table[DIO_NUM_CONFIGURED_PINS] = {
     { PA1,
       DIO_MODE_INPUT,
       DIO_AF_0,
-      DIO_RES_PULLUP,
+      DIO_RES_PULLDOWN,
       DIO_STATE_HIGH,
       DIO_SPEED_FAST }, /*BUTTON*/
     { PA4,

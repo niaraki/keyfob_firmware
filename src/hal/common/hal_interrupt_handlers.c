@@ -40,6 +40,33 @@ SysTick_Handler(void)
     hal_systick_inc_tick();
 }
 
+/**
+ * @brief Interrupt handler for EXTI0 and EXTI1
+ * */
+void
+EXTI0_1_IRQHandler(void)
+{
+    hal_exti0_1_irq_handler();
+}
+
+/**
+ * @brief Interrupt handler for EXTI2 and EXTI3
+ * */
+void
+EXTI2_3_IRQHandler(void)
+{
+    hal_exti2_3_irq_handler();
+}
+
+/**
+ * @brief Interrupt handler for EXTI4 and EXTI15
+ * */
+void
+EXTI4_15_IRQHandler(void)
+{
+    hal_exti4_15_irq_handler();
+}
+
 /**  @}*/
 /** @}*/
 

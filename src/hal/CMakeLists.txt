@@ -2,10 +2,12 @@
 set(HAL_SOURCES
   "./common/hal.c"
   "./common/hal_common_helper.c"
-  "./config/hal_rcc_cfg.c"
   "./rcc/hal_rcc.c"
+  "./config/hal_rcc_cfg.c"
   "./dio/hal_dio.c"
   "./config/hal_dio_cfg.c"
+  "./exti/hal_exti.c"
+  "./config/hal_exti_cfg.c"
   "./systick/hal_systick.c"
 )
 
@@ -16,6 +18,7 @@ set(HAL_INC_DIRS
     ${CMAKE_CURRENT_SOURCE_DIR}/config
     ${CMAKE_CURRENT_SOURCE_DIR}/rcc
     ${CMAKE_CURRENT_SOURCE_DIR}/dio
+    ${CMAKE_CURRENT_SOURCE_DIR}/exti
     ${CMAKE_CURRENT_SOURCE_DIR}/systick
 )
   

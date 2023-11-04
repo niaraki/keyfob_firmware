@@ -8,6 +8,7 @@ add_executable(${HAL_UNIT_TARGET}
    ${TEST_FOLDER_PATH}/unit/hal/hal_systick_tests.cpp
    ${TEST_FOLDER_PATH}/unit/hal/hal_rcc_tests.cpp
    ${TEST_FOLDER_PATH}/unit/hal/hal_dio_tests.cpp
+   ${TEST_FOLDER_PATH}/unit/hal/hal_exti_tests.cpp
    ${TEST_FOLDER_PATH}/unit/hal/hal_delay_tests.cpp
 )
 target_include_directories(${HAL_UNIT_TARGET} PUBLIC

@@ -15,6 +15,7 @@
 #define __HAL_COMMON_DEFINES_H
 
 #include <stdint.h>
+#include <stdbool.h>
 #include "hal_pins.h"
 
 #ifdef __cplusplus
@@ -40,10 +41,11 @@ extern "C"
 
 #define FALSE (0U)
 #define TRUE  (1U)
+#define BOOL  bool
 
-#define NULLPTR (0U)
+#define NULLPTR (0)
 
-#define BOOL bit
+#define __FORCEINLINE __attribute__((always_inline)) inline
 
 #ifdef __cplusplus
 }

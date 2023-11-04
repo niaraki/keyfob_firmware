@@ -15,6 +15,7 @@
 #define __HLL_H
 
 #include "stm32f0xx.h"
+#include "core_cm0.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -24,8 +25,14 @@ extern "C"
     {
         DIO_CHANNELS = 2U
     };
-    static volatile PWR_TypeDef *const gp_pwr_regs = PWR;
-    static volatile RCC_TypeDef *const gp_rcc_regs = RCC;
+
+    static volatile PWR_TypeDef *const    gp_pwr_regs    = PWR;
+    static volatile RCC_TypeDef *const    gp_rcc_regs    = RCC;
+    static volatile EXTI_TypeDef *const   gp_exti_regs   = EXTI;
+    static volatile SYSCFG_TypeDef *const gp_syscfg_regs = SYSCFG;
+    static volatile NVIC_Type *const      gp_nvic_regs   = NVIC;
+    static volatile SCB_Type *const       gp_scb_regs    = SCB;
+
     /* DIO regs */
     static volatile GPIO_TypeDef *const gp_dio_regs[DIO_CHANNELS]
         = { GPIOA, GPIOB };

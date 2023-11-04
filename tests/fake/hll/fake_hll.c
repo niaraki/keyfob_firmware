@@ -42,5 +42,19 @@ volatile GPIO_TypeDef        fake_dio_regs_b = { 0 };
 volatile GPIO_TypeDef *const gp_dio_regs[DIO_CHANNELS]
     = { &fake_dio_regs_a, &fake_dio_regs_b };
 
+/* EXTI fakes */
+volatile EXTI_TypeDef        fake_exti_regs = { 0 };
+volatile EXTI_TypeDef *const gp_exti_regs   = &fake_exti_regs;
+
+/* SYSCONFIG fakes */
+volatile SYSCFG_TypeDef        fake_syscfg_regs = { 0 };
+volatile SYSCFG_TypeDef *const gp_syscfg_regs   = &fake_syscfg_regs;
+volatile SCB_Type              fake_scb_regs    = { 0 };
+volatile SCB_Type *const       gp_scb_regs      = &fake_scb_regs;
+
+/* NVIC fakes*/
+volatile NVIC_Type        fake_nvic_regs = { 0 };
+volatile NVIC_Type *const gp_nvic_regs   = &fake_nvic_regs;
+
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF
    FILE****/

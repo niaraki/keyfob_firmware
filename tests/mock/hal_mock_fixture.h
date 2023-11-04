@@ -18,6 +18,7 @@
 #include <gmock/gmock.h>
 #include "hal.h"
 #include "hal_common_defines.h"
+#include "stm32f030x6_override.h"
 
 namespace HalUnitTests {
 class HalMock
@@ -34,6 +35,9 @@ public:
 
     /*CMSIS related funtions or macros*/
     MOCK_METHOD((U32), SysTick_Config, (U32));
+    MOCK_METHOD((void), NVIC_SetPriority, (IRQn_Type, uint32_t));
+    MOCK_METHOD((void), __NVIC_DisableIRQ, (IRQn_Type));
+    MOCK_METHOD((void), __NVIC_EnableIRQ, (IRQn_Type));
 };
 
 class HalTestFixture : public testing::Test

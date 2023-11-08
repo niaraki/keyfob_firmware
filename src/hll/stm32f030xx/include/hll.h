@@ -26,6 +26,11 @@ extern "C"
         DIO_CHANNELS = 2U
     };
 
+    enum
+    {
+        TIM_CHANNELS = 5U
+    };
+
     static volatile PWR_TypeDef *const    gp_pwr_regs    = PWR;
     static volatile RCC_TypeDef *const    gp_rcc_regs    = RCC;
     static volatile EXTI_TypeDef *const   gp_exti_regs   = EXTI;
@@ -37,6 +42,9 @@ extern "C"
     static volatile GPIO_TypeDef *const gp_dio_regs[DIO_CHANNELS]
         = { GPIOA, GPIOB };
 
+    /* TIM regs*/
+    static volatile TIM_TypeDef *const gp_tim_regs[TIM_CHANNELS]
+        = { TIM1, TIM3, TIM14, TIM16, TIM17 };
 #ifdef __cplusplus
 }
 #endif

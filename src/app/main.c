@@ -32,6 +32,7 @@
 
 void rf_pin_callback(void);
 void button_pin_callback(void);
+void timer17_callback(void);
 
 __IO BOOL bIsInterruptActivated = FALSE;
 
@@ -49,6 +50,12 @@ button_pin_callback(void)
 }
 
 void
+timer17_callback(void)
+{
+    bIsInterruptActivated = !(bIsInterruptActivated);
+}
+
+void
 app(void)
 {
     hal_rcc_init(hal_rcc_cfg_get());
@@ -57,6 +64,7 @@ app(void)
     hal_exti_init(hal_exti_cfg_get(), hal_exti_cfg_get_size());
     hal_exti_register_callback(EXTI_CHANNEL_0, rf_pin_callback);
     hal_exti_register_callback(EXTI_CHANNEL_1, button_pin_callback);
+    hal_timer_init(hal_timer_cfg_get(), hal_timer_cfg_get_size());
     hal_systick_init();
 
     while (1)

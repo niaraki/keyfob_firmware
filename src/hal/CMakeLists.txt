@@ -9,6 +9,8 @@ set(HAL_SOURCES
   "./exti/hal_exti.c"
   "./config/hal_exti_cfg.c"
   "./systick/hal_systick.c"
+  "./timer/hal_timer.c"
+  "./config/hal_timer_cfg.c"
 )
 
 # Add required headers
@@ -20,6 +22,7 @@ set(HAL_INC_DIRS
     ${CMAKE_CURRENT_SOURCE_DIR}/dio
     ${CMAKE_CURRENT_SOURCE_DIR}/exti
     ${CMAKE_CURRENT_SOURCE_DIR}/systick
+    ${CMAKE_CURRENT_SOURCE_DIR}/timer
 )
   
 add_library(${HAL_LIB_TARGET} STATIC ${HAL_SOURCES})

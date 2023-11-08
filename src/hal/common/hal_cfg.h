@@ -16,6 +16,7 @@
 
 #define HALL_RCC_MODULE_ENABLED
 #define HALL_SYSTICK_MODULE_ENABLED
+#define HALL_TIMER_MODULE_ENABLED
 #define HALL_DIO_MODULE_ENABLED
 #define HALL_EXTI_MODULE_ENABLED
 
@@ -40,6 +41,10 @@ extern "C"
 #ifdef HALL_EXTI_MODULE_ENABLED
 #include "hal_exti.h"
 #endif /* HALL_EXTI_MODULE_ENABLED */
+
+#ifdef HALL_TIMER_MODULE_ENABLED
+#include "hal_timer.h"
+#endif /* HALL_TIMER_MODULE_ENABLED */
 
 #ifdef __cplusplus
 }

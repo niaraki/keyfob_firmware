@@ -75,7 +75,13 @@ endif()
 
 # Clangformat checks
 include(ClangFormat)
-file(GLOB_RECURSE list_of_src_header_files "${CMAKE_SOURCE_DIR}/src/*.[c|h]")
+file(GLOB_RECURSE list_of_src_header_files 
+  "${CMAKE_SOURCE_DIR}/src/app/*.[c|h]"
+  "${CMAKE_SOURCE_DIR}/src/bsp/*.[c|h]"
+  "${CMAKE_SOURCE_DIR}/src/middleware/*.[c|h]"
+  "${CMAKE_SOURCE_DIR}/src/common/*.[c|h]"
+  "${CMAKE_SOURCE_DIR}/src/hal/*.[c|h]"
+  )
 clangformat_setup(${list_of_src_header_files})
 
 # Lizard for CCM analysis

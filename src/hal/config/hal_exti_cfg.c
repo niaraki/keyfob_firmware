@@ -54,7 +54,7 @@ EXTI module
  **/
 static const exti_config_t g_exti_config_table[EXTI_NUM_CONFIGURED_CHANNELS] = {
     /* channel | port | mode | priority */
-    { EXTI_CHANNEL_0, PORTA, EXTI_MODE_FALLING_EDGE, EXTI_PRIORITY_HIGHEST },
+    { EXTI_CHANNEL_0, PORTA, EXTI_MODE_BOTH_EDGE, EXTI_PRIORITY_HIGHEST },
     { EXTI_CHANNEL_1, PORTA, EXTI_MODE_RISING_EDGE, EXTI_PRIORITY_NORMAL },
 };
 /**  @}*/

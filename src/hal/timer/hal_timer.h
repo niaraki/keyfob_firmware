@@ -21,13 +21,18 @@ extern "C"
 {
 #endif
 
-    typedef void (*timer_ofv_callback_t)(void);
+    typedef void (*timer_ovf_callback_t)(void);
     I8   hal_timer_init(const timer_config_t *const configs, U16 num_configs);
     void hal_timer_start(timer_channel_t const channel);
-    void hal_timer_register_callback(timer_channel_t const      channel,
-                                     timer_ofv_callback_t const callback);
-    U32  hal_timer_get_value(timer_channel_t const channel);
+    void hal_timer_restart(timer_channel_t const channel);
+    void hal_timer_stop(timer_channel_t const channel);
+    U32  hal_timer_read(timer_channel_t const channel);
+    void hal_timer_register_callback(timer_channel_t const channel,
+                                     timer_ovf_callback_t  callback);
 
+    void hal_tim14_irq_handler(void);
+    void hal_tim16_irq_handler(void);
+    void hal_tim17_irq_handler(void);
 #ifdef __cplusplus
 }
 #endif

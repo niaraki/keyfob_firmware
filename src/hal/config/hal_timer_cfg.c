@@ -44,17 +44,18 @@ Timer module
 /** @brief Configuration table for TIMER pins. we can populate the state of the
  *MCU pins to this table according to the hardware and it's schmatic
  *@attention  each entry must be defined like the following format:
- *     channel | port | mode | priority
+ * CHANNEL | PRESCALER | RELOAD *
  * for example:
  * @code
- *  { TIMER_CHANNEL_0, PORTA, TIMER_MODE_FALLING_EDGE, TIMER_PRIORITY_HIGHEST }
+ * {TIMER_CHANNEL_17, 48, 0xffff}
  * @endcode
  * Also, the TIMER_NUM_CONFIGURED_CHANNELS must be updated
  * @see TIMER_NUM_CONFIGURED_PINS
  **/
 static const timer_config_t g_timer_config_table[TIMER_NUM_CONFIGURED_CHANNELS]
     = {
-          { TIMER_CHANNEL_TIM17, 48 - 1, 0xffff },
+          /* CHANNEL | PRESCALER | RELOAD */
+          { TIMER_CHANNEL_17, 48, 0xffff },
       };
 /**  @}*/
 

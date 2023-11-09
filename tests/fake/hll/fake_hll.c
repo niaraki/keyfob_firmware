@@ -56,5 +56,12 @@ volatile SCB_Type *const       gp_scb_regs      = &fake_scb_regs;
 volatile NVIC_Type        fake_nvic_regs = { 0 };
 volatile NVIC_Type *const gp_nvic_regs   = &fake_nvic_regs;
 
+/* TIM fakes */
+volatile TIM_TypeDef        fake_tim_regs_14 = { 0 };
+volatile TIM_TypeDef        fake_tim_regs_16 = { 0 };
+volatile TIM_TypeDef        fake_tim_regs_17 = { 0 };
+volatile TIM_TypeDef *const gp_tim_regs[TIM_CHANNELS]
+    = { &fake_tim_regs_14, &fake_tim_regs_16, &fake_tim_regs_17 };
+
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF
    FILE****/

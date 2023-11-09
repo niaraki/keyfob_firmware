@@ -67,6 +67,33 @@ EXTI4_15_IRQHandler(void)
     hal_exti4_15_irq_handler();
 }
 
+/**
+ * @brief Interrupt handler for TIM14
+ * */
+void
+TIM14_IRQHandler(void)
+{
+    hal_tim14_irq_handler();
+}
+
+/**
+ * @brief Interrupt handler for TIM16
+ * */
+void
+TIM16_IRQHandler(void)
+{
+    hal_tim16_irq_handler();
+}
+
+/**
+ * @brief Interrupt handler for TIM17
+ * */
+void
+TIM17_IRQHandler(void)
+{
+    hal_tim17_irq_handler();
+}
+
 /**  @}*/
 /** @}*/
 

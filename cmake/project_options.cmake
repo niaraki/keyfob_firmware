@@ -31,8 +31,8 @@ if (CMAKE_BUILD_TYPE  STREQUAL "Debug")
 	set(CMAKE_C_FLAGS_DEBUG "-O0 -g -DDEBUG")
 	set(CMAKE_CXX_FLAGS_DEBUG "-Og -g")
 else()
-	set(CMAKE_C_FLAGS_RELEASE "-Os ")
-	set(CMAKE_CXX_FLAGS_RELEASE "-Os ")
+	set(CMAKE_C_FLAGS_RELEASE "-O3 ")
+	set(CMAKE_CXX_FLAGS_RELEASE "-O3 ")
 endif()
 
 # define linker options

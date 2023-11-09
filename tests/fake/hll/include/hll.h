@@ -26,6 +26,10 @@ extern "C"
     {
         DIO_CHANNELS = 2U
     };
+    enum
+    {
+        TIM_CHANNELS = 3U
+    };
 
     extern volatile RCC_TypeDef *const    gp_rcc_regs;
     extern volatile PWR_TypeDef *const    gp_pwr_regs;
@@ -34,6 +38,7 @@ extern "C"
     extern volatile SYSCFG_TypeDef *const gp_syscfg_regs;
     extern volatile NVIC_Type *const      gp_nvic_regs;
     extern volatile SCB_Type *const       gp_scb_regs;
+    extern volatile TIM_TypeDef *const    gp_tim_regs[TIM_CHANNELS];
     extern uint32_t                       SystemCoreClock;
     extern uint8_t                        IsWrongSystemCoreClockEnabled;
     extern void                           SystemCoreClockUpdate(void);

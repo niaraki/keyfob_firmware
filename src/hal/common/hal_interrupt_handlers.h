@@ -20,6 +20,9 @@ extern "C"
 #endif
 
     void SysTick_Handler(void);
+    void TIM14_IRQHandler(void);
+    void TIM16_IRQHandler(void);
+    void TIM17_IRQHandler(void);
 
 #ifdef __cplusplus
 }

@@ -344,7 +344,7 @@ extern "C"
         __IO uint32_t
             ISR; /*!< I2C Interrupt and status register, Address offset: 0x18 */
         __IO uint32_t
-                      ICR; /*!< I2C Interrupt clear register,      Address offset: 0x1C */
+            ICR; /*!< I2C Interrupt clear register,      Address offset: 0x1C */
         __IO uint32_t PECR; /*!< I2C PEC register,                  Address
                                offset: 0x20 */
         __IO uint32_t RXDR; /*!< I2C Receive data register,         Address
@@ -386,11 +386,11 @@ extern "C"
     typedef struct
     {
         __IO uint32_t
-                      CR; /*!< RCC clock control register, Address offset: 0x00 */
+            CR; /*!< RCC clock control register, Address offset: 0x00 */
         __IO uint32_t CFGR; /*!< RCC clock configuration register,  Address
                                offset: 0x04 */
         __IO uint32_t
-                      CIR; /*!< RCC clock interrupt register,   Address offset: 0x08 */
+            CIR; /*!< RCC clock interrupt register,   Address offset: 0x08 */
         __IO uint32_t APB2RSTR; /*!< RCC APB2 peripheral reset register, Address
                                    offset: 0x0C */
         __IO uint32_t APB1RSTR; /*!< RCC APB1 peripheral reset register, Address
@@ -433,14 +433,14 @@ extern "C"
         __IO uint32_t ALRMAR; /*!< RTC alarm A register, Address offset: 0x1C */
         uint32_t      RESERVED3; /*!< Reserved,   Address   offset: 0x20 */
         __IO uint32_t
-                      WPR; /*!< RTC write protection register, Address offset: 0x24 */
+            WPR; /*!< RTC write protection register, Address offset: 0x24 */
         __IO uint32_t SSR; /*!< RTC sub second register, Address offset: 0x28 */
         __IO uint32_t
             SHIFTR; /*!< RTC shift control register, Address offset: 0x2C */
         __IO uint32_t
             TSTR; /*!< RTC time stamp time register, Address offset: 0x30 */
         __IO uint32_t
-                      TSDR; /*!< RTC time stamp date register, Address offset: 0x34 */
+            TSDR; /*!< RTC time stamp date register, Address offset: 0x34 */
         __IO uint32_t TSSSR; /*!< RTC time-stamp sub second register, Address
                                 offset: 0x38 */
         __IO uint32_t

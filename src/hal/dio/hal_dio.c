@@ -156,7 +156,7 @@ set_af(const dio_config_t *const config, const dio_channel_info_t *const chi)
      * AFR register*/
     U8 af_value   = (U8)config->af;
     U8 af_reg_idx = 0U;
-    if (chi->pin_index < 8U)
+    if (chi->pin_index > 7U)
         af_reg_idx = 1U;
     U8 af_bit_idx = (chi->pin_index % (NUM_PIN_IN_PORT / 2U));
 

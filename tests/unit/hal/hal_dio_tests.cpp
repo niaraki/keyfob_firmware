@@ -325,4 +325,30 @@ TEST_F(HalDioTestFixture, HalDioMultiConfig_Test)
     EXPECT_EQ(3, gp_dio_regs[PORTA]->OSPEEDR);
 }
 
+TEST_F(HalDioTestFixture, HalDioAlternateFunction_Test)
+{
+    /* Arrange */
+    dio_config_t pin_config1 = { .channel       = PA6,
+                                 .mode          = DIO_MODE_INPUT,
+                                 .af            = DIO_AF_1,
+                                 .resistor      = DIO_RES_PULLDOWN,
+                                 .default_state = DIO_STATE_LOW,
+                                 .speed         = DIO_SPEED_SLOW };
+
+    dio_config_t pin_config2 = { .channel       = PA8,
+                                 .mode          = DIO_MODE_OUTPUT_OD,
+                                 .af            = DIO_AF_7,
+                                 .resistor      = DIO_RES_PULLUP,
+                                 .default_state = DIO_STATE_HIGH,
+                                 .speed         = DIO_SPEED_FAST };
+    /* Action */
+    /** config with an old settings */
+    hal_dio_config(&pin_config1);
+    /** reconfigure with new settings */
+    hal_dio_config(&pin_config2);
+
+    /* Assert: check new config for selected pin */
+    EXPECT_EQ((1U << 24), gp_dio_regs[PORTA]->AFR[0]);
+    EXPECT_EQ((7U << 0), gp_dio_regs[PORTA]->AFR[1]);
+}
 /************************ (C) COPYRIGHT Mohammad Niaraki *****END OF FILE****/

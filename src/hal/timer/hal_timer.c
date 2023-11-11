@@ -175,10 +175,9 @@ hal_timer_register_callback(timer_channel_t      channel,
 U32
 hal_timer_read(timer_channel_t const channel)
 {
-    if (!IS_CHANNEL_VALID(channel))
-        return -EINVAL;
-
-    return ((U32)gp_tim_regs[channel]->CNT);
+    if (IS_CHANNEL_VALID(channel))
+        return ((U32)gp_tim_regs[channel]->CNT);
+    return 0;
 }
 
 void

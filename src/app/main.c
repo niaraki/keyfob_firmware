@@ -32,53 +32,21 @@
 #include "ev1527.h"
 #include "assert.h"
 
-void rf_pin_callback(void);
-void button_pin_callback(void);
-void timer17_callback(void);
+U32 code = 0;
 
-// __IO BOOL bIsInterruptActivated = FALSE;
-
-// #define pin_mask (1U << 4)
-// __IO U32  TimerValue         = 0;
-// __IO BOOL bIsPreamleDetected = FALSE;
-// __IO BOOL bIsRemoteDetected  = FALSE;
-// __IO U32  RemoteCode         = 0U;
-// __IO U8   bitIndex           = 0U;
+void blink(U32 times);
 
 void
-rf_pin_callback(void)
+blink(U32 times)
 {
-    // bIsInterruptActivated = !(bIsInterruptActivated);
-    // hal_dio_toggle(PA4);
-    // if (hal_dio_read(PA0) == DIO_STATE_HIGH)
-    // {
-    //     TimerValue = hal_timer_get_value(TIMER_CHANNEL_17);
-    //     hal_timer_stop(TIMER_CHANNEL_17);
-    //     hal_timer_start(TIMER_CHANNEL_17);
-    //     return;
-    // }
-    // if (!bIsPreamleDetected)
-    // {
-    //     if (TimerValue > 13000)
-    //     {
-    //         bIsPreamleDetected = TRUE;
-    //     }
-    // }
-
-    // hal_timer_start(TIMER_CHANNEL_17);
-    // TimerValue = 0;
-}
-
-void
-button_pin_callback(void)
-{
-    // bIsInterruptActivated = !(bIsInterruptActivated);
-}
-
-void
-timer17_callback(void)
-{
-    hal_dio_toggle(PA4);
+    hal_dio_write(PA4, DIO_STATE_LOW);
+    for (U32 i = 0; i < times; i++)
+    {
+        hal_dio_write(PA4, DIO_STATE_HIGH);
+        hal_delay(500);
+        hal_dio_write(PA4, DIO_STATE_LOW);
+        hal_delay(500);
+    }
 }
 
 void
@@ -88,35 +56,46 @@ app(void)
     hal_rcc_check_system_clock();
 
     hal_dio_init(hal_dio_cfg_get(), hal_dio_cfg_get_size());
-
     hal_exti_init(hal_exti_cfg_get(), hal_exti_cfg_get_size());
-    hal_exti_register_callback(EXTI_CHANNEL_0, rf_pin_callback);
-    hal_exti_register_callback(EXTI_CHANNEL_1, button_pin_callback);
-
     hal_timer_init(hal_timer_cfg_get(), hal_timer_cfg_get_size());
-    hal_timer_register_callback(TIMER_CHANNEL_17, timer17_callback);
-    hal_timer_start(TIMER_CHANNEL_17); /*rf timer*/
-    hal_timer_start(TIMER_CHANNEL_3);  /*tag pwm*/
+    drv_ev1527_init(TIMER_CHANNEL_17, EXTI_CHANNEL_0, PA0);
+    hal_timer_start(TIMER_CHANNEL_3); /*tag pwm*/
 
     hal_systick_init();
 
     while (1)
     {
-        // dio_state_t state = hal_dio_read(PA0);
-        // if (DIO_STATE_LOW != state)
-        //     hal_dio_toggle(PA4);
-        // if (bIsInterruptActivated == FALSE)
-        //     hal_dio_toggle(PA4);
-        // if (bIsPreamleDetected)
-        // {
-        //     hal_dio_write(PA4, DIO_STATE_HIGH);
-        //     hal_delay(5000);
-        //     hal_dio_write(PA4, DIO_STATE_LOW);
-        //     bIsPreamleDetected = FALSE;
-        // }
-        // hal_delay(5000);
-        // hal_timer_set_duty(TIMER_CHANNEL_3, 90);
-        // hal_delay(5000);
+        if (drv_ev1527_read(&code) != 0)
+        {
+            if (code == 0x30c221)
+            {
+                blink(1);
+            }
+            if (code == 0x30c222)
+            {
+                blink(2);
+            }
+            if (code == 0x30c224)
+            {
+                blink(3);
+            }
+            if (code == 0x30c228)
+            {
+                blink(4);
+            }
+            if (code == 0x22CA01)
+            {
+                blink(1);
+            }
+            if (code == 0x22CA04)
+            {
+                blink(3);
+            }
+            code = 0;
+            drv_ev1527_discard();
+            hal_delay(100);
+        }
+        hal_delay(50);
     }
 }
 

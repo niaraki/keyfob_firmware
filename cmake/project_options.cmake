@@ -29,9 +29,9 @@ set(COMPILER_OPTIONS
 
 if (CMAKE_BUILD_TYPE  STREQUAL "Debug")
 	message("-- Debug mode activated")
-	set(DEBUG_OPTIONS -g3 -O0)
-	set(CMAKE_C_FLAGS_DEBUG "-O0 -g -DDEBUG")
-	set(CMAKE_CXX_FLAGS_DEBUG "-Og -g")
+	set(DEBUG_OPTIONS -g1 -O0)
+	set(CMAKE_C_FLAGS_DEBUG "-O0 -g1 -DDEBUG")
+	set(CMAKE_CXX_FLAGS_DEBUG "-Og -g1")
 else()
 	set(CMAKE_C_FLAGS_RELEASE "-Os ")
 	set(CMAKE_CXX_FLAGS_RELEASE "-Os ")

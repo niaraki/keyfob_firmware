@@ -14,10 +14,18 @@
 #ifndef __EV1527_H
 #define __EV1527_H
 
+#include "hal.h"
+
 #ifdef __cplusplus
 extern "C"
 {
 #endif
+
+    I8   drv_ev1527_init(timer_channel_t timer_channel,
+                         exti_channel_t  exti_channel,
+                         pin_t           rf_pin);
+    I8   drv_ev1527_read(U32 *const code);
+    void drv_ev1527_discard(void);
 
 #ifdef __cplusplus
 }

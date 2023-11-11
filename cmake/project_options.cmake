@@ -22,7 +22,9 @@ set(COMPILER_OPTIONS
 	-Wlogical-op
 	-pedantic
 	-Werror=cast-align
-  	-fshort-enums
+ 	-fshort-enums
+  -fdata-sections
+  -ffunction-sections
 )
 
 if (CMAKE_BUILD_TYPE  STREQUAL "Debug")
@@ -31,18 +33,21 @@ if (CMAKE_BUILD_TYPE  STREQUAL "Debug")
 	set(CMAKE_C_FLAGS_DEBUG "-O0 -g -DDEBUG")
 	set(CMAKE_CXX_FLAGS_DEBUG "-Og -g")
 else()
-	set(CMAKE_C_FLAGS_RELEASE "-O3 ")
-	set(CMAKE_CXX_FLAGS_RELEASE "-O3 ")
+	set(CMAKE_C_FLAGS_RELEASE "-Os ")
+	set(CMAKE_CXX_FLAGS_RELEASE "-Os ")
 endif()
 
 # define linker options
 set(LINKER_OPTIONS 
     ${CPU_OPTIONS}
     -specs=nano.specs
-    -lc
-    -lm
     -lnosys
     -Wl,--gc-sections
+    -static
+    -Wl,--start-group
+    -lc
+    -lm
+    -Wl,--end-group
 )
 
 # define Language options

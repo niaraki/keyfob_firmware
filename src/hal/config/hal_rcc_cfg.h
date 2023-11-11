@@ -44,6 +44,7 @@ typedef enum
     RCC_DEBUG,
     RCC_SYSCFG,
     RCC_TIM17,
+    RCC_TIM3,
     RCC_PERI_COUNT
 } rcc_peri_name_t;
 

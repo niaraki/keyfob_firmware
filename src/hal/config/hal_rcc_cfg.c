@@ -40,6 +40,7 @@ const rcc_peri_t g_rcc_peri_table[RCC_PERI_COUNT] = {
     { RCC_BUS_APB2, RCC_APB2ENR_DBGMCUEN_Pos, RCC_CLK_ON },     /* DEBUG*/
     { RCC_BUS_APB2, RCC_APB2ENR_SYSCFGCOMPEN_Pos, RCC_CLK_ON }, /* SYSCFG*/
     { RCC_BUS_APB2, RCC_APB2ENR_TIM17EN_Pos, RCC_CLK_ON },      /* TIM17*/
+    { RCC_BUS_APB1, RCC_APB1ENR_TIM3EN_Pos, RCC_CLK_ON },       /* TIM3*/
 };
 
 const rcc_config_t g_rcc_config_table[RCC_CHANNELS] = {

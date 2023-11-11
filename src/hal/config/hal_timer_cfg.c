@@ -34,7 +34,6 @@ Timer module
  * @note This macro should be updated when we want to add a new entry to the
  *table
  **/
-#define TIMER_NUM_CONFIGURED_CHANNELS (1U)
 
 /**  @}*/
 
@@ -44,7 +43,7 @@ Timer module
 /** @brief Configuration table for TIMER pins. we can populate the state of the
  *MCU pins to this table according to the hardware and it's schmatic
  *@attention  each entry must be defined like the following format:
- * CHANNEL | PRESCALER | RELOAD *
+ * CHANNEL | MODE | PRESCALER | RELOAD *
  * for example:
  * @code
  * {TIMER_CHANNEL_17, 48, 0xffff}
@@ -52,11 +51,11 @@ Timer module
  * Also, the TIMER_NUM_CONFIGURED_CHANNELS must be updated
  * @see TIMER_NUM_CONFIGURED_PINS
  **/
-static const timer_config_t g_timer_config_table[TIMER_NUM_CONFIGURED_CHANNELS]
-    = {
-          /* CHANNEL | PRESCALER | RELOAD */
-          { TIMER_CHANNEL_17, 48, 0xffff },
-      };
+static const timer_config_t g_timer_config_table[] = {
+    /* CHANNEL | MODE | PRESCALER | RELOAD */
+    { TIMER_CHANNEL_3, TIMER_MODE_PWM, 48, 8 }, /*125khz = 8us*/
+    { TIMER_CHANNEL_17, TIMER_MODE_COUNTER, 48, 0xffff },
+};
 /**  @}*/
 
 /** @addtogroup TIMER_CONFIG_FUNC Functions
@@ -81,7 +80,7 @@ hal_timer_cfg_get(void)
 U16
 hal_timer_cfg_get_size(void)
 {
-    return TIMER_NUM_CONFIGURED_CHANNELS;
+    return ((U16)(sizeof(g_timer_config_table) / sizeof(timer_config_t)));
 }
 
 /**  @}*/

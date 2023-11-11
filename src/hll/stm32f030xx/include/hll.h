@@ -28,7 +28,7 @@ extern "C"
 
     enum
     {
-        TIM_CHANNELS = 3U
+        TIM_CHANNELS = 5U
     };
 
     static volatile PWR_TypeDef *const    gp_pwr_regs    = PWR;
@@ -44,7 +44,7 @@ extern "C"
 
     /* TIM regs*/
     static volatile TIM_TypeDef *const gp_tim_regs[TIM_CHANNELS]
-        = { TIM14, TIM16, TIM17 };
+        = { TIM1, TIM3, TIM14, TIM16, TIM17 };
 
 #ifdef __cplusplus
 }

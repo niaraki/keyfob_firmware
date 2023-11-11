@@ -36,15 +36,25 @@
  **/
 typedef enum
 {
-    TIMER_CHANNEL_14 = 0U,
+    TIMER_CHANNEL_1 = 0U,
+    TIMER_CHANNEL_3,
+    TIMER_CHANNEL_14,
     TIMER_CHANNEL_16,
     TIMER_CHANNEL_17,
     TIMER_CHANNEL_COUNT,
 } timer_channel_t;
 
+typedef enum
+{
+    TIMER_MODE_COUNTER = 0U,
+    TIMER_MODE_PWM,
+    TIMER_MODE_COUNT,
+} timer_mode_t;
+
 typedef struct
 {
     timer_channel_t channel;
+    timer_mode_t    mode;
     U32             prescaler;
     U32             reload;
 } timer_config_t;

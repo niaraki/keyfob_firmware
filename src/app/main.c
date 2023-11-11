@@ -86,14 +86,19 @@ app(void)
 {
     hal_rcc_init(hal_rcc_cfg_get());
     hal_rcc_check_system_clock();
+
     hal_dio_init(hal_dio_cfg_get(), hal_dio_cfg_get_size());
+
     hal_exti_init(hal_exti_cfg_get(), hal_exti_cfg_get_size());
     hal_exti_register_callback(EXTI_CHANNEL_0, rf_pin_callback);
     hal_exti_register_callback(EXTI_CHANNEL_1, button_pin_callback);
-    // hal_timer_init(hal_timer_cfg_get(), hal_timer_cfg_get_size());
-    // hal_timer_register_callback(TIMER_CHANNEL_17, timer17_callback);
+
+    hal_timer_init(hal_timer_cfg_get(), hal_timer_cfg_get_size());
+    hal_timer_register_callback(TIMER_CHANNEL_17, timer17_callback);
+    hal_timer_start(TIMER_CHANNEL_17); /*rf timer*/
+    hal_timer_start(TIMER_CHANNEL_3);  /*tag pwm*/
+
     hal_systick_init();
-    // hal_timer_start(TIMER_CHANNEL_17);
     while (1)
     {
         // dio_state_t state = hal_dio_read(PA0);
@@ -108,7 +113,9 @@ app(void)
         //     hal_dio_write(PA4, DIO_STATE_LOW);
         //     bIsPreamleDetected = FALSE;
         // }
-        hal_delay(50);
+        hal_delay(5000);
+        // hal_timer_set_duty(TIMER_CHANNEL_3, 90);
+        hal_delay(5000);
     }
 }
 

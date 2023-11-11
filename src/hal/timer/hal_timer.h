@@ -22,14 +22,17 @@ extern "C"
 #endif
 
     typedef void (*timer_ovf_callback_t)(void);
-    I8   hal_timer_init(const timer_config_t *const configs, U16 num_configs);
-    void hal_timer_start(timer_channel_t const channel);
-    void hal_timer_restart(timer_channel_t const channel);
-    void hal_timer_stop(timer_channel_t const channel);
-    U32  hal_timer_read(timer_channel_t const channel);
-    void hal_timer_register_callback(timer_channel_t const channel,
-                                     timer_ovf_callback_t  callback);
+    I8  hal_timer_init(const timer_config_t *const configs, U16 num_configs);
+    I8  hal_timer_start(timer_channel_t const channel);
+    I8  hal_timer_reset_counter(timer_channel_t const channel);
+    I8  hal_timer_stop(timer_channel_t const channel);
+    U32 hal_timer_read(timer_channel_t const channel);
+    I8  hal_timer_set_duty(timer_channel_t const channel, U8 const percent);
+    I8  hal_timer_register_callback(timer_channel_t const channel,
+                                    timer_ovf_callback_t  callback);
 
+    void hal_tim1_irq_handler(void);
+    void hal_tim3_irq_handler(void);
     void hal_tim14_irq_handler(void);
     void hal_tim16_irq_handler(void);
     void hal_tim17_irq_handler(void);

@@ -34,7 +34,7 @@ DIO module
  * @note This macro should be updated when we want to add a new entry to the
  *table
  **/
-#define DIO_NUM_CONFIGURED_PINS (5U)
+#define DIO_NUM_CONFIGURED_PINS (6U)
 
 /**  @}*/
 
@@ -72,6 +72,12 @@ static const dio_config_t g_dio_config_table[DIO_NUM_CONFIGURED_PINS] = {
       DIO_RES_PULLUP,
       DIO_STATE_HIGH,
       DIO_SPEED_FAST }, /*LED*/
+    { PA6,
+      DIO_MODE_AF_PP,
+      DIO_AF_1,
+      DIO_RES_PULLDOWN,
+      DIO_STATE_LOW,
+      DIO_SPEED_FAST }, /*TAG_PWM*/
     { PA13,
       DIO_MODE_AF_PP,
       DIO_AF_0,

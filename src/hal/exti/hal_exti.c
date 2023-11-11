@@ -96,7 +96,7 @@ hal_exti_config(const exti_config_t *const config)
     return 0;
 }
 
-void
+I8
 hal_exti_register_callback(exti_channel_t const  channel,
                            exti_callback_t const callback)
 {
@@ -104,7 +104,7 @@ hal_exti_register_callback(exti_channel_t const  channel,
     ASSERT(IS_CHANNEL_VALID(channel));
 
     if (!IS_CALLBACK_VALID(callback) || !IS_CHANNEL_VALID(channel))
-        return;
+        return -EINVAL;
 
     IRQn_Type interrupt_number = get_interrupt_number(channel);
     NVIC_DisableIRQ(interrupt_number);

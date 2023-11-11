@@ -29,7 +29,7 @@
 #include "bsp.h"
 #include "middleware.h"
 #include "config.h"
-#include "spi_flash.h"
+#include "ev1527.h"
 #include "assert.h"
 
 void rf_pin_callback(void);
@@ -99,6 +99,7 @@ app(void)
     hal_timer_start(TIMER_CHANNEL_3);  /*tag pwm*/
 
     hal_systick_init();
+
     while (1)
     {
         // dio_state_t state = hal_dio_read(PA0);
@@ -113,9 +114,9 @@ app(void)
         //     hal_dio_write(PA4, DIO_STATE_LOW);
         //     bIsPreamleDetected = FALSE;
         // }
-        hal_delay(5000);
+        // hal_delay(5000);
         // hal_timer_set_duty(TIMER_CHANNEL_3, 90);
-        hal_delay(5000);
+        // hal_delay(5000);
     }
 }
 
